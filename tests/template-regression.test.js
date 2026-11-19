@@ -11,30 +11,32 @@ test('patchUserModel adds Sanctum and role without creating an empty array eleme
   const modelDir = path.join(root, 'app', 'Models')
   fs.mkdirSync(modelDir, { recursive: true })
   const modelFile = path.join(modelDir, 'User.php')
-
-  fs.writeFileSync(modelFile, \`<?php
-
-namespace App\\Models;
-
-use Illuminate\\Foundation\\Auth\\User as Authenticatable;
-use Illuminate\\Notifications\\Notifiable;
-
-class User extends Authenticatable
-{
-    use HasFactory, Notifiable;
-
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
-}
-\`)
+  const fixture = [
+    '<?php',
+    '',
+    'namespace App\\Models;',
+    '',
+    'use Illuminate\\Foundation\\Auth\\User as Authenticatable;',
+    'use Illuminate\\Notifications\\Notifiable;',
+    '',
+    'class User extends Authenticatable',
+    '{',
+    '    use HasFactory, Notifiable;',
+    '',
+    '    protected $fillable = [',
+    "        'name',",
+    "        'email',",
+    "        'password',",
+    '    ];',
+    '}',
+    '',
+  ].join('\n')
+  fs.writeFileSync(modelFile, fixture)
 
   const patched = patchUserModel(root)
   assert.match(patched, /use Laravel\\Sanctum\\HasApiTokens;/)
   assert.match(patched, /use HasApiTokens, HasFactory, Notifiable;/)
-  assert.match(patched, /'password',\\s*'role',/)
-  assert.doesNotMatch(patched, /'password',\\s*,/)
+  assert.match(patched, /'password',\s*'role',/)
+  assert.doesNotMatch(patched, /'password',\s*,/)
   assert.equal((patched.match(/'role'/g) || []).length, 1)
 })
