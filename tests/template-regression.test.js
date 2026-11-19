@@ -12,7 +12,7 @@ test('patchUserModel adds Sanctum and role without creating an empty array eleme
   fs.mkdirSync(modelDir, { recursive: true })
   const modelFile = path.join(modelDir, 'User.php')
 
-  fs.writeFileSync(modelFile, `<?php
+  fs.writeFileSync(modelFile, \`<?php
 
 namespace App\\Models;
 
@@ -29,10 +29,10 @@ class User extends Authenticatable
         'password',
     ];
 }
-`)
+\`)
 
   const patched = patchUserModel(root)
-  assert.match(patched, /use Laravel\\\\Sanctum\\\\HasApiTokens;/)
+  assert.match(patched, /use Laravel\\Sanctum\\HasApiTokens;/)
   assert.match(patched, /use HasApiTokens, HasFactory, Notifiable;/)
   assert.match(patched, /'password',\\s*'role',/)
   assert.doesNotMatch(patched, /'password',\\s*,/)
