@@ -1,4 +1,5 @@
 <div align="center">
+<img src="assets/react-lara-forge-wordmark.png" alt="React-Lara Forge Logo" width="650">
 
 # React-Lara Forge
 
