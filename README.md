@@ -1,6 +1,8 @@
 <div align="center">
 <img src="assets/react-lara-forge-wordmark.png" alt="React-Lara Forge Logo" width="650">
 
+[English](README.md) | [Bahasa Indonesia](README.id.md)
+
 # React-Lara Forge
 
 **Generate a Laravel API + React SPA starter project in minutes.**
