@@ -7,10 +7,11 @@ import { spawnSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 import readline from 'node:readline/promises'
 import { stdin as input, stdout as output } from 'node:process'
+import { patchUserModel } from './lib/patch-user-model.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const templates = path.join(__dirname, 'templates')
-const VERSION = '0.2.0'
+const VERSION = '0.3.1'
 
 function fail(message) {
   console.error(chalk.red(`\n✖ ${message}\n`))
@@ -46,43 +47,6 @@ function supportsPhp82() {
   const major = Number(version[1])
   const minor = Number(version[2])
   return major > 8 || (major === 8 && minor >= 2)
-}
-
-function patchUserModel(backendDir) {
-  const file = path.join(backendDir, 'app', 'Models', 'User.php')
-  if (!fs.existsSync(file)) throw new Error('Model app/Models/User.php tidak ditemukan.')
-
-  let source = fs.readFileSync(file, 'utf8')
-  if (!source.includes('use Laravel\\Sanctum\\HasApiTokens;')) {
-    const importAnchor = 'use Illuminate\\Notifications\\Notifiable;'
-    if (!source.includes(importAnchor)) {
-      throw new Error('Tidak dapat menemukan import Notifiable pada model User. Periksa struktur Laravel yang terpasang.')
-    }
-    source = source.replace(importAnchor, `${importAnchor}\nuse Laravel\\Sanctum\\HasApiTokens;`)
-  }
-
-  const hasApiTokensTrait = /^[ \t]*use\s+HasApiTokens(?:\s*,|\s*;)/m.test(source)
-  if (!hasApiTokensTrait) {
-    // Match the model's trait declaration only, not the `use ...HasFactory;` import.
-    const traitLine = source.match(/^[ \t]*use\s+((?:HasFactory|Notifiable)(?:\s*,\s*(?:HasFactory|Notifiable))*)\s*;/m)
-    if (!traitLine) throw new Error('Tidak dapat menemukan deklarasi trait HasFactory/Notifiable pada model User.')
-    source = source.replace(traitLine[0], `    use HasApiTokens, ${traitLine[1].trim()};`)
-  }
-
-  // Tambahkan role ke fillable agar registrasi dan manajemen user dapat menyimpan peran.
-  if (!source.includes("'role'")) {
-    const fillable = source.match(/protected\s+\$fillable\s*=\s*\[([\s\S]*?)\];/)
-    if (fillable) {
-      const body = fillable[1].trim()
-      const updated = body ? `${body},\n        'role',` : "'role',"
-      source = source.replace(fillable[0], `protected $fillable = [${updated}\n    ];`)
-    } else {
-      throw new Error('Tidak dapat menemukan properti $fillable pada model User.')
-    }
-  }
-
-  fs.writeFileSync(file, source)
-  return source.includes('HasApiTokens')
 }
 
 async function ask(rl, label, choices, defaultValue) {
