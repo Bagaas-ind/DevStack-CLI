@@ -1,39 +1,67 @@
 # ⚡ React-Lara Forge
 
-> **Stop wasting 2–3 hours wiring Laravel + React from scratch.**  
-> Scaffold a full-stack **Laravel + React** starter project—complete with **Sanctum**, **CORS**, **Tailwind CSS**, **React Router**, **Login**, and **Admin Dashboard**—in one command.
+> **Skip repetitive boilerplate setup.**  
+> Scaffold a **Laravel + React** full-stack starter project—pre-configured for **Sanctum**, **CORS**, **Tailwind CSS**, **React Router**, **Login**, and an **Admin Dashboard** layout—in one command.
 
 ![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?style=flat-square&logo=node.js&logoColor=white)
 ![Laravel](https://img.shields.io/badge/Laravel-API%20%2B%20Sanctum-FF2D20?style=flat-square&logo=laravel&logoColor=white)
-![React](https://img.shields.io/badge/React-Vite%20%2B%20Tailwind-61DAFB?style=flat-square&logo=react&logoColor=black)
+![React](https://img.shields.io/badge/React-Tailwind%20%2B%20Router-61DAFB?style=flat-square&logo=react&logoColor=black)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
 
 ---
 
-## Why This Exists
+## Before vs After (Alur Kerja & UI)
 
-Every time you start a new full-stack app with **Laravel** and **React**, the early hours often go into repetitive setup instead of core features:
-- Setting up backend & frontend folders cleanly
-- Wiring **Laravel Sanctum** & **CORS** without hitting frustrating local origin mismatches
-- Setting up routing, auth flow, and a clean **Admin Dashboard** shell
-
-**React-Lara Forge** packages that repetitive baseline into a single CLI workflow so you can jump straight into building features.
+| Aspek | Before (Setup Manual / Tanpa Tool) | After (Dengan React-Lara Forge) |
+| :--- | :--- | :--- |
+| **Waktu Setup Awal** | Menghabiskan sekitar 2–3 jam untuk merangkai proyek, konfigurasi, dan halaman dasar. | Menyiapkan kerangka proyek awal dalam hitungan menit lewat satu perintah CLI. |
+| **Konfigurasi Backend & CORS** | Sering lupa menyamakan *origin* CORS, konfigurasi Sanctum, atau struktur *endpoint* dasar saat awal mulai. | Struktur Laravel, CORS, dan autentikasi dasar sudah disiapkan sebagai titik awal. |
+| **Frontend & Routing** | Setup Vite, Tailwind CSS, React Router, serta komponen *layout* dilakukan satu per satu dari nol. | Sudah terstruktur dengan React + Tailwind + Router dan siap dikembangkan lebih lanjut. |
+| **Tampilan UI Awal (Login & Admin)** | Kosong / masih halaman *starter* bawaan framework yang belum punya alur login & *sidebar* admin. | Sudah ada halaman **Login** dan *layout* **Admin Dashboard** dasar untuk langsung diisi fitur inti. |
 
 ---
 
-## Quick Start
+## Prasyarat (Prerequisites)
+
+- **Node.js** (v18+ direkomendasikan) & `npm`
+- **PHP** (v8.2+ direkomendasikan) & **Composer**
+- **Database** (MySQL / MariaDB / SQLite)
+
+---
+
+## Cara Instalasi & Menjalankan Project
+
+### A. Menjalankan Langsung dari GitHub (Tanpa Publish npm Dulu)
 
 ```bash
-npx react-lara-forge my-app
+npx github:Bagaas-ind/instal-react-lara-forge nama-project
 ```
 
-Follow the prompts, enter your project directory, and start your backend and frontend services:
+### B. Instalasi Lokal untuk Pengembangan / Testing (`npm link`)
 
 ```bash
-cd my-app
+git clone [https://github.com/Bagaas-ind/instal-react-lara-forge.git](https://github.com/Bagaas-ind/instal-react-lara-forge.git)
+cd instal-react-lara-forge
+npm install
+npm link
 ```
 
-**Backend (Laravel):**
+Setelah di-link, uji perintah CLI dari folder mana saja:
+
+```bash
+react-lara-forge test-project
+```
+
+### C. Menjalankan Hasil Generate (Backend & Frontend)
+
+Masuk ke folder project yang sudah dibuat:
+
+```bash
+cd nama-project
+```
+
+**1. Backend (Laravel):**
+
 ```bash
 cd backend
 cp .env.example .env
@@ -42,7 +70,8 @@ php artisan migrate
 php artisan serve
 ```
 
-**Frontend (React):**
+**2. Frontend (React) di terminal terpisah:**
+
 ```bash
 cd frontend
 cp .env.example .env
@@ -52,45 +81,23 @@ npm run dev
 
 ---
 
-## What You Get Out of the Box
+## UI Preview (Before vs After)
 
-- **One-Command Scaffolding**: Generates a structured full-stack project layout quickly.
-- **Auth & API Ready**: Pre-wired **Laravel Sanctum** and **CORS** setup to speed up frontend-backend integration.
-- **Modern Frontend Stack**: React + Vite + Tailwind CSS + React Router.
-- **Starter Pages Included**: Ready-to-customize **Login** screen and **Admin Dashboard** layout.
-- **Developer-Friendly Structure**: Clear separation between backend API and frontend UI.
+> *(Ganti bagian ini dengan screenshot tampilan asli halaman Login & Admin Dashboard kamu nanti)*
 
----
-
-## Preview
-
-> *Tip: Add a terminal GIF or screenshots of the generated Login & Admin Dashboard here—visual previews boost repo engagement fast.*
-
-- **CLI Scaffolding**: *(add screenshot/GIF)*
-- **Login & Admin Layout**: *(add screenshot/GIF)*
-
----
-
-## Project Structure
-
-```text
-my-app/
-├── backend/     # Laravel API, Sanctum & CORS configuration
-└── frontend/    # React app, router, auth screen & admin dashboard layout
-```
+- **Before (Blank Starter):** `<!-- tambahkan link/path gambar before di sini -->`
+- **After (Login & Admin Dashboard):** `<!-- tambahkan link/path gambar after di sini -->`
 
 ---
 
 ## Roadmap
 
-- [ ] Interactive CLI prompts (project name, database driver, starter modules)
+- [ ] Interactive CLI prompts & template customization
 - [ ] Ready-to-use CRUD module generator
-- [ ] Docker / `.env` helper setup for faster local onboarding
+- [ ] Screenshots/GIFs of CLI execution, Login page, and Admin Dashboard
 
 ---
 
-## Contributing & Stars
+## Lisensi
 
-Ideas, bug reports, and pull requests are welcome. If this saves you setup time, consider giving the repository a **Star** ⭐ to support development.
-
-Licensed under the **MIT License**.
+Dirilis di bawah lisensi **MIT**.
