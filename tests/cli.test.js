@@ -56,3 +56,27 @@ test('CLI generates the TypeScript frontend template without a backend', (t) => 
   assert.ok(fs.existsSync(path.join(temp, 'sample-app', 'frontend', 'tsconfig.json')))
   assert.ok(fs.existsSync(path.join(temp, 'sample-app', 'frontend', 'src', 'vite-env.d.ts')))
 })
+
+
+test('CLI version matches the package release version', () => {
+  const result = execute(['--version'])
+  assert.equal(result.status, 0)
+  assert.match(result.stdout, /^0\\.3\\.1/)
+})
+
+test('Laravel admin routes use a registered middleware alias, not a route closure', () => {
+  const routes = fs.readFileSync(path.join(root, 'templates', 'backend', 'routes', 'api.php'), 'utf8')
+  const bootstrap = fs.readFileSync(path.join(root, 'templates', 'backend', 'bootstrap', 'app.php'), 'utf8')
+  const middleware = fs.readFileSync(path.join(root, 'templates', 'backend', 'app', 'Http', 'Middleware', 'EnsureAdmin.php'), 'utf8')
+
+  assert.match(routes, /prefix\\('admin'\\)\\s*->middleware\\('admin'\\)/)
+  assert.doesNotMatch(routes, /Route::middleware\\(function/)
+  assert.match(bootstrap, /'admin'\\s*=>\\s*\\\\App\\\\Http\\\\Middleware\\\\EnsureAdmin::class/)
+  assert.match(middleware, /role\\s*!==\\s*'admin'/)
+})
+
+test('JavaScript dashboard template uses valid JSX structure', () => {
+  const dashboard = fs.readFileSync(path.join(root, 'templates', 'frontend', 'src', 'pages', 'Dashboard.jsx'), 'utf8')
+  assert.match(dashboard, /return \\(\\s*<div>/)
+  assert.match(dashboard, /cards\\.map\\(\\(card\\) => \\(\\s*<div/)
+})
