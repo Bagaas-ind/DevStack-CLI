@@ -3,7 +3,10 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { patchUserModel } from '../lib/patch-user-model.js'
+
+const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)))
 
 test('patchUserModel adds Sanctum and role without creating an empty array element', (t) => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'rlf-user-model-'))
@@ -43,7 +46,7 @@ test('patchUserModel adds Sanctum and role without creating an empty array eleme
 
 test('Laravel API exceptions are rendered as JSON without an Accept header', () => {
   const bootstrap = fs.readFileSync(
-    path.join(path.dirname(path.dirname(new URL(import.meta.url).pathname)), 'templates', 'backend', 'bootstrap', 'app.php'),
+    path.join(root, 'templates', 'backend', 'bootstrap', 'app.php'),
     'utf8'
   )
   assert.match(bootstrap, /use Illuminate\\\\Http\\\\Request;/)
