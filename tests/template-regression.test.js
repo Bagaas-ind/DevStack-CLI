@@ -49,7 +49,7 @@ test('Laravel API exceptions are rendered as JSON without an Accept header', () 
     path.join(root, 'templates', 'backend', 'bootstrap', 'app.php'),
     'utf8'
   )
-  assert.ok(bootstrap.includes('use Illuminate\\\\Http\\\\Request;'))
+  assert.ok(bootstrap.includes(String.raw`use Illuminate\Http\Request;`))
   assert.match(bootstrap, /shouldRenderJsonWhen/)
   assert.match(bootstrap, /\$request->is\('api\/\*'\) \|\| \$request->expectsJson\(\)/)
 })
