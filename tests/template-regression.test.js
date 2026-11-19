@@ -40,3 +40,13 @@ test('patchUserModel adds Sanctum and role without creating an empty array eleme
   assert.doesNotMatch(patched, /'password',\s*,/)
   assert.equal((patched.match(/'role'/g) || []).length, 1)
 })
+
+test('Laravel API exceptions are rendered as JSON without an Accept header', () => {
+  const bootstrap = fs.readFileSync(
+    path.join(path.dirname(path.dirname(new URL(import.meta.url).pathname)), 'templates', 'backend', 'bootstrap', 'app.php'),
+    'utf8'
+  )
+  assert.match(bootstrap, /use Illuminate\\\\Http\\\\Request;/)
+  assert.match(bootstrap, /shouldRenderJsonWhen/)
+  assert.match(bootstrap, /\$request->is\('api\/\*'\) \|\| \$request->expectsJson\(\)/)
+})
