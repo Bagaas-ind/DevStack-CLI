@@ -1,0 +1,20 @@
+REACT-LARA FORGE — BRAND ASSETS
+
+Files:
+- react-lara-forge-icon.png       Square icon / avatar
+- react-lara-forge-wordmark.png   Horizontal logo for README
+- github-social-preview.png      GitHub repository social preview (1280 x 640)
+
+Visual concept:
+- Hexagonal forge frame: structure, reliability, and building.
+- Interlocking abstract R/L strokes: React + Laravel, drawn as one identity.
+- Red: Laravel-inspired warmth and energy.
+- Cyan: React-inspired clarity and motion.
+- Dark navy: developer-tool / terminal aesthetic.
+- Gold spark: the act of forging and creating.
+
+Suggested README image:
+![React-Lara Forge](./assets/react-lara-forge-wordmark.png)
+
+Suggested GitHub social preview:
+Repository → Settings → General → Social preview → Edit.
