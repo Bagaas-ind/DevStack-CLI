@@ -14,14 +14,14 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
-            'admin' => \\App\\Http\\Middleware\\EnsureAdmin::class,
+            'admin' => \App\Http\Middleware\EnsureAdmin::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         // API requests should receive JSON errors even when the client does not
         // explicitly send an Accept: application/json header.
         $exceptions->shouldRenderJsonWhen(
-            fn (Request $request, \\Throwable $exception): bool =>
+            fn (Request $request, \Throwable $exception): bool =>
                 $request->is('api/*') || $request->expectsJson()
         );
     })->create();
