@@ -1,24 +1,13 @@
 <?php
 
 return [
-    'paths' => ['api/*'],
-
+    'paths' => ['api/*', 'sanctum/csrf-cookie'],
     'allowed_methods' => ['*'],
-
-    // Alamat frontend React. Ubah lewat FRONTEND_URL di file .env
-    'allowed_origins' => [
-        env('FRONTEND_URL', 'http://localhost:5173'),
-        'http://127.0.0.1:5173',
-    ],
-
+    'allowed_origins' => array_filter(array_map('trim', explode(',', env('FRONTEND_URL', 'http://localhost:5173')))),
     'allowed_origins_patterns' => [],
-
     'allowed_headers' => ['*'],
-
     'exposed_headers' => [],
-
-    'max_age' => 0,
-
-    // Autentikasi memakai token Bearer, bukan cookie
+    'max_age' => 600,
+    // Bearer-token authentication does not require credentialed CORS.
     'supports_credentials' => false,
 ];

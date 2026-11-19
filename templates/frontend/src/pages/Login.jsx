@@ -21,8 +21,9 @@ export default function Login() {
       navigate('/')
     } catch (err) {
       setError(
-        err.response?.data?.message ||
-          'Tidak bisa terhubung ke server. Pastikan backend berjalan di php artisan serve.'
+        err.response?.data?.errors?.email?.[0] ||
+          err.response?.data?.message ||
+          'Tidak bisa terhubung ke server. Pastikan backend berjalan dan alamat API sudah benar.'
       )
     } finally {
       setSubmitting(false)
@@ -50,6 +51,7 @@ export default function Login() {
         <input
           id="email"
           type="email"
+          autoComplete="username"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -62,6 +64,7 @@ export default function Login() {
         <input
           id="password"
           type="password"
+          autoComplete="current-password"
           required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -76,9 +79,10 @@ export default function Login() {
           {submitting ? 'Memproses...' : 'Masuk'}
         </button>
 
-        <p className="mt-4 text-center text-xs text-ink-700">
-          Akun demo: admin@example.com / password
+        <p className="mt-4 text-center text-sm text-ink-700">
+          Belum punya akun? <a className="font-medium text-brand-700" href="/register">Daftar</a>
         </p>
+        <p className="mt-2 text-center text-xs text-ink-700">Akun demo hanya untuk development lokal.</p>
       </form>
     </div>
   )
