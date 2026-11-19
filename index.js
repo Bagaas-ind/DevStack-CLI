@@ -73,7 +73,7 @@ function patchUserModel(backendDir) {
   if (!source.includes("'role'")) {
     const fillable = source.match(/protected\s+\$fillable\s*=\s*\[([\s\S]*?)\];/)
     if (fillable) {
-      const body = fillable[1].trim().replace(/,\\s*$/, '')
+      const body = fillable[1].trim().replace(/,\s*$/, '')
       const updated = body ? `${body},\n        'role',` : "'role',"
       source = source.replace(fillable[0], `protected $fillable = [${updated}\n    ];`)
     } else {
