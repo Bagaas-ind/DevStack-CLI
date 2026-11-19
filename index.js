@@ -98,10 +98,25 @@ program
       console.log(chalk.gray('\n2/3 Backend dilewati (--skip-backend)'))
     }
 
+    // Skrip peluncur: klik dua kali start.bat (Windows) atau jalankan ./start.sh
+    if (!options.skipBackend) {
+      fs.copySync(path.join(templates, 'root', 'start.bat'), path.join(target, 'start.bat'))
+      const sh = path.join(target, 'start.sh')
+      fs.copySync(path.join(templates, 'root', 'start.sh'), sh)
+      try { fs.chmodSync(sh, 0o755) } catch {}
+    }
+
     // 3. Selesai
     console.log(chalk.bold('\n3/3 Selesai'))
     console.log(chalk.green(`\n✔ Project "${projectName}" siap!\n`))
-    console.log('Langkah selanjutnya:\n')
+    if (!options.skipBackend) {
+      console.log(chalk.bold('Cara tercepat:'))
+      console.log(`  Windows : klik dua kali ${chalk.cyan(`${projectName}\\start.bat`)}`)
+      console.log(`  Mac/Linux: ${chalk.cyan(`cd ${projectName} && ./start.sh`)}\n`)
+      console.log(chalk.bold('Atau manual:\n'))
+    } else {
+      console.log('Langkah selanjutnya:\n')
+    }
     console.log(chalk.cyan(`  cd ${projectName}/frontend`))
     console.log(chalk.cyan('  npm install'))
     console.log(chalk.cyan('  npm run dev'))
