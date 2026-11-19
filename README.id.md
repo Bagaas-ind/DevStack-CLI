@@ -56,6 +56,36 @@ Backend dan frontend dibuat secara terpisah:
 
 React-Lara Forge adalah alat pembuat kerangka awal proyek (project scaffold) yang juga cocok untuk belajar. Proyek ini bukan layanan hosting atau aplikasi bisnis siap pakai.
 
+## Instal Manual vs. Menggunakan React-Lara Forge
+
+Membangun fondasi Laravel + React secara manual memberi kamu kendali penuh, tetapi kamu juga perlu mengulang sejumlah proses setup dan integrasi. React-Lara Forge mengotomatiskan sebagian besar pembuatan kerangka awal tersebut.
+
+| Tahap setup | Instalasi manual | Menggunakan React-Lara Forge |
+|---|---|---|
+| Membuat backend Laravel | Membuat proyek Laravel dan menyiapkan strukturnya sendiri | Membuat kerangka backend Laravel 12 secara otomatis |
+| Membuat frontend React | Menyiapkan React, Vite, dan struktur proyek sendiri | Membuat kerangka frontend React 18 + Vite |
+| Memasang dependency umum | Mencari dan memasang package yang dibutuhkan satu per satu | Memasang/mengonfigurasi dependency starter sebagai bagian dari proses generate |
+| Menghubungkan frontend dan backend | Mengatur URL API dan penanganan request sendiri | Menyediakan fondasi koneksi API yang sudah dikonfigurasi |
+| Fondasi autentikasi | Membuat registrasi, login, logout, dan protected route sendiri | Menyediakan starter autentikasi token menggunakan Laravel Sanctum |
+| Konfigurasi CORS | Mengatur origin frontend yang diizinkan sendiri | Menyediakan konfigurasi CORS yang bisa disesuaikan |
+| Fondasi admin | Membuat dashboard dan halaman manajemen pengguna sendiri | Menyediakan starter admin dashboard dan manajemen pengguna |
+| Setup database | Mengatur koneksi database pilihan sendiri | Bisa memilih SQLite, MySQL, atau PostgreSQL saat proses generate |
+| Menjalankan server | Membuka terminal dan menjalankan backend/frontend secara terpisah | Menyediakan script praktis `start.bat` dan `start.sh` |
+
+### Mengapa menggunakan React-Lara Forge?
+
+- **Mengurangi setup berulang:** buat struktur awal backend dan frontend dengan satu perintah.
+- **Integrasi dasar sudah tersedia:** fondasi API, autentikasi, dan CORS sudah disertakan.
+- **Lebih cepat memulai pengembangan:** lebih banyak waktu bisa digunakan untuk menyesuaikan fitur aplikasi daripada mengulang setup boilerplate.
+- **Kode tetap dalam kendali kamu:** proyek hasil generate bisa diperiksa, diubah, dikembangkan, dan di-deploy sendiri.
+
+### Apa yang tetap harus kamu kerjakan?
+
+React-Lara Forge tidak menghilangkan proses development. Kamu tetap perlu menyesuaikan tampilan, membuat business logic aplikasi, meninjau pengaturan keamanan, menyiapkan infrastruktur production, dan menguji aplikasi sampai selesai.
+
+Perbandingan ini menjelaskan pekerjaan setup yang dicakup repository ini; langkah yang dibutuhkan bisa berbeda tergantung kebutuhan dan pengalaman masing-masing.
+
+
 ## Fitur
 
 - **Backend dan frontend terpisah** — Laravel API dan React SPA dibuat dalam direktori masing-masing.
