@@ -2,9 +2,9 @@
 
 # React-Lara Forge
 
-**A practical Laravel API + React SPA project generator.**
+**Generate a Laravel API + React SPA starter project in minutes.**
 
-Scaffold a separate Laravel backend and React frontend with Sanctum token authentication, a ready-to-customize admin interface, and an interactive setup.
+A command-line project generator that scaffolds a separate Laravel backend and React frontend, with authentication, role-based admin features, database configuration, and a ready-to-customize interface.
 
 [![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![CI](https://github.com/Bagaas-ind/react-lara-forge/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Bagaas-ind/react-lara-forge/actions/workflows/ci.yml)
@@ -14,52 +14,98 @@ Scaffold a separate Laravel backend and React frontend with Sanctum token authen
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
+**Quick start**
+
 ```bash
 npx github:Bagaas-ind/react-lara-forge my-project
 ```
-
-<table>
-  <tr>
-    <td align="center"><strong>Login</strong><br><img src="docs/login.png" width="420" alt="React-Lara Forge login screen"></td>
-    <td align="center"><strong>Admin dashboard</strong><br><img src="docs/dashboard.png" width="420" alt="React-Lara Forge admin dashboard"></td>
-  </tr>
-</table>
 
 </div>
 
 ---
 
-## Why React-Lara Forge?
+## Table of contents
 
-Starting a Laravel API and a separate React SPA usually means repeating the same setup: creating the Laravel application, installing Sanctum, configuring CORS, preparing Vite and Tailwind CSS, wiring API requests, and building an authentication flow.
+- [Overview](#overview)
+- [Features](#features)
+- [Preview](#preview)
+- [Requirements](#requirements)
+- [Quick start](#quick-start)
+- [CLI options](#cli-options)
+- [Generated project structure](#generated-project-structure)
+- [Authentication and security](#authentication-and-security)
+- [Database configuration](#database-configuration)
+- [Development commands](#development-commands)
+- [Troubleshooting](#troubleshooting)
+- [Project status and roadmap](#project-status-and-roadmap)
+- [Contributing](#contributing)
+- [License](#license)
 
-React-Lara Forge automates that foundation so you can spend more time building the features that make your application unique.
+## Overview
+
+Starting a Laravel API and a separate React single-page application often involves repeating the same setup: creating the backend, installing Sanctum, configuring CORS, preparing Vite and Tailwind CSS, connecting API requests, and building an authentication flow.
+
+**React-Lara Forge automates that initial setup.** It gives you a practical foundation that you can customize for your own application instead of starting from an empty directory.
+
+The generated project keeps the backend and frontend separate:
+
+- `backend/` — Laravel 12 API.
+- `frontend/` — React single-page application.
+
+React-Lara Forge is a project starter and learning-friendly scaffold. It is not a hosted service or a finished business application.
 
 ## Features
 
-- **Separate applications:** Laravel API in `backend/` and React SPA in `frontend/`.
-- **Frontend language choice:** JavaScript (default) or TypeScript.
-- **Database setup:** SQLite, MySQL, or PostgreSQL configuration.
-- **Authentication starter:** Laravel Sanctum personal access tokens, registration, login, logout, and protected API routes.
-- **Role-based access:** new accounts receive the `user` role; the seeded account receives `admin`.
-- **Admin interface:** live dashboard statistics and database-backed user listing/creation/deletion with server-side admin authorization.
-- **Frontend stack:** React 18, Vite 6, Tailwind CSS 4, React Router, and Axios.
-- **Launch scripts:** `start.bat` for Windows and `start.sh` for macOS/Linux.
-- **Safer setup behavior:** validates project names and existing paths, checks required tools, and cleans up an incomplete project after a fatal generation error.
+- **Separate backend and frontend** — Laravel API and React SPA are generated in their own directories.
+- **JavaScript or TypeScript** — choose the frontend language during setup or with a CLI option.
+- **Database selection** — configure SQLite, MySQL, or PostgreSQL.
+- **Authentication starter** — registration, login, logout, protected API routes, and Laravel Sanctum personal access tokens.
+- **Role-based access** — registered users receive the `user` role; the local development seeder creates an administrator account.
+- **Admin dashboard** — dashboard statistics and user management backed by the database.
+- **Server-side authorization** — administrator-only API actions are protected on the Laravel backend.
+- **Modern frontend stack** — React 18, Vite 6, Tailwind CSS 4, React Router, and Axios.
+- **Cross-platform launch scripts** — `start.bat` for Windows and `start.sh` for macOS/Linux.
+- **Safer generation** — validates project names and existing paths, checks required tools, and cleans up incomplete output after fatal generation errors.
 
-> Dashboard metrics currently report user/account counts. Business-specific metrics (orders, revenue, tickets, and similar data) must be added by the application developer.
+> Dashboard statistics currently focus on user/account data. Features such as orders, payments, inventory, and revenue are not included and must be developed separately.
+
+## Preview
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><strong>Login</strong></td>
+      <td align="center"><strong>Admin dashboard</strong></td>
+    </tr>
+    <tr>
+      <td><img src="docs/login.png" width="420" alt="React-Lara Forge login page"></td>
+      <td><img src="docs/dashboard.png" width="420" alt="React-Lara Forge admin dashboard"></td>
+    </tr>
+  </table>
+</div>
 
 ## Requirements
 
-| Tool | Requirement | Used for |
-|---|---|---|
-| Node.js | 18 or newer | CLI and frontend tooling |
-| npm | Included with Node.js | Frontend dependencies |
-| PHP | 8.2 or newer | Laravel 12 backend |
-| Composer | 2.x recommended | Creating the Laravel application |
-| Database | SQLite, MySQL, or PostgreSQL | Application data |
+Install these tools before generating a full-stack project:
 
-For MySQL or PostgreSQL, install and start the database server yourself and create the database/user before running migrations. SQLite is the default and does not require a separate database server.
+| Tool | Version | Purpose |
+|---|---|---|
+| Node.js | 18 or newer | Runs the CLI and frontend tooling |
+| npm | Included with Node.js | Installs frontend dependencies |
+| PHP | 8.2 or newer | Runs the Laravel 12 backend |
+| Composer | 2.x recommended | Creates and manages the Laravel application |
+| Database | SQLite, MySQL, or PostgreSQL | Stores application data |
+
+Check your installations:
+
+```bash
+node --version
+npm --version
+php --version
+composer --version
+```
+
+For MySQL or PostgreSQL, start the database server and create the database and database user before running migrations. SQLite is the default and does not require a separate database server.
 
 ## Quick start
 
@@ -69,42 +115,52 @@ For MySQL or PostgreSQL, install and start the database server yourself and crea
 npx github:Bagaas-ind/react-lara-forge my-project
 ```
 
-In an interactive terminal, choose JavaScript or TypeScript and select a database. The defaults are JavaScript and SQLite.
+Follow the prompts to choose JavaScript or TypeScript and a database. The default choices are JavaScript and SQLite.
 
-The generator downloads Laravel through Composer and installs frontend packages through npm. An internet connection is required for the initial setup.
+The generator downloads Laravel through Composer and installs frontend dependencies through npm. An internet connection is required during initial generation.
 
 ### 2. Start the applications
 
-**Windows** — open `my-project` and double-click `start.bat`, or run:
+**Windows**
+
+Open the generated folder and double-click `start.bat`, or run:
 
 ```powershell
 cd my-project
 .\start.bat
 ```
 
-**macOS / Linux:**
+**macOS / Linux**
 
 ```bash
 cd my-project
+chmod +x start.sh
 ./start.sh
 ```
 
-The scripts start Laravel at `http://localhost:8000` and Vite at `http://localhost:5173`.
+The development servers use these default addresses:
 
-### 3. Sign in locally
+| Application | URL |
+|---|---|
+| React frontend | http://localhost:5173 |
+| Laravel backend | http://localhost:8000 |
 
-Open `http://localhost:5173`.
+### 3. Open the application
 
-For a local development project generated with the default settings:
+Visit [http://localhost:5173](http://localhost:5173) in your browser.
+
+For a project generated with the default local development configuration, the seeded administrator credentials are:
 
 | Field | Local demo value |
 |---|---|
 | Email | `admin@example.com` |
 | Password | `password` |
 
-**Security warning:** these demo credentials are only for local development. Change or remove the demo account before exposing the application to a network or deploying it. Never reuse the demo password in production.
+**Important:** These are local development credentials only. Change or remove the demo account before exposing the application to other users or deploying it. Never use the demo password in production.
 
 ## CLI options
+
+General syntax:
 
 ```bash
 npx github:Bagaas-ind/react-lara-forge <project-name> [options]
@@ -116,82 +172,103 @@ npx github:Bagaas-ind/react-lara-forge <project-name> [options]
 | `--language <language>` | Choose `javascript` or `typescript` |
 | `--database <driver>` | Choose `sqlite`, `mysql`, or `pgsql` |
 | `--skip-backend` | Generate only the React frontend |
-| `--skip-install` | Generate files without running `npm install` |
-| `--non-interactive` | Use defaults/options without interactive prompts |
-| `-V, --version` | Print the CLI version |
-| `-h, --help` | Show help |
+| `--skip-install` | Generate files without running frontend `npm install` |
+| `--non-interactive` | Run with options/defaults without interactive prompts |
+| `-V, --version` | Display the CLI version |
+| `-h, --help` | Display help |
 
-Examples:
+### Examples
+
+Generate a TypeScript project:
 
 ```bash
-# TypeScript + default SQLite
 npx github:Bagaas-ind/react-lara-forge my-app --typescript
+```
 
-# JavaScript + MySQL, no prompts
+Generate a JavaScript project with MySQL without interactive prompts:
+
+```bash
 npx github:Bagaas-ind/react-lara-forge my-app --language javascript --database mysql --non-interactive
+```
 
-# Frontend only
+Generate only the frontend:
+
+```bash
 npx github:Bagaas-ind/react-lara-forge my-frontend --skip-backend
+```
 
-# Generate without installing frontend packages
+Generate the project without installing frontend packages:
+
+```bash
 npx github:Bagaas-ind/react-lara-forge my-app --skip-install
 ```
 
-When using `--non-interactive`, the default language is JavaScript and the default database is SQLite unless overridden with options.
+When using `--non-interactive`, JavaScript and SQLite are selected by default unless you override them with options.
 
 ## Generated project structure
 
+The generated directory follows this general structure:
+
 ```text
 my-project/
-├── backend/                 # Laravel 12 API + Sanctum
-│   ├── app/Http/Controllers/ (authentication, dashboard, users)
-│   ├── config/cors.php
-│   ├── database/migrations/ (user role)
-│   ├── database/seeders/DatabaseSeeder.php
-│   └── routes/api.php
-├── frontend/                # React + Vite + Tailwind CSS
+├── backend/                     # Laravel 12 API + Sanctum
+│   ├── app/Http/Controllers/    # Authentication, dashboard, users
+│   ├── config/                  # Application and CORS configuration
+│   ├── database/
+│   │   ├── migrations/
+│   │   └── seeders/
+│   └── routes/
+│       └── api.php
+├── frontend/                    # React + Vite + Tailwind CSS
 │   ├── src/
 │   │   ├── components/
 │   │   ├── context/
 │   │   ├── lib/
 │   │   └── pages/
 │   ├── package.json
-│   └── vite.config.js       # .ts for TypeScript projects
-├── start.bat
-└── start.sh
+│   └── vite.config.js            # .ts for TypeScript projects
+├── start.bat                     # Windows launcher
+└── start.sh                      # macOS/Linux launcher
 ```
 
-## Authentication and security notes
+Exact files may vary slightly depending on the selected language and generator options.
 
-- The starter uses **Sanctum personal access tokens** with the `Authorization: Bearer` header. It does not configure Sanctum's stateful cookie-based SPA flow.
-- Public registration is rate-limited and assigns the `user` role. Only an administrator can access the admin dashboard and user-management API.
-- The admin API enforces authorization on the Laravel server. Hiding a frontend navigation item is not treated as a security boundary.
-- Login is rate-limited to five attempts per minute by Laravel's route throttle middleware.
-- The frontend stores the returned token in `localStorage` for a simple local starter flow. Be aware that JavaScript-accessible storage increases the impact of an XSS vulnerability. Review your application's threat model before production use; consider a properly configured cookie-based session flow for browser-only applications.
-- CORS is restricted to the frontend origin in `FRONTEND_URL`. Set the exact production frontend origin in the backend environment; do not use `*` with credentials.
-- The local seeder creates `admin@example.com` / `password` only in `local` or `testing` environments. Outside those environments, set `ADMIN_NAME`, `ADMIN_EMAIL`, and a strong `ADMIN_PASSWORD` in `backend/.env` before running the seeder. These values are loaded through `config/react-lara-forge.php` so they remain available when Laravel configuration is cached.
-- The generated project is a development foundation, not a complete production security review. Review registration policy, token storage, authorization, validation, logging, monitoring, HTTPS, backups, and deployment-specific configuration before production use.
+## Authentication and security
+
+React-Lara Forge provides a starting authentication implementation. Understand these defaults before adapting the generated application:
+
+- Authentication uses **Sanctum personal access tokens** sent with the `Authorization: Bearer` header. The generator does not configure Sanctum's stateful cookie-based SPA authentication flow.
+- Public registration is rate-limited and assigns the `user` role. Administrator-only operations are authorized by the Laravel backend.
+- Login is rate-limited by Laravel route middleware.
+- The frontend stores the returned token in `localStorage` for a straightforward starter experience. JavaScript-accessible storage increases the impact of cross-site scripting (XSS); review token storage and your threat model before production use.
+- CORS is configured through `FRONTEND_URL`. Set this to the exact frontend origin used by your deployment. Avoid permissive wildcard origins when credentials are involved.
+- The local seeder uses `admin@example.com` / `password` only in local or testing environments. For other environments, configure `ADMIN_NAME`, `ADMIN_EMAIL`, and a strong `ADMIN_PASSWORD` in `backend/.env` before seeding.
+- Do not commit `.env` files, credentials, access tokens, or production secrets.
+
+**Production note:** generated projects are development foundations, not security-certified applications. Before deployment, review authentication, authorization, validation, token handling, HTTPS, logging, monitoring, backups, dependency updates, and environment configuration.
 
 ## Database configuration
 
-The generator writes the selected driver to `backend/.env`:
+The generator writes the selected database driver to `backend/.env`.
 
-- **SQLite:** creates `backend/database/database.sqlite`.
-- **MySQL:** configures the standard local MySQL host and port. Create the database and set the correct credentials in `backend/.env`.
-- **PostgreSQL:** configures the standard local PostgreSQL host and port. Create the database and set the correct credentials in `backend/.env`.
+| Driver | Notes |
+|---|---|
+| SQLite | Creates `backend/database/database.sqlite`; no separate database server is needed. |
+| MySQL | Uses standard local connection defaults. Create the database and update credentials in `backend/.env`. |
+| PostgreSQL | Uses standard local connection defaults. Create the database and update credentials in `backend/.env`. |
 
-After editing database settings, run:
+After changing database settings, run:
 
 ```bash
 cd backend
 php artisan migrate --seed
 ```
 
-If the selected database server is not running or the database does not exist during generation, the project files are still created; run the migration command after correcting `backend/.env`.
+If the database server is unavailable or the database does not exist during generation, correct `backend/.env` and run the migration command once the database is ready.
 
 ## Development commands
 
-Frontend:
+### Frontend
 
 ```bash
 cd frontend
@@ -200,9 +277,13 @@ npm run dev
 npm run build
 ```
 
-For TypeScript projects, run `npm run typecheck` to check frontend types.
+For a TypeScript project, run the following command to check frontend types:
 
-Backend:
+```bash
+npm run typecheck
+```
+
+### Backend
 
 ```bash
 cd backend
@@ -210,37 +291,82 @@ php artisan serve
 php artisan migrate --seed
 ```
 
-The frontend API base URL is configured in `frontend/.env` using `VITE_API_URL`.
+The frontend API base URL is configured in `frontend/.env` through `VITE_API_URL`.
 
 ## Troubleshooting
 
-**PHP or Composer is not found**
-Install the required tool, add it to your system `PATH`, then open a new terminal and check `php -v` and `composer --version`.
+<details>
+<summary><strong>PHP or Composer is not recognized</strong></summary>
 
-**Frontend cannot connect to the API**
-Make sure Laravel is running at `http://localhost:8000`, check `VITE_API_URL` in `frontend/.env`, and verify `FRONTEND_URL` in `backend/.env` matches the frontend origin.
+Install PHP and Composer, add them to your system `PATH`, then open a new terminal. Verify with `php --version` and `composer --version`.
 
-**Migration fails with MySQL/PostgreSQL**
-Confirm the database server is running, the database exists, and the username/password in `backend/.env` are correct. Then run `php artisan migrate --seed` again.
+</details>
 
-**The project folder already exists**
-The generator never overwrites an existing path. Choose another project name.
+<details>
+<summary><strong>The frontend cannot connect to the API</strong></summary>
 
-**Frontend dependencies were not installed**
-Run `npm install` inside the generated `frontend/` directory.
+Make sure Laravel is running at `http://localhost:8000`. Check `VITE_API_URL` in `frontend/.env` and confirm that `FRONTEND_URL` in `backend/.env` matches the frontend origin.
+
+</details>
+
+<details>
+<summary><strong>MySQL or PostgreSQL migration fails</strong></summary>
+
+Confirm that the database server is running, the database exists, and the credentials in `backend/.env` are correct. Then retry `php artisan migrate --seed`.
+
+</details>
+
+<details>
+<summary><strong>The project directory already exists</strong></summary>
+
+Choose a different project name. The generator is designed not to overwrite an existing project directory.
+
+</details>
+
+<details>
+<summary><strong>Frontend dependencies are missing</strong></summary>
+
+Open a terminal in the generated `frontend/` directory and run `npm install`.
+
+</details>
+
+## Project status and roadmap
+
+React-Lara Forge is under active development. The current repository contains the generator, JavaScript and TypeScript templates, documentation, and automated CLI tests.
+
+Planned areas of improvement include:
+
+- More comprehensive end-to-end tests for generated Laravel and React projects.
+- Additional starter modules and customization options.
+- Clearer release notes and versioned distribution.
+- More examples and screenshots of generated projects.
+
+Bug reports and constructive feedback are welcome through [GitHub Issues](https://github.com/Bagaas-ind/react-lara-forge/issues).
 
 ## Contributing
 
-Contributions, bug reports, and documentation improvements are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request and use GitHub Issues to report reproducible bugs or propose changes.
+Contributions are welcome, including bug fixes, tests, documentation improvements, and feature suggestions.
+
+Before submitting a pull request:
+
+1. Read [CONTRIBUTING.md](CONTRIBUTING.md).
+2. Create a focused branch from `main`.
+3. Add or update tests for behavior changes.
+4. Run `npm test`.
+5. Explain what changed and how you tested it.
+
+Please do not commit generated application folders, `node_modules`, `.env` files, local databases, or secrets.
 
 ## License
 
-React-Lara Forge is open source under the [MIT License](LICENSE).
+React-Lara Forge is released under the [MIT License](LICENSE). You are free to use, modify, and distribute it under the terms of that license.
 
 ---
 
 <div align="center">
 
-Built to make starting Laravel + React applications less repetitive.
+Made to make starting Laravel + React projects less repetitive.
+
+**If React-Lara Forge is useful to you, consider giving the repository a ⭐ on GitHub.**
 
 </div>
