@@ -1,105 +1,116 @@
 #!/usr/bin/env node
+import { program } from 'commander'
+import chalk from 'chalk'
+import fs from 'fs-extra'
+import path from 'path'
+import { spawnSync } from 'child_process'
+import { fileURLToPath } from 'url'
 
-import { program } from 'commander';
-import chalk from 'chalk';
-import { execSync } from 'child_process';
-import fs from 'fs-extra';
-import path from 'path';
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const templates = path.join(__dirname, 'templates')
 
-// Fungsi untuk menjalankan perintah terminal
-function runCommand(command, cwd = process.cwd()) {
-  try {
-    execSync(command, { stdio: 'inherit', cwd });
-  } catch (error) {
-    console.error(chalk.red(`\n[X] Error saat menjalankan: ${command}`));
-    process.exit(1);
-  }
+const fail = (msg) => {
+  console.log(chalk.red(`\n✖ ${msg}\n`))
+  process.exit(1)
+}
+
+// Jalankan perintah, tampilkan outputnya langsung. shell:true agar composer.bat jalan di Windows.
+function run(cmd, args, cwd) {
+  const res = spawnSync(cmd, args, { cwd, stdio: 'inherit', shell: true })
+  return res.status === 0
+}
+
+function has(cmd) {
+  return spawnSync(cmd, ['--version'], { stdio: 'ignore', shell: true }).status === 0
+}
+
+// Tambahkan trait HasApiTokens ke model User bawaan Laravel
+function patchUserModel(backendDir) {
+  const file = path.join(backendDir, 'app', 'Models', 'User.php')
+  if (!fs.existsSync(file)) return false
+  let src = fs.readFileSync(file, 'utf8')
+  if (src.includes('HasApiTokens')) return true
+
+  src = src.replace(
+    'use Illuminate\\Notifications\\Notifiable;',
+    'use Illuminate\\Notifications\\Notifiable;\nuse Laravel\\Sanctum\\HasApiTokens;'
+  )
+  src = src.replace(/use (HasFactory, Notifiable);/, 'use HasApiTokens, $1;')
+  fs.writeFileSync(file, src)
+  return src.includes('use HasApiTokens')
 }
 
 program
   .name('react-lara-forge')
-  .description('CLI Scaffolding untuk project Laravel 11 API + React (Vite) + Tailwind')
-  .version('1.0.0');
+  .description('Buat starter full-stack Laravel + React dalam satu perintah')
+  .version('0.1.0')
+  .argument('<project-name>', 'nama folder project')
+  .option('--skip-backend', 'hanya buat frontend (lewati Laravel)')
+  .action((projectName, options) => {
+    const target = path.resolve(process.cwd(), projectName)
 
-program
-  .command('create <project-name>')
-  .description('Membuat project Fullstack baru')
-  .action(async (projectName) => {
-    const rootDir = path.join(process.cwd(), projectName);
-    const backendDir = path.join(rootDir, 'backend');
-    const frontendDir = path.join(rootDir, 'frontend');
-
-    console.log(chalk.cyan.bold(`\n🔥 MEMULAI PEMBUATAN PROJECT: ${projectName}\n`));
-
-    // 1. Buat Folder Utama
-    if (fs.existsSync(rootDir)) {
-      console.error(chalk.red(`Folder ${projectName} sudah ada! Gunakan nama lain.`));
-      process.exit(1);
+    if (!/^[a-zA-Z0-9._-]+$/.test(projectName)) {
+      fail('Nama project hanya boleh berisi huruf, angka, titik, strip, dan garis bawah.')
     }
-    fs.mkdirSync(rootDir);
+    if (fs.existsSync(target)) fail(`Folder "${projectName}" sudah ada.`)
+    if (!fs.existsSync(templates)) fail('Folder "templates" tidak ditemukan di paket CLI ini.')
 
-    // 2. Setup Backend (Laravel)
-    console.log(chalk.yellow('\n[1/4] Menginstall Laravel (Backend)...'));
-    runCommand(`composer create-project laravel/laravel backend`, rootDir);
-    console.log(chalk.green('[✔] Laravel berhasil diinstall.'));
-    
-    console.log(chalk.yellow('[2/4] Menginstall Laravel Sanctum & Setup CORS...'));
-    runCommand(`php artisan install:api`, backendDir);
-    
-    // Membuat file cors.php otomatis
-    const corsContent = `<?php
-return [
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
-    'allowed_methods' => ['*'],
-    'allowed_origins' => ['http://localhost:5173'],
-    'allowed_origins_patterns' => [],
-    'allowed_headers' => ['*'],
-    'exposed_headers' => [],
-    'max_age' => 0,
-    'supports_credentials' => true,
-];`;
-    fs.writeFileSync(path.join(backendDir, 'config', 'cors.php'), corsContent);
-    console.log(chalk.green('[✔] CORS & Sanctum siap digunakan.'));
+    if (!options.skipBackend) {
+      if (!has('php')) fail('PHP tidak ditemukan. Install PHP 8.2+ atau jalankan dengan --skip-backend.')
+      if (!has('composer')) fail('Composer tidak ditemukan. Install dari https://getcomposer.org atau pakai --skip-backend.')
+    }
 
-    // 3. Setup Frontend (React + Vite)
-    console.log(chalk.yellow('\n[3/4] Membuat React (Frontend)...'));
-    runCommand(`npm create vite@latest frontend -- --template react`, rootDir);
-    
-    console.log(chalk.yellow('[4/4] Menginstall Dependencies Frontend (Tailwind, Router, Axios)...'));
-    runCommand(`npm install`, frontendDir);
-    runCommand(`npm install -D tailwindcss@3 postcss autoprefixer`, frontendDir);
-    runCommand(`npx tailwindcss init -p`, frontendDir);
-    runCommand(`npm install react-router-dom axios framer-motion`, frontendDir);
+    console.log(chalk.cyan(`\n⚒  Membuat "${projectName}"...\n`))
+    fs.ensureDirSync(target)
 
-    // Konfigurasi Tailwind Otomatis
-    const tailwindConfig = `/** @type {import('tailwindcss').Config} */
-export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-  theme: { extend: {} },
-  plugins: [],
-}`;
-    fs.writeFileSync(path.join(frontendDir, 'tailwind.config.js'), tailwindConfig);
-    
-    // Index CSS Otomatis
-    const indexCss = `@tailwind base;\n@tailwind components;\n@tailwind utilities;\n`;
-    fs.writeFileSync(path.join(frontendDir, 'src', 'index.css'), indexCss);
+    // 1. Frontend
+    console.log(chalk.bold('1/3 Frontend React'))
+    const frontendDir = path.join(target, 'frontend')
+    fs.copySync(path.join(templates, 'frontend'), frontendDir)
+    fs.copySync(path.join(frontendDir, '.env.example'), path.join(frontendDir, '.env'))
+    fs.writeFileSync(path.join(frontendDir, '.gitignore'), 'node_modules\ndist\n.env\n')
 
-    // 4. Buat File start.bat (Khusus Windows)
-    const startBat = `@echo off
-echo Menyalakan Backend...
-start "Backend" cmd /k "cd backend && php artisan serve"
-echo Menyalakan Frontend...
-start "Frontend" cmd /k "cd frontend && npm run dev"
-`;
-    fs.writeFileSync(path.join(rootDir, 'start.bat'), startBat);
+    // 2. Backend
+    if (!options.skipBackend) {
+      console.log(chalk.bold('\n2/3 Backend Laravel (butuh koneksi internet, bisa beberapa menit)'))
+      const backendDir = path.join(target, 'backend')
 
-    // Selesai
-    console.log(chalk.green.bold(`\n✅ PROJECT ${projectName} BERHASIL DIBUAT!`));
-    console.log(chalk.white(`\nLangkah selanjutnya:`));
-    console.log(chalk.cyan(`  1. cd ${projectName}`));
-    console.log(chalk.cyan(`  2. Buka terminal backend: cd backend && php artisan serve`));
-    console.log(chalk.cyan(`  3. Buka terminal frontend: cd frontend && npm run dev`));
-    console.log(chalk.cyan(`  (Atau klik 2x file start.bat jika pakai Windows)\n`));
-  });
+      if (!run('composer', ['create-project', 'laravel/laravel', 'backend', '--no-interaction'], target)) {
+        fail('Gagal membuat project Laravel. Periksa koneksi internet dan versi PHP/Composer.')
+      }
+      if (!run('php', ['artisan', 'install:api', '--no-interaction'], backendDir)) {
+        fail('Gagal memasang Sanctum (php artisan install:api). Butuh Laravel 11 atau lebih baru.')
+      }
 
-program.parse(process.argv);
+      // Timpa dengan file template (route, controller, CORS, seeder)
+      fs.copySync(path.join(templates, 'backend'), backendDir, { overwrite: true })
+      if (!patchUserModel(backendDir)) {
+        console.log(chalk.yellow('! Tambahkan trait HasApiTokens ke app/Models/User.php secara manual.'))
+      }
+
+      fs.appendFileSync(path.join(backendDir, '.env'), '\nFRONTEND_URL=http://localhost:5173\n')
+      fs.appendFileSync(path.join(backendDir, '.env.example'), '\nFRONTEND_URL=http://localhost:5173\n')
+
+      if (!run('php', ['artisan', 'migrate', '--force', '--seed'], backendDir)) {
+        console.log(chalk.yellow('! Migrasi gagal. Jalankan "php artisan migrate --seed" setelah database siap.'))
+      }
+    } else {
+      console.log(chalk.gray('\n2/3 Backend dilewati (--skip-backend)'))
+    }
+
+    // 3. Selesai
+    console.log(chalk.bold('\n3/3 Selesai'))
+    console.log(chalk.green(`\n✔ Project "${projectName}" siap!\n`))
+    console.log('Langkah selanjutnya:\n')
+    console.log(chalk.cyan(`  cd ${projectName}/frontend`))
+    console.log(chalk.cyan('  npm install'))
+    console.log(chalk.cyan('  npm run dev'))
+    if (!options.skipBackend) {
+      console.log('\nDi terminal lain:\n')
+      console.log(chalk.cyan(`  cd ${projectName}/backend`))
+      console.log(chalk.cyan('  php artisan serve'))
+      console.log('\nLogin demo: admin@example.com / password\n')
+    }
+  })
+
+program.parse()

@@ -1,18 +1,23 @@
 {
   "name": "react-lara-forge",
-  "version": "1.0.0",
-  "description": "CLI Scaffolding untuk project Laravel 11 API + React (Vite) + Tailwind",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "One-command CLI to scaffold Laravel + React (Sanctum, Tailwind, Router, Login, Admin Dashboard)",
   "type": "module",
   "bin": {
     "react-lara-forge": "./index.js"
   },
-  "scripts": {
-    "test": "node index.js create test-project"
+  "files": [
+    "index.js",
+    "templates"
+  ],
+  "keywords": ["laravel", "react", "cli", "scaffold", "generator", "sanctum", "tailwindcss", "vite"],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
   },
   "dependencies": {
-    "chalk": "^4.1.2",
-    "commander": "^11.1.0",
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
     "fs-extra": "^11.2.0"
   }
 }
