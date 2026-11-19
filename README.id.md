@@ -17,6 +17,14 @@ Generator proyek berbasis command line yang menyiapkan backend Laravel dan front
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
+
+[![GitHub stars](https://img.shields.io/github/stars/Bagaas-ind/react-lara-forge?style=for-the-badge&logo=github&label=STARS)](https://github.com/Bagaas-ind/react-lara-forge/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/Bagaas-ind/react-lara-forge?style=for-the-badge&logo=github&label=FORKS)](https://github.com/Bagaas-ind/react-lara-forge/network/members)
+[![GitHub issues](https://img.shields.io/github/issues/Bagaas-ind/react-lara-forge?style=for-the-badge&logo=github&label=ISSUES)](https://github.com/Bagaas-ind/react-lara-forge/issues)
+[![GitHub last commit](https://img.shields.io/github/last-commit/Bagaas-ind/react-lara-forge?style=for-the-badge&logo=git&label=UPDATED)](https://github.com/Bagaas-ind/react-lara-forge/commits/main)
+
+> **Bangun lebih cepat. Kembangkan dengan bebas. Rilis dengan percaya diri.**
+
 **Mulai cepat**
 
 ```bash
@@ -55,6 +63,21 @@ Backend dan frontend dibuat secara terpisah:
 - `frontend/` — React Single-Page Application.
 
 React-Lara Forge adalah alat pembuat kerangka awal proyek (project scaffold) yang juga cocok untuk belajar. Proyek ini bukan layanan hosting atau aplikasi bisnis siap pakai.
+
+
+### Gambaran arsitektur
+
+```mermaid
+flowchart LR
+    A["React-Lara Forge CLI"] --> B["Project Generator"]
+    B --> C["Laravel 12 API"]
+    B --> D["React 18 SPA"]
+    C --> E["Sanctum Auth + Role Authorization"]
+    D --> F["Vite + Tailwind CSS"]
+    E <--> G[("SQLite / MySQL / PostgreSQL")]
+    F <-->|"HTTP + Bearer Token"| C
+```
+
 
 ## Fitur
 
