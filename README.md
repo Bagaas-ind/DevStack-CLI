@@ -1,228 +1,245 @@
 <div align="center">
 
-# ⚡ React-Lara Forge
+# React-Lara Forge
 
-### Satu perintah untuk membuat starter full-stack **Laravel + React** yang langsung bisa login.
+**A practical Laravel API + React SPA project generator.**
 
-*One command to scaffold a Laravel API + React SPA with Sanctum auth, CORS, Tailwind, and an admin dashboard.*
+Scaffold a separate Laravel backend and React frontend with Sanctum token authentication, a ready-to-customize admin interface, and an interactive setup.
 
-![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?style=flat-square&logo=node.js&logoColor=white)
-![Laravel](https://img.shields.io/badge/Laravel-11%20%7C%2012-FF2D20?style=flat-square&logo=laravel&logoColor=white)
-![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=black)
-![Tailwind](https://img.shields.io/badge/Tailwind-v4-38BDF8?style=flat-square&logo=tailwindcss&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
-[![Stars](https://img.shields.io/github/stars/Bagaas-ind/react-lara-forge?style=flat-square)](https://github.com/Bagaas-ind/react-lara-forge/stargazers)
+[![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?logo=laravel&logoColor=white)](https://laravel.com/)
+[![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-6-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ```bash
-npx github:Bagaas-ind/react-lara-forge nama-project
+npx github:Bagaas-ind/react-lara-forge my-project
 ```
 
-| Login | Admin Dashboard |
-|:---:|:---:|
-| <img src="docs/login.png" width="380" alt="Halaman login"> | <img src="docs/dashboard.png" width="380" alt="Admin dashboard"> |
+<table>
+  <tr>
+    <td align="center"><strong>Login</strong><br><img src="docs/login.png" width="420" alt="React-Lara Forge login screen"></td>
+    <td align="center"><strong>Admin dashboard</strong><br><img src="docs/dashboard.png" width="420" alt="React-Lara Forge admin dashboard"></td>
+  </tr>
+</table>
 
 </div>
 
 ---
 
-## 😩 Masalahnya
+## Why React-Lara Forge?
 
-Setiap memulai proyek Laravel + React, hal yang sama selalu diulang: memasang Sanctum,
-mengatur CORS, memasang Tailwind, menyiapkan React Router, membuat halaman login,
-lalu membuat layout dashboard. Biasanya memakan **2-3 jam** sebelum satu fitur pun ditulis.
+Starting a Laravel API and a separate React SPA usually means repeating the same setup: creating the Laravel application, installing Sanctum, configuring CORS, preparing Vite and Tailwind CSS, wiring API requests, and building an authentication flow.
 
-## ✨ Solusinya
+React-Lara Forge automates that foundation so you can spend more time building the features that make your application unique.
 
-React-Lara Forge mengerjakan semua itu dengan satu perintah. Kamu langsung mendapat
-backend dan frontend yang sudah tersambung, lengkap dengan login dan dashboard.
+## Features
 
-```mermaid
-flowchart LR
-    A["npx react-lara-forge<br/>nama-project"] --> B["Frontend<br/>React + Tailwind + Router"]
-    A --> C["Backend<br/>Laravel + Sanctum + CORS"]
-    B --> D["start.bat"]
-    C --> D
-    D --> E["Login<br/>admin@example.com"]
-    E --> F["Admin Dashboard ✅"]
-```
+- **Separate applications:** Laravel API in `backend/` and React SPA in `frontend/`.
+- **Frontend language choice:** JavaScript (default) or TypeScript.
+- **Database setup:** SQLite, MySQL, or PostgreSQL configuration.
+- **Authentication starter:** Laravel Sanctum personal access tokens, registration, login, logout, and protected API routes.
+- **Role-based access:** new accounts receive the `user` role; the seeded account receives `admin`.
+- **Admin interface:** live dashboard statistics and database-backed user listing/creation/deletion with server-side admin authorization.
+- **Frontend stack:** React 18, Vite 6, Tailwind CSS 4, React Router, and Axios.
+- **Launch scripts:** `start.bat` for Windows and `start.sh` for macOS/Linux.
+- **Safer setup behavior:** validates project names and existing paths, checks required tools, and cleans up an incomplete project after a fatal generation error.
 
-## 🎁 Yang kamu dapat
+> Dashboard metrics currently report user/account counts. Business-specific metrics (orders, revenue, tickets, and similar data) must be added by the application developer.
 
-| | |
-|---|---|
-| 🔐 **Autentikasi siap pakai** | Login dan logout dengan token Laravel Sanctum, rute dilindungi di frontend |
-| 🌐 **CORS sudah benar** | Backend dan frontend langsung bisa saling bicara |
-| 🎨 **Admin Dashboard** | Sidebar responsif, halaman Dashboard, Pengguna, dan Pengaturan |
-| ⚡ **Frontend modern** | React 18, Vite, Tailwind CSS v4, React Router, axios |
-| 🚀 **Satu klik jalan** | `start.bat` (Windows) / `start.sh` (Mac/Linux) menjalankan backend dan frontend sekaligus |
-| 🧪 **Akun demo** | Seeder membuat `admin@example.com` / `password` |
+## Requirements
 
-## ⏱️ Before vs After
-
-| | Setup manual | Dengan React-Lara Forge |
+| Tool | Requirement | Used for |
 |---|---|---|
-| **Waktu setup awal** | 2-3 jam | Beberapa menit (kebanyakan menunggu unduhan Laravel) |
-| **Sanctum + CORS** | Dikonfigurasi dan di-debug sendiri | Sudah terkonfigurasi |
-| **Tailwind + Router + axios** | Dipasang satu per satu | Sudah terpasang |
-| **Login + layout admin** | Dibangun dari nol | Sudah ada, tinggal diisi fitur |
-| **Menjalankan project** | Dua terminal, ingat perintahnya | Klik `start.bat` |
+| Node.js | 18 or newer | CLI and frontend tooling |
+| npm | Included with Node.js | Frontend dependencies |
+| PHP | 8.2 or newer | Laravel 12 backend |
+| Composer | 2.x recommended | Creating the Laravel application |
+| Database | SQLite, MySQL, or PostgreSQL | Application data |
 
-## 📋 Prasyarat
+For MySQL or PostgreSQL, install and start the database server yourself and create the database/user before running migrations. SQLite is the default and does not require a separate database server.
 
-- [Node.js](https://nodejs.org) 18 atau lebih baru
-- [PHP](https://www.php.net) 8.2 atau lebih baru
-- [Composer](https://getcomposer.org)
+## Quick start
 
-Database bawaan memakai **SQLite**, jadi tidak perlu menginstal MySQL. Bisa diganti kapan saja lewat `backend/.env`.
-
-## 🚀 Mulai dalam 3 langkah
-
-### 1. Buat project
+### 1. Generate a project
 
 ```bash
-npx github:Bagaas-ind/react-lara-forge nama-project
+npx github:Bagaas-ind/react-lara-forge my-project
 ```
 
-Proses ini mengunduh Laravel lewat Composer, jadi butuh internet dan bisa memakan beberapa menit.
+In an interactive terminal, choose JavaScript or TypeScript and select a database. The defaults are JavaScript and SQLite.
 
-### 2. Jalankan
+The generator downloads Laravel through Composer and installs frontend packages through npm. An internet connection is required for the initial setup.
 
-**Cara tercepat:**
+### 2. Start the applications
 
-| Sistem | Perintah |
+**Windows** — open `my-project` and double-click `start.bat`, or run:
+
+```powershell
+cd my-project
+.\start.bat
+```
+
+**macOS / Linux:**
+
+```bash
+cd my-project
+./start.sh
+```
+
+The scripts start Laravel at `http://localhost:8000` and Vite at `http://localhost:5173`.
+
+### 3. Sign in locally
+
+Open `http://localhost:5173`.
+
+For a local development project generated with the default settings:
+
+| Field | Local demo value |
 |---|---|
-| Windows | Klik dua kali `nama-project/start.bat` |
-| Mac / Linux | `cd nama-project && ./start.sh` |
+| Email | `admin@example.com` |
+| Password | `password` |
 
-**Atau manual**, di dua terminal terpisah:
+**Security warning:** these demo credentials are only for local development. Change or remove the demo account before exposing the application to a network or deploying it. Never reuse the demo password in production.
+
+## CLI options
 
 ```bash
-# Terminal 1: backend
-cd nama-project/backend
-php artisan serve
+npx github:Bagaas-ind/react-lara-forge <project-name> [options]
 ```
 
+| Option | Description |
+|---|---|
+| `--typescript` | Use the TypeScript frontend template |
+| `--language <language>` | Choose `javascript` or `typescript` |
+| `--database <driver>` | Choose `sqlite`, `mysql`, or `pgsql` |
+| `--skip-backend` | Generate only the React frontend |
+| `--skip-install` | Generate files without running `npm install` |
+| `--non-interactive` | Use defaults/options without interactive prompts |
+| `-V, --version` | Print the CLI version |
+| `-h, --help` | Show help |
+
+Examples:
+
 ```bash
-# Terminal 2: frontend
-cd nama-project/frontend
+# TypeScript + default SQLite
+npx github:Bagaas-ind/react-lara-forge my-app --typescript
+
+# JavaScript + MySQL, no prompts
+npx github:Bagaas-ind/react-lara-forge my-app --language javascript --database mysql --non-interactive
+
+# Frontend only
+npx github:Bagaas-ind/react-lara-forge my-frontend --skip-backend
+
+# Generate without installing frontend packages
+npx github:Bagaas-ind/react-lara-forge my-app --skip-install
+```
+
+When using `--non-interactive`, the default language is JavaScript and the default database is SQLite unless overridden with options.
+
+## Generated project structure
+
+```text
+my-project/
+├── backend/                 # Laravel 12 API + Sanctum
+│   ├── app/Http/Controllers/ (authentication, dashboard, users)
+│   ├── config/cors.php
+│   ├── database/migrations/ (user role)
+│   ├── database/seeders/DatabaseSeeder.php
+│   └── routes/api.php
+├── frontend/                # React + Vite + Tailwind CSS
+│   ├── src/
+│   │   ├── components/
+│   │   ├── context/
+│   │   ├── lib/
+│   │   └── pages/
+│   ├── package.json
+│   └── vite.config.js       # .ts for TypeScript projects
+├── start.bat
+└── start.sh
+```
+
+## Authentication and security notes
+
+- The starter uses **Sanctum personal access tokens** with the `Authorization: Bearer` header. It does not configure Sanctum's stateful cookie-based SPA flow.
+- Public registration is rate-limited and assigns the `user` role. Only an administrator can access the admin dashboard and user-management API.
+- The admin API enforces authorization on the Laravel server. Hiding a frontend navigation item is not treated as a security boundary.
+- Login is rate-limited to five attempts per minute by Laravel's route throttle middleware.
+- The frontend stores the returned token in `localStorage` for a simple local starter flow. Be aware that JavaScript-accessible storage increases the impact of an XSS vulnerability. Review your application's threat model before production use; consider a properly configured cookie-based session flow for browser-only applications.
+- CORS is restricted to the frontend origin in `FRONTEND_URL`. Set the exact production frontend origin in the backend environment; do not use `*` with credentials.
+- The local seeder creates `admin@example.com` / `password` only in `local` or `testing` environments. Outside those environments, set `ADMIN_NAME`, `ADMIN_EMAIL`, and a strong `ADMIN_PASSWORD` in `backend/.env` before running the seeder. These values are loaded through `config/react-lara-forge.php` so they remain available when Laravel configuration is cached.
+- The generated project is a development foundation, not a complete production security review. Review registration policy, token storage, authorization, validation, logging, monitoring, HTTPS, backups, and deployment-specific configuration before production use.
+
+## Database configuration
+
+The generator writes the selected driver to `backend/.env`:
+
+- **SQLite:** creates `backend/database/database.sqlite`.
+- **MySQL:** configures the standard local MySQL host and port. Create the database and set the correct credentials in `backend/.env`.
+- **PostgreSQL:** configures the standard local PostgreSQL host and port. Create the database and set the correct credentials in `backend/.env`.
+
+After editing database settings, run:
+
+```bash
+cd backend
+php artisan migrate --seed
+```
+
+If the selected database server is not running or the database does not exist during generation, the project files are still created; run the migration command after correcting `backend/.env`.
+
+## Development commands
+
+Frontend:
+
+```bash
+cd frontend
 npm install
 npm run dev
+npm run build
 ```
 
-### 3. Buka dan login
+For TypeScript projects, run `npm run typecheck` to check frontend types.
 
-Buka **http://localhost:5173** lalu masuk dengan:
-
-- Email: `admin@example.com`
-- Kata sandi: `password`
-
-## 📁 Struktur project hasil generate
-
-```
-nama-project/
-├── backend/            Laravel (API + Sanctum)
-│   ├── app/Http/Controllers/AuthController.php
-│   ├── routes/api.php
-│   └── config/cors.php
-├── frontend/           React + Vite + Tailwind
-│   └── src/
-│       ├── pages/          Login, Dashboard, Users, Settings
-│       ├── components/     AdminLayout, ProtectedRoute
-│       ├── context/        AuthContext
-│       └── lib/api.js      axios + token otomatis
-├── start.bat           Jalankan semuanya (Windows)
-└── start.sh            Jalankan semuanya (Mac/Linux)
-```
-
-## ⚙️ Cara kerjanya
-
-1. Menyalin template frontend React ke `frontend/`.
-2. Membuat project Laravel terbaru ke `backend/` dengan `composer create-project`.
-3. Memasang Sanctum (`php artisan install:api`) dan menambahkan trait `HasApiTokens` ke model `User`.
-4. Menimpa route, controller, konfigurasi CORS, dan seeder dengan versi template.
-5. Menjalankan migrasi dan seeder.
-6. Menyalin `start.bat` dan `start.sh`.
-
-Autentikasi memakai **token Bearer Sanctum**: login mengembalikan token, frontend menyimpannya
-dan mengirimnya di setiap request. Ini lebih sederhana daripada mode cookie SPA karena tidak
-perlu mengatur CSRF dan domain.
-
-## 🛠️ Opsi CLI
+Backend:
 
 ```bash
-react-lara-forge <nama-project> [opsi]
+cd backend
+php artisan serve
+php artisan migrate --seed
 ```
 
-| Opsi | Fungsi |
-|---|---|
-| `--skip-backend` | Hanya membuat frontend (tanpa Laravel) |
-| `--version` | Menampilkan versi |
-| `--help` | Menampilkan bantuan |
+The frontend API base URL is configured in `frontend/.env` using `VITE_API_URL`.
 
-## 🤔 Kenapa bukan Laravel Breeze / Starter Kit?
+## Troubleshooting
 
-Breeze dengan Inertia menyatukan frontend dan backend dalam satu aplikasi.
-React-Lara Forge untuk kamu yang ingin **API Laravel dan SPA React yang terpisah**:
-bisa di-deploy sendiri-sendiri, dan API yang sama bisa dipakai nanti oleh aplikasi mobile.
+**PHP or Composer is not found**
+Install the required tool, add it to your system `PATH`, then open a new terminal and check `php -v` and `composer --version`.
 
-## 🩹 Pemecahan masalah
+**Frontend cannot connect to the API**
+Make sure Laravel is running at `http://localhost:8000`, check `VITE_API_URL` in `frontend/.env`, and verify `FRONTEND_URL` in `backend/.env` matches the frontend origin.
 
-**"Tidak bisa terhubung ke server" di halaman login**
-Backend belum jalan. Jalankan `php artisan serve` di folder `backend`, atau pakai `start.bat`.
+**Migration fails with MySQL/PostgreSQL**
+Confirm the database server is running, the database exists, and the username/password in `backend/.env` are correct. Then run `php artisan migrate --seed` again.
 
-**"PHP tidak ditemukan" / "Composer tidak ditemukan"**
-Pasang PHP 8.2+ dan Composer, lalu buka terminal baru. Cek dengan `php -v` dan `composer -V`.
+**The project folder already exists**
+The generator never overwrites an existing path. Choose another project name.
 
-**Error CORS di browser**
-Pastikan frontend berjalan di `http://localhost:5173`. Kalau memakai alamat lain, ubah `FRONTEND_URL` di `backend/.env`.
+**Frontend dependencies were not installed**
+Run `npm install` inside the generated `frontend/` directory.
 
-**`start.bat` berkata "Folder backend tidak ditemukan"**
-Project dibuat dengan `--skip-backend`, atau `start.bat` dipindahkan dari folder project. Buat ulang tanpa opsi itu.
+## Contributing
 
-**Folder sudah ada**
-CLI tidak menimpa folder yang sudah ada. Pilih nama project lain.
+Contributions, bug reports, and documentation improvements are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request and use GitHub Issues to report reproducible bugs or propose changes.
 
-**Mengubah alamat API**
-Edit `VITE_API_URL` di `frontend/.env` (bawaan: `http://localhost:8000/api`).
+## License
 
-## 💻 Pengembangan lokal
-
-Ingin ikut mengembangkan CLI-nya?
-
-```bash
-git clone https://github.com/Bagaas-ind/react-lara-forge.git
-cd react-lara-forge
-npm install
-npm link
-react-lara-forge test-project
-```
-
-## 🗺️ Roadmap
-
-- [x] Template Laravel + React dengan login dan admin dashboard
-- [x] Skrip `start.bat` / `start.sh`
-- [ ] Publikasi ke npm (`npx react-lara-forge`)
-- [ ] Opsi TypeScript (`--ts`)
-- [ ] Prompt interaktif untuk memilih fitur
-- [ ] Generator modul CRUD
-- [ ] Mode autentikasi cookie SPA
-- [ ] Dark mode
-
-Punya ide atau menemukan bug? [Buka issue](https://github.com/Bagaas-ind/react-lara-forge/issues).
-
-## 🤝 Kontribusi
-
-Pull request sangat diterima. Fork repo ini, buat branch, lalu ajukan PR.
-Untuk perubahan besar, buka issue dulu agar bisa didiskusikan.
-
-## 📄 Lisensi
-
-[MIT](LICENSE) © [Bagaas-ind](https://github.com/Bagaas-ind)
+React-Lara Forge is open source under the [MIT License](LICENSE).
 
 ---
 
 <div align="center">
 
-**Kalau project ini menghemat waktumu, kasih ⭐ ya!**
+Built to make starting Laravel + React applications less repetitive.
 
 </div>

@@ -14,8 +14,13 @@ export default function AdminLayout() {
   const [open, setOpen] = useState(false)
 
   async function handleLogout() {
-    await logout()
-    navigate('/login')
+    try {
+      await logout()
+    } catch (error) {
+      console.error('Logout request failed; local session was cleared.', error)
+    } finally {
+      navigate('/login')
+    }
   }
 
   const linkClass = ({ isActive }) =>
@@ -33,7 +38,7 @@ export default function AdminLayout() {
       >
         <div className="mb-8 px-3 text-lg font-semibold text-white">Admin Panel</div>
         <nav className="space-y-1" onClick={() => setOpen(false)}>
-          {nav.map((item) => (
+          {nav.filter((item) => item.to !== '/users' || user?.role === 'admin').map((item) => (
             <NavLink key={item.to} to={item.to} end={item.end} className={linkClass}>
               {item.label}
             </NavLink>

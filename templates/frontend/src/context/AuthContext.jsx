@@ -18,6 +18,16 @@ export function AuthProvider({ children }) {
 
   async function login(email, password) {
     const res = await api.post('/login', { email, password })
+    if (!res.data?.token || !res.data?.user) {
+      throw new Error('Respons autentikasi dari server tidak lengkap.')
+    }
+    localStorage.setItem('token', res.data.token)
+    setUser(res.data.user)
+  }
+
+  async function register(name, email, password, passwordConfirmation) {
+    const res = await api.post('/register', { name, email, password, password_confirmation: passwordConfirmation })
+    if (!res.data?.token || !res.data?.user) throw new Error('Respons registrasi dari server tidak lengkap.')
     localStorage.setItem('token', res.data.token)
     setUser(res.data.user)
   }
@@ -32,7 +42,7 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   )
