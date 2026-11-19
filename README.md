@@ -57,6 +57,36 @@ The generated project keeps the backend and frontend separate:
 
 React-Lara Forge is a project starter and learning-friendly scaffold. It is not a hosted service or a finished business application.
 
+## Manual Setup vs. React-Lara Forge
+
+Building the same Laravel + React foundation manually gives you full control, but it also means repeating several setup and integration tasks. React-Lara Forge automates much of that initial scaffolding.
+
+| Setup task | Manual setup | With React-Lara Forge |
+|---|---|---|
+| Create Laravel backend | Create the Laravel project and prepare its structure yourself | Generates the Laravel 12 backend scaffold |
+| Create React frontend | Set up React, Vite, and the project structure yourself | Generates the React 18 + Vite frontend scaffold |
+| Install common dependencies | Find and install the required packages individually | Installs/configures the starter dependencies as part of generation |
+| Connect frontend to backend | Configure API URLs and request handling yourself | Includes a preconfigured API connection foundation |
+| Authentication foundation | Implement registration, login, logout, and protected routes yourself | Includes a Laravel Sanctum token-authentication starter |
+| CORS configuration | Configure allowed frontend origins yourself | Includes a CORS configuration ready to adjust |
+| Admin foundation | Build dashboard and basic user-management screens yourself | Includes a starter admin dashboard and user management |
+| Database setup | Configure the selected database connection yourself | Lets you select SQLite, MySQL, or PostgreSQL during generation |
+| Start development servers | Open terminals and start backend/frontend separately | Includes convenient `start.bat` and `start.sh` scripts |
+
+### Why use React-Lara Forge?
+
+- **Reduce repetitive setup:** generate the initial backend and frontend structure with one command.
+- **Start with integration in place:** common API, authentication, and CORS foundations are already included.
+- **Get a working starting point sooner:** spend more time adapting features to your application instead of repeating boilerplate setup.
+- **Keep control of your code:** the generated project is yours to inspect, modify, extend, and deploy.
+
+### What still requires your work?
+
+React-Lara Forge does not eliminate development. You still need to customize the interface, implement your application's business logic, review security settings, configure production infrastructure, and test the finished application.
+
+The comparison describes the setup work included in this repository; exact setup steps can vary depending on your requirements and experience.
+
+
 ## Features
 
 - **Separate backend and frontend** — Laravel API and React SPA are generated in their own directories.
