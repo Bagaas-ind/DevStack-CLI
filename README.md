@@ -2,9 +2,9 @@
 
 # ⚡ React-Lara Forge
 
-**Satu perintah untuk membuat starter full-stack Laravel + React yang sudah siap login.**
+### Satu perintah untuk membuat starter full-stack **Laravel + React** yang langsung bisa login.
 
-*One command to scaffold a Laravel API + React SPA with auth, CORS, Tailwind, and an admin dashboard.*
+*One command to scaffold a Laravel API + React SPA with Sanctum auth, CORS, Tailwind, and an admin dashboard.*
 
 ![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?style=flat-square&logo=node.js&logoColor=white)
 ![Laravel](https://img.shields.io/badge/Laravel-11%20%7C%2012-FF2D20?style=flat-square&logo=laravel&logoColor=white)
@@ -13,26 +13,40 @@
 ![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
 [![Stars](https://img.shields.io/github/stars/Bagaas-ind/react-lara-forge?style=flat-square)](https://github.com/Bagaas-ind/react-lara-forge/stargazers)
 
-</div>
-
----
-
-## Kenapa ini ada?
-
-Setiap kali memulai proyek Laravel + React, hal yang sama selalu diulang:
-memasang Sanctum, mengatur CORS, memasang Tailwind, menyiapkan React Router,
-membuat halaman login, lalu membuat layout dashboard. Biasanya memakan **2-3 jam**
-sebelum satu fitur pun ditulis.
-
-React-Lara Forge mengerjakan semua itu untukmu:
-
 ```bash
 npx github:Bagaas-ind/react-lara-forge nama-project
 ```
 
-Selesai. Klik `start.bat`, buka browser, login.
+| Login | Admin Dashboard |
+|:---:|:---:|
+| <img src="docs/login.png" width="380" alt="Halaman login"> | <img src="docs/dashboard.png" width="380" alt="Admin dashboard"> |
 
-## Yang kamu dapat
+</div>
+
+---
+
+## 😩 Masalahnya
+
+Setiap memulai proyek Laravel + React, hal yang sama selalu diulang: memasang Sanctum,
+mengatur CORS, memasang Tailwind, menyiapkan React Router, membuat halaman login,
+lalu membuat layout dashboard. Biasanya memakan **2-3 jam** sebelum satu fitur pun ditulis.
+
+## ✨ Solusinya
+
+React-Lara Forge mengerjakan semua itu dengan satu perintah. Kamu langsung mendapat
+backend dan frontend yang sudah tersambung, lengkap dengan login dan dashboard.
+
+```mermaid
+flowchart LR
+    A["npx react-lara-forge<br/>nama-project"] --> B["Frontend<br/>React + Tailwind + Router"]
+    A --> C["Backend<br/>Laravel + Sanctum + CORS"]
+    B --> D["start.bat"]
+    C --> D
+    D --> E["Login<br/>admin@example.com"]
+    E --> F["Admin Dashboard ✅"]
+```
+
+## 🎁 Yang kamu dapat
 
 | | |
 |---|---|
@@ -43,7 +57,7 @@ Selesai. Klik `start.bat`, buka browser, login.
 | 🚀 **Satu klik jalan** | `start.bat` (Windows) / `start.sh` (Mac/Linux) menjalankan backend dan frontend sekaligus |
 | 🧪 **Akun demo** | Seeder membuat `admin@example.com` / `password` |
 
-## Before vs After
+## ⏱️ Before vs After
 
 | | Setup manual | Dengan React-Lara Forge |
 |---|---|---|
@@ -51,8 +65,9 @@ Selesai. Klik `start.bat`, buka browser, login.
 | **Sanctum + CORS** | Dikonfigurasi dan di-debug sendiri | Sudah terkonfigurasi |
 | **Tailwind + Router + axios** | Dipasang satu per satu | Sudah terpasang |
 | **Login + layout admin** | Dibangun dari nol | Sudah ada, tinggal diisi fitur |
+| **Menjalankan project** | Dua terminal, ingat perintahnya | Klik `start.bat` |
 
-## Prasyarat
+## 📋 Prasyarat
 
 - [Node.js](https://nodejs.org) 18 atau lebih baru
 - [PHP](https://www.php.net) 8.2 atau lebih baru
@@ -60,7 +75,7 @@ Selesai. Klik `start.bat`, buka browser, login.
 
 Database bawaan memakai **SQLite**, jadi tidak perlu menginstal MySQL. Bisa diganti kapan saja lewat `backend/.env`.
 
-## Mulai dalam 3 langkah
+## 🚀 Mulai dalam 3 langkah
 
 ### 1. Buat project
 
@@ -101,7 +116,7 @@ Buka **http://localhost:5173** lalu masuk dengan:
 - Email: `admin@example.com`
 - Kata sandi: `password`
 
-## Struktur project hasil generate
+## 📁 Struktur project hasil generate
 
 ```
 nama-project/
@@ -119,17 +134,20 @@ nama-project/
 └── start.sh            Jalankan semuanya (Mac/Linux)
 ```
 
-## Cara kerjanya
+## ⚙️ Cara kerjanya
 
 1. Menyalin template frontend React ke `frontend/`.
 2. Membuat project Laravel terbaru ke `backend/` dengan `composer create-project`.
 3. Memasang Sanctum (`php artisan install:api`) dan menambahkan trait `HasApiTokens` ke model `User`.
 4. Menimpa route, controller, konfigurasi CORS, dan seeder dengan versi template.
 5. Menjalankan migrasi dan seeder.
+6. Menyalin `start.bat` dan `start.sh`.
 
-Autentikasi memakai **token Bearer Sanctum**: login mengembalikan token, frontend menyimpannya dan mengirimnya di setiap request. Ini lebih sederhana daripada mode cookie SPA karena tidak perlu mengatur CSRF dan domain.
+Autentikasi memakai **token Bearer Sanctum**: login mengembalikan token, frontend menyimpannya
+dan mengirimnya di setiap request. Ini lebih sederhana daripada mode cookie SPA karena tidak
+perlu mengatur CSRF dan domain.
 
-## Opsi CLI
+## 🛠️ Opsi CLI
 
 ```bash
 react-lara-forge <nama-project> [opsi]
@@ -141,13 +159,13 @@ react-lara-forge <nama-project> [opsi]
 | `--version` | Menampilkan versi |
 | `--help` | Menampilkan bantuan |
 
-## Kenapa bukan Laravel Breeze / Starter Kit?
+## 🤔 Kenapa bukan Laravel Breeze / Starter Kit?
 
 Breeze dengan Inertia menyatukan frontend dan backend dalam satu aplikasi.
 React-Lara Forge untuk kamu yang ingin **API Laravel dan SPA React yang terpisah**:
 bisa di-deploy sendiri-sendiri, dan API yang sama bisa dipakai nanti oleh aplikasi mobile.
 
-## Pemecahan masalah
+## 🩹 Pemecahan masalah
 
 **"Tidak bisa terhubung ke server" di halaman login**
 Backend belum jalan. Jalankan `php artisan serve` di folder `backend`, atau pakai `start.bat`.
@@ -158,13 +176,16 @@ Pasang PHP 8.2+ dan Composer, lalu buka terminal baru. Cek dengan `php -v` dan `
 **Error CORS di browser**
 Pastikan frontend berjalan di `http://localhost:5173`. Kalau memakai alamat lain, ubah `FRONTEND_URL` di `backend/.env`.
 
+**`start.bat` berkata "Folder backend tidak ditemukan"**
+Project dibuat dengan `--skip-backend`, atau `start.bat` dipindahkan dari folder project. Buat ulang tanpa opsi itu.
+
 **Folder sudah ada**
 CLI tidak menimpa folder yang sudah ada. Pilih nama project lain.
 
 **Mengubah alamat API**
 Edit `VITE_API_URL` di `frontend/.env` (bawaan: `http://localhost:8000/api`).
 
-## Pengembangan lokal
+## 💻 Pengembangan lokal
 
 Ingin ikut mengembangkan CLI-nya?
 
@@ -176,8 +197,10 @@ npm link
 react-lara-forge test-project
 ```
 
-## Roadmap
+## 🗺️ Roadmap
 
+- [x] Template Laravel + React dengan login dan admin dashboard
+- [x] Skrip `start.bat` / `start.sh`
 - [ ] Publikasi ke npm (`npx react-lara-forge`)
 - [ ] Opsi TypeScript (`--ts`)
 - [ ] Prompt interaktif untuk memilih fitur
@@ -187,12 +210,12 @@ react-lara-forge test-project
 
 Punya ide atau menemukan bug? [Buka issue](https://github.com/Bagaas-ind/react-lara-forge/issues).
 
-## Kontribusi
+## 🤝 Kontribusi
 
 Pull request sangat diterima. Fork repo ini, buat branch, lalu ajukan PR.
 Untuk perubahan besar, buka issue dulu agar bisa didiskusikan.
 
-## Lisensi
+## 📄 Lisensi
 
 [MIT](LICENSE) © [Bagaas-ind](https://github.com/Bagaas-ind)
 
@@ -200,6 +223,6 @@ Untuk perubahan besar, buka issue dulu agar bisa didiskusikan.
 
 <div align="center">
 
-Kalau project ini menghemat waktumu, kasih ⭐ ya!
+**Kalau project ini menghemat waktumu, kasih ⭐ ya!**
 
 </div>
