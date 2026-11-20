@@ -68,7 +68,7 @@ jobs:
         working-directory: ci-generated-app/frontend
         run: |
           npm install
-          npm audit --audit-level=high
+          npm audit --audit-level=moderate
           npm run build
       - name: Run generated Laravel feature tests
         working-directory: ci-generated-app/backend
@@ -79,6 +79,6 @@ jobs:
         working-directory: ci-generated-ts/frontend
         run: |
           npm install
-          npm audit --audit-level=high
+          npm audit --audit-level=moderate
           npm run build
           npm run typecheck
