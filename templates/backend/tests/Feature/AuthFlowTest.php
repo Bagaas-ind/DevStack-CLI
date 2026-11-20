@@ -55,7 +55,12 @@ class AuthFlowTest extends TestCase
         $user = User::factory()->create();
         $token = $user->createToken('feature-test')->plainTextToken;
 
-        $this->withToken($token)->postJson('/api/logout')->assertOk();
-        $this->withToken($token)->getJson('/api/user')->assertUnauthorized();
+        $this->withToken($token)->postJson('/api/logout')->assertOk()
+            ->assertJsonPath('message', 'Berhasil keluar.');
+
+        $this->assertDatabaseMissing('personal_access_tokens', [
+            'tokenable_id' => $user->id,
+            'name' => 'feature-test',
+        ]);
     }
 }
