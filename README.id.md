@@ -9,7 +9,7 @@
 
 Generator proyek berbasis command line yang menyiapkan backend Laravel dan frontend React secara terpisah, lengkap dengan autentikasi, fitur admin berbasis peran, konfigurasi database, dan antarmuka yang siap dikembangkan.
 
-[![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-22%2F24-LTS-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![CI](https://github.com/Bagaas-ind/react-lara-forge/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Bagaas-ind/react-lara-forge/actions/workflows/ci.yml)
 [![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?logo=laravel&logoColor=white)](https://laravel.com/)
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://react.dev/)
@@ -59,7 +59,7 @@ Menyiapkan Laravel API dan React Single-Page Application (SPA) secara terpisah b
 
 Backend dan frontend dibuat secara terpisah:
 
-- `backend/` — Laravel 12 API.
+- `backend/` — Laravel 12.x API.
 - `frontend/` — React Single-Page Application.
 
 React-Lara Forge adalah alat pembuat kerangka awal proyek (project scaffold) yang juga cocok untuk belajar. Proyek ini bukan layanan hosting atau aplikasi bisnis siap pakai.
@@ -70,7 +70,7 @@ React-Lara Forge adalah alat pembuat kerangka awal proyek (project scaffold) yan
 ```mermaid
 flowchart LR
     A["React-Lara Forge CLI"] --> B["Project Generator"]
-    B --> C["Laravel 12 API"]
+    B --> C["Laravel 12.x API"]
     B --> D["React 18 SPA"]
     C --> E["Sanctum Auth + Role Authorization"]
     D --> F["Vite + Tailwind CSS"]
@@ -115,10 +115,10 @@ Pasang tools berikut sebelum membuat proyek full-stack:
 
 | Tool | Versi | Kegunaan |
 |---|---|---|
-| Node.js | 18 atau lebih baru | Menjalankan CLI dan tools frontend |
+| Node.js | 22 atau 24 LTS | Menjalankan CLI dan tools frontend |
 | npm | Termasuk dengan Node.js | Memasang dependency frontend |
 | PHP | 8.2 atau lebih baru | Menjalankan backend Laravel 12 |
-| Composer | Disarankan 2.x | Membuat dan mengelola aplikasi Laravel |
+| Composer | 2.x (wajib untuk backend) | Membuat dan mengelola aplikasi Laravel |
 | Database | SQLite, MySQL, atau PostgreSQL | Menyimpan data aplikasi |
 
 Periksa instalasi:
@@ -195,6 +195,7 @@ npx github:Bagaas-ind/react-lara-forge <nama-proyek> [options]
 |---|---|
 | `--typescript` | Menggunakan template frontend TypeScript |
 | `--language <language>` | Memilih `javascript` atau `typescript` |
+| `--laravel-version <version>` | Mengunci versi Laravel, default `12.*` |
 | `--database <driver>` | Memilih `sqlite`, `mysql`, atau `pgsql` |
 | `--skip-backend` | Hanya membuat frontend React |
 | `--skip-install` | Membuat file tanpa menjalankan `npm install` frontend |
@@ -214,6 +215,12 @@ Membuat proyek JavaScript dengan MySQL tanpa prompt interaktif:
 
 ```bash
 npx github:Bagaas-ind/react-lara-forge my-app --language javascript --database mysql --non-interactive
+```
+
+Mengunci Laravel ke seri 12.x:
+
+```bash
+npx github:Bagaas-ind/react-lara-forge my-app --laravel-version '12.*'
 ```
 
 Membuat frontend saja:

@@ -9,7 +9,7 @@
 
 A command-line project generator that scaffolds a separate Laravel backend and React frontend, with authentication, role-based admin features, database configuration, and a ready-to-customize interface.
 
-[![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-22%2F24-LTS-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![CI](https://github.com/Bagaas-ind/react-lara-forge/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Bagaas-ind/react-lara-forge/actions/workflows/ci.yml)
 [![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?logo=laravel&logoColor=white)](https://laravel.com/)
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://react.dev/)
@@ -60,7 +60,7 @@ Starting a Laravel API and a separate React single-page application often involv
 
 The generated project keeps the backend and frontend separate:
 
-- `backend/` — Laravel 12 API.
+- `backend/` — Laravel 12.x API.
 - `frontend/` — React single-page application.
 
 React-Lara Forge is a project starter and learning-friendly scaffold. It is not a hosted service or a finished business application.
@@ -71,7 +71,7 @@ React-Lara Forge is a project starter and learning-friendly scaffold. It is not 
 ```mermaid
 flowchart LR
     A["React-Lara Forge CLI"] --> B["Project Generator"]
-    B --> C["Laravel 12 API"]
+    B --> C["Laravel 12.x API"]
     B --> D["React 18 SPA"]
     C --> E["Sanctum Auth + Role Authorization"]
     D --> F["Vite + Tailwind CSS"]
@@ -116,10 +116,10 @@ Install these tools before generating a full-stack project:
 
 | Tool | Version | Purpose |
 |---|---|---|
-| Node.js | 18 or newer | Runs the CLI and frontend tooling |
+| Node.js | 22 or 24 LTS | Runs the CLI and frontend tooling |
 | npm | Included with Node.js | Installs frontend dependencies |
-| PHP | 8.2 or newer | Runs the Laravel 12 backend |
-| Composer | 2.x recommended | Creates and manages the Laravel application |
+| PHP | 8.2 or newer | Runs the Laravel 12.x backend |
+| Composer | 2.x required for backend generation | Creates and manages the Laravel application |
 | Database | SQLite, MySQL, or PostgreSQL | Stores application data |
 
 Check your installations:
@@ -196,6 +196,7 @@ npx github:Bagaas-ind/react-lara-forge <project-name> [options]
 |---|---|
 | `--typescript` | Use the TypeScript frontend template |
 | `--language <language>` | Choose `javascript` or `typescript` |
+| `--laravel-version <version>` | Pin the Laravel version; defaults to `12.*` |
 | `--database <driver>` | Choose `sqlite`, `mysql`, or `pgsql` |
 | `--skip-backend` | Generate only the React frontend |
 | `--skip-install` | Generate files without running frontend `npm install` |
@@ -215,6 +216,20 @@ Generate a JavaScript project with MySQL without interactive prompts:
 
 ```bash
 npx github:Bagaas-ind/react-lara-forge my-app --language javascript --database mysql --non-interactive
+```
+
+
+Pin Laravel to the 12.x series:
+
+```bash
+npx github:Bagaas-ind/react-lara-forge my-app --laravel-version '12.*'
+```
+
+
+Pin Laravel to the 12.x series:
+
+```bash
+npx github:Bagaas-ind/react-lara-forge my-app --laravel-version '12.*'
 ```
 
 Generate only the frontend:

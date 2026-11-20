@@ -28,27 +28,43 @@ function run(command, args, cwd, { stdio = 'inherit' } = {}) {
   return { ok: result.status === 0, error: result.error, status: result.status }
 }
 
-function commandExists(command) {
-  const result = spawnSync(command, ['--version'], {
-    stdio: 'ignore',
-    shell: process.platform === 'win32',
-  })
-  return !result.error && result.status === 0
-}
 
-function supportsPhp82() {
-  const result = spawnSync('php', ['-v'], {
+function checkRuntimeRequirements(skipBackend) {
+  const nodeMajor = Number(process.versions.node.split('.')[0])
+  if (![22, 24].includes(nodeMajor)) {
+    throw new Error(`Node.js 22 atau 24 LTS diperlukan. Versi saat ini: ${process.versions.node}. Instal versi LTS dari https://nodejs.org/ lalu jalankan ulang.`)
+  }
+
+  const npm = spawnSync('npm', ['--version'], {
     encoding: 'utf8',
     shell: process.platform === 'win32',
   })
-  if (result.error || result.status !== 0) return false
-  const version = `${result.stdout || ''}\n${result.stderr || ''}`.match(/PHP\s+(\d+)\.(\d+)\.(\d+)/)
-  if (!version) return false
-  const major = Number(version[1])
-  const minor = Number(version[2])
-  return major > 8 || (major === 8 && minor >= 2)
-}
+  if (npm.error || npm.status !== 0) {
+    throw new Error('npm tidak ditemukan. Instal ulang Node.js LTS atau periksa PATH, lalu jalankan ulang.')
+  }
 
+  if (skipBackend) return
+
+  const php = spawnSync('php', ['-v'], {
+    encoding: 'utf8',
+    shell: process.platform === 'win32',
+  })
+  const phpOutput = `${php.stdout || ''}\n${php.stderr || ''}`
+  const phpVersion = phpOutput.match(/PHP\s+(\d+)\.(\d+)/)
+  if (php.error || php.status !== 0 || !phpVersion ||
+      Number(phpVersion[1]) < 8 || (Number(phpVersion[1]) === 8 && Number(phpVersion[2]) < 2)) {
+    throw new Error('PHP 8.2 atau lebih baru diperlukan untuk backend. Periksa instalasi/PATH PHP atau gunakan --skip-backend.')
+  }
+
+  const composer = spawnSync('composer', ['--version'], {
+    encoding: 'utf8',
+    shell: process.platform === 'win32',
+  })
+  const composerOutput = `${composer.stdout || ''}\n${composer.stderr || ''}`
+  if (composer.error || composer.status !== 0 || !/Composer version 2\./i.test(composerOutput)) {
+    throw new Error('Composer 2.x diperlukan untuk membuat backend Laravel. Instal dari https://getcomposer.org/ dan periksa PATH.')
+  }
+}
 async function ask(rl, label, choices, defaultValue) {
   const menu = choices.map((choice, index) => `${index + 1}) ${choice.label}${choice.value === defaultValue ? ' (default)' : ''}`).join('\n')
   while (true) {
@@ -66,6 +82,7 @@ async function collectConfig(options) {
   const config = {
     language: options.language || (options.typescript ? 'typescript' : 'javascript'),
     database: options.database || 'sqlite',
+    laravelVersion: options.laravelVersion || '12.*',
   }
 
   if (options.nonInteractive || !process.stdin.isTTY || !process.stdout.isTTY) return config
@@ -126,20 +143,22 @@ async function createProject(projectName, options) {
     throw new Error('Nama project harus diawali huruf/angka dan hanya boleh berisi huruf, angka, titik, strip, atau garis bawah.')
   }
 
+  const laravelVersion = options.laravelVersion || '12.*'
+  if (!/^\d+\.\d+(?:\.\d+)?(?:\.\*)?$/.test(laravelVersion)) {
+    throw new Error('Versi Laravel tidak valid. Gunakan format seperti 12.* atau 12.8.0.')
+  }
+
+  checkRuntimeRequirements(options.skipBackend)
+
   const target = path.resolve(process.cwd(), projectName)
   if (fs.existsSync(target)) throw new Error(`Folder atau file "${projectName}" sudah ada. Pilih nama lain.`)
   if (!fs.existsSync(templates)) throw new Error('Folder templates tidak ditemukan. Instalasi paket mungkin tidak lengkap.')
-  if (!commandExists('node') || !commandExists('npm')) throw new Error('Node.js dan npm wajib terpasang. Unduh dari https://nodejs.org/.')
-  if (!options.skipBackend) {
-    if (!commandExists('php') || !supportsPhp82()) throw new Error('PHP 8.2 atau lebih baru tidak ditemukan. Periksa versi/PATH PHP atau gunakan --skip-backend.')
-    if (!commandExists('composer')) throw new Error('Composer tidak ditemukan. Unduh dari https://getcomposer.org/.')
-  }
-
   const config = await collectConfig(options)
   if (!['javascript', 'typescript'].includes(config.language)) throw new Error('Bahasa frontend harus javascript atau typescript.')
   if (!['sqlite', 'mysql', 'pgsql'].includes(config.database)) throw new Error('Database harus sqlite, mysql, atau pgsql.')
 
   let created = false
+  let currentStep = 'menyiapkan direktori proyek'
   try {
     fs.ensureDirSync(target)
     created = true
@@ -147,6 +166,7 @@ async function createProject(projectName, options) {
 
     const frontendTemplate = path.join(templates, config.language === 'typescript' ? 'frontend-ts' : 'frontend')
     const frontendDir = path.join(target, 'frontend')
+    currentStep = 'menyiapkan frontend React'
     console.log(chalk.bold('1/3 Menyiapkan frontend React'))
     fs.copySync(frontendTemplate, frontendDir)
     fs.copySync(path.join(frontendDir, '.env.example'), path.join(frontendDir, '.env'))
@@ -155,24 +175,29 @@ async function createProject(projectName, options) {
 
     if (!options.skipBackend) {
       console.log(chalk.bold('\n2/3 Membuat backend Laravel dan memasang Sanctum'))
-      const composerResult = run('composer', ['create-project', 'laravel/laravel:12.*', 'backend', '--no-interaction'], target)
+      currentStep = 'membuat backend Laravel'
+      const composerResult = run('composer', ['create-project', `laravel/laravel:${config.laravelVersion}`, 'backend', '--no-interaction'], target)
       if (!composerResult.ok) throw new Error('Composer gagal membuat Laravel. Periksa koneksi internet, versi PHP, dan output Composer di atas.')
 
       const backendDir = path.join(target, 'backend')
+      currentStep = 'memasang API dan Sanctum Laravel'
       const apiResult = run('php', ['artisan', 'install:api', '--no-interaction'], backendDir)
       if (!apiResult.ok) throw new Error('Laravel gagal memasang API/Sanctum. Periksa versi Laravel dan output Artisan di atas.')
 
+      currentStep = 'menerapkan template backend dan konfigurasi database'
       fs.copySync(path.join(templates, 'backend'), backendDir, { overwrite: true })
       patchUserModel(backendDir)
       configureDatabase(backendDir, config.database)
 
       console.log(chalk.gray(`\nMenjalankan migrasi database (${config.database})...`))
+      currentStep = 'menjalankan migrasi database'
       const migration = run('php', ['artisan', 'migrate', '--seed', '--no-interaction'], backendDir)
       if (!migration.ok) {
         console.log(chalk.yellow('\n! Project berhasil dibuat, tetapi migrasi belum berhasil. Periksa konfigurasi database di backend/.env lalu jalankan:'))
         console.log(chalk.cyan('  cd backend && php artisan migrate --seed'))
       }
 
+      currentStep = 'menyalin script launcher lintas platform'
       fs.copySync(path.join(templates, 'root', 'start.bat'), path.join(target, 'start.bat'))
       const shellScript = path.join(target, 'start.sh')
       fs.copySync(path.join(templates, 'root', 'start.sh'), shellScript)
@@ -183,9 +208,10 @@ async function createProject(projectName, options) {
 
     if (!options.skipInstall) {
       console.log(chalk.bold('\n3/3 Memasang dependency frontend'))
+      currentStep = 'memasang dependency frontend'
       const install = run('npm', ['install'], frontendDir)
       if (!install.ok) {
-        console.log(chalk.yellow('\n! Frontend berhasil dibuat, tetapi npm install gagal. Jalankan npm install secara manual di folder frontend.'))
+        throw new Error('npm install gagal. Periksa koneksi internet dan pesan error npm di atas.')
       }
     } else {
       console.log(chalk.gray('\n3/3 Instalasi dependency dilewati (--skip-install)'))
@@ -209,7 +235,7 @@ async function createProject(projectName, options) {
       fs.removeSync(target)
       console.log(chalk.yellow('\nFolder project yang gagal dibuat telah dibersihkan.'))
     }
-    throw error
+    throw new Error(`Gagal pada langkah: ${currentStep}. ${error.message || 'Kesalahan tidak diketahui.'}`)
   }
 }
 
@@ -222,9 +248,10 @@ program
   .option('--typescript', 'gunakan template React + TypeScript')
   .option('--language <language>', 'bahasa frontend: javascript atau typescript')
   .option('--database <driver>', 'database Laravel: sqlite, mysql, atau pgsql')
+  .option('--laravel-version <version>', 'versi Laravel, default 12.*')
   .option('--non-interactive', 'gunakan konfigurasi default tanpa prompt')
   .option('--skip-install', 'lewati npm install frontend')
-  .addHelpText('after', `\nContoh:\n  $ npx react-lara-forge my-app\n  $ npx react-lara-forge my-app --typescript\n  $ npx react-lara-forge my-app --database mysql --non-interactive\n  $ npx react-lara-forge my-frontend --skip-backend`)
+  .addHelpText('after', `\nContoh:\n  $ npx react-lara-forge my-app\n  $ npx react-lara-forge my-app --typescript\n  $ npx react-lara-forge my-app --database mysql --non-interactive\n  $ npx react-lara-forge my-app --laravel-version '12.*'\n  $ npx react-lara-forge my-frontend --skip-backend`)
   .action(async (projectName, options) => {
     try {
       await createProject(projectName, options)
