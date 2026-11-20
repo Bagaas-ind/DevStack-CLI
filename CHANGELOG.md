@@ -6,6 +6,7 @@ All notable changes to React-Lara Forge are documented here.
 
 - Added Laravel feature tests for demo admin login, invalid credentials, protected endpoints, and logout token revocation.
 - Expanded CI to generate real Laravel + React and TypeScript projects, build both frontends, and run backend tests.
+- Updated pinned frontend dependencies and aligned Tailwind packages after build verification exposed an incompatible plugin/core version pair.
 - Added npm package-content verification and cross-platform CLI checks on Node.js 22/24.
 - Aligned launcher behavior across Windows, macOS, and Linux.
 - Failed database migrations now stop generation and remove the incomplete output directory.
