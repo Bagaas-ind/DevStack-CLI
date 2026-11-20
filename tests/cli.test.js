@@ -33,7 +33,7 @@ test('CLI reports an invalid project name before creating files', () => {
 })
 
 test('CLI rejects an existing project path instead of overwriting it', () => {
-  const result = execute(['templates', '--non-interactive'])
+  const result = execute(['templates', '--skip-backend', '--non-interactive'])
   assert.equal(result.status, 1)
   assert.match(result.stdout + result.stderr, /sudah ada/)
 })

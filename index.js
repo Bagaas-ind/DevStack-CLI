@@ -148,11 +148,10 @@ async function createProject(projectName, options) {
     throw new Error('Versi Laravel tidak valid. Gunakan format seperti 12.* atau 12.8.0.')
   }
 
-  checkRuntimeRequirements(options.skipBackend)
-
   const target = path.resolve(process.cwd(), projectName)
   if (fs.existsSync(target)) throw new Error(`Folder atau file "${projectName}" sudah ada. Pilih nama lain.`)
   if (!fs.existsSync(templates)) throw new Error('Folder templates tidak ditemukan. Instalasi paket mungkin tidak lengkap.')
+  checkRuntimeRequirements(options.skipBackend)
   const config = await collectConfig(options)
   if (!['javascript', 'typescript'].includes(config.language)) throw new Error('Bahasa frontend harus javascript atau typescript.')
   if (!['sqlite', 'mysql', 'pgsql'].includes(config.database)) throw new Error('Database harus sqlite, mysql, atau pgsql.')

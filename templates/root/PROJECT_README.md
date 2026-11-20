@@ -4,7 +4,7 @@ Generated with **React-Lara Forge**. This project keeps Laravel as the API backe
 
 ## Requirements
 
-- Node.js 18+ and npm
+- Node.js 22/24 LTS and npm
 - PHP 8.2+
 - Composer 2.x
 - SQLite, MySQL, or PostgreSQL (the selected database server must be available)

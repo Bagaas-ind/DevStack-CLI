@@ -6,11 +6,12 @@ on:
 
 jobs:
   cli:
-    name: CLI checks (Node ${{ matrix.node-version }})
-    runs-on: ubuntu-latest
+    name: CLI checks (${{ matrix.os }}, Node ${{ matrix.node-version }})
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
         node-version: [22, 24]
     steps:
       - name: Checkout
@@ -22,6 +23,9 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
+      - name: Validate POSIX launcher syntax
+        if: runner.os != 'Windows'
+        run: bash -n templates/root/start.sh
       - name: Run tests
         run: npm test
 
