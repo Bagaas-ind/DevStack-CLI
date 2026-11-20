@@ -9,7 +9,7 @@
 
 Generator proyek berbasis command line yang menyiapkan backend Laravel dan frontend React secara terpisah, lengkap dengan autentikasi, fitur admin berbasis peran, konfigurasi database, dan antarmuka yang siap dikembangkan.
 
-[![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-22%2F24-LTS-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![CI](https://github.com/Bagaas-ind/react-lara-forge/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Bagaas-ind/react-lara-forge/actions/workflows/ci.yml)
 [![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?logo=laravel&logoColor=white)](https://laravel.com/)
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://react.dev/)
@@ -46,6 +46,7 @@ npx github:Bagaas-ind/react-lara-forge my-project
 - [Autentikasi dan Keamanan](#autentikasi-dan-keamanan)
 - [Konfigurasi Database](#konfigurasi-database)
 - [Perintah Pengembangan](#perintah-pengembangan)
+- [Pengujian Otomatis](#pengujian-otomatis)
 - [Pemecahan Masalah](#pemecahan-masalah)
 - [Status dan Roadmap](#status-dan-roadmap)
 - [Kontribusi](#kontribusi)
@@ -59,7 +60,7 @@ Menyiapkan Laravel API dan React Single-Page Application (SPA) secara terpisah b
 
 Backend dan frontend dibuat secara terpisah:
 
-- `backend/` — Laravel 12 API.
+- `backend/` — Laravel 12.x API.
 - `frontend/` — React Single-Page Application.
 
 React-Lara Forge adalah alat pembuat kerangka awal proyek (project scaffold) yang juga cocok untuk belajar. Proyek ini bukan layanan hosting atau aplikasi bisnis siap pakai.
@@ -70,7 +71,7 @@ React-Lara Forge adalah alat pembuat kerangka awal proyek (project scaffold) yan
 ```mermaid
 flowchart LR
     A["React-Lara Forge CLI"] --> B["Project Generator"]
-    B --> C["Laravel 12 API"]
+    B --> C["Laravel 12.x API"]
     B --> D["React 18 SPA"]
     C --> E["Sanctum Auth + Role Authorization"]
     D --> F["Vite + Tailwind CSS"]
@@ -115,10 +116,10 @@ Pasang tools berikut sebelum membuat proyek full-stack:
 
 | Tool | Versi | Kegunaan |
 |---|---|---|
-| Node.js | 18 atau lebih baru | Menjalankan CLI dan tools frontend |
+| Node.js | 22 atau 24 LTS | Menjalankan CLI dan tools frontend |
 | npm | Termasuk dengan Node.js | Memasang dependency frontend |
 | PHP | 8.2 atau lebih baru | Menjalankan backend Laravel 12 |
-| Composer | Disarankan 2.x | Membuat dan mengelola aplikasi Laravel |
+| Composer | 2.x (wajib untuk backend) | Membuat dan mengelola aplikasi Laravel |
 | Database | SQLite, MySQL, atau PostgreSQL | Menyimpan data aplikasi |
 
 Periksa instalasi:
@@ -195,6 +196,7 @@ npx github:Bagaas-ind/react-lara-forge <nama-proyek> [options]
 |---|---|
 | `--typescript` | Menggunakan template frontend TypeScript |
 | `--language <language>` | Memilih `javascript` atau `typescript` |
+| `--laravel-version <version>` | Mengunci versi Laravel, default `12.*` |
 | `--database <driver>` | Memilih `sqlite`, `mysql`, atau `pgsql` |
 | `--skip-backend` | Hanya membuat frontend React |
 | `--skip-install` | Membuat file tanpa menjalankan `npm install` frontend |
@@ -214,6 +216,12 @@ Membuat proyek JavaScript dengan MySQL tanpa prompt interaktif:
 
 ```bash
 npx github:Bagaas-ind/react-lara-forge my-app --language javascript --database mysql --non-interactive
+```
+
+Mengunci Laravel ke seri 12.x:
+
+```bash
+npx github:Bagaas-ind/react-lara-forge my-app --laravel-version '12.*'
 ```
 
 Membuat frontend saja:
@@ -266,6 +274,7 @@ React-Lara Forge menyediakan implementasi awal autentikasi. Pahami konfigurasi d
 - Registrasi publik dibatasi dengan rate limit dan memberikan peran `user`. Operasi khusus administrator diotorisasi oleh backend Laravel.
 - Login dilindungi rate limit melalui middleware route Laravel.
 - Frontend menyimpan token yang diterima di `localStorage` untuk pengalaman awal yang sederhana. Penyimpanan yang dapat diakses JavaScript meningkatkan dampak risiko cross-site scripting (XSS); tinjau penyimpanan token dan model ancaman sebelum production.
+- Untuk aplikasi yang membutuhkan perlindungan sesi browser lebih kuat, pertimbangkan autentikasi SPA Sanctum berbasis stateful cookie dengan cookie HttpOnly dan perlindungan CSRF. Mode ini merupakan alternatif dan belum disertakan dalam scaffold saat ini; backend dan frontend perlu dikonfigurasi bersama.
 - CORS dikonfigurasi melalui `FRONTEND_URL`. Atur ke origin frontend yang tepat saat deployment. Hindari wildcard origin yang terlalu permisif ketika menggunakan credentials.
 - Seeder lokal menggunakan `admin@example.com` / `password` hanya di lingkungan lokal atau testing. Untuk lingkungan lain, atur `ADMIN_NAME`, `ADMIN_EMAIL`, dan `ADMIN_PASSWORD` yang kuat di `backend/.env` sebelum menjalankan seeder.
 - Jangan commit file `.env`, kredensial, access token, atau secret production.
@@ -355,16 +364,28 @@ Buka terminal di direktori hasil generate `frontend/` lalu jalankan `npm install
 
 </details>
 
+## Pengujian Otomatis
+
+Jalankan pengujian CLI dan regresi template dari root repository:
+
+```bash
+npm ci
+npm test
+```
+
+GitHub Actions menjalankan pemeriksaan CLI pada Node.js 22 dan 24 di Ubuntu, Windows, dan macOS. Pipeline juga memeriksa sintaks PHP, membuat proyek Laravel + React sungguhan menggunakan SQLite, menjalankan build frontend, menjalankan pengujian fitur Laravel (login admin, login gagal, endpoint terlindungi, dan logout), serta membuat dan melakukan build/type-check template TypeScript.
+
+Pengujian generate penuh membutuhkan PHP 8.3, Composer 2.x, ekstensi SQLite, dan koneksi internet untuk mengunduh Laravel serta dependency frontend.
+
 ## Status dan Roadmap
 
-React-Lara Forge masih dalam pengembangan aktif. Repository saat ini berisi generator, template JavaScript dan TypeScript, dokumentasi, serta automated CLI tests.
+Repository saat ini mencakup generator CLI, template JavaScript dan TypeScript, pengamanan autentikasi dasar, launcher Windows/macOS/Linux, pengujian CLI, pengujian fitur Laravel, dan CI lintas platform.
 
-Area pengembangan berikutnya meliputi:
+Pekerjaan berikutnya sebelum rilis stabil:
 
-- Pengujian end-to-end yang lebih menyeluruh untuk proyek Laravel dan React yang dihasilkan.
-- Modul starter dan opsi kustomisasi tambahan.
-- Catatan rilis dan distribusi berbasis versi yang lebih jelas.
-- Contoh serta screenshot tambahan dari proyek hasil generate.
+- Meninjau hasil CI dan melakukan uji manual di Windows serta macOS/Linux.
+- Memeriksa hasil generate dan alur login pada instalasi PHP/Composer lokal.
+- Menyiapkan catatan rilis dan paket npm setelah seluruh pemeriksaan lulus.
 
 Laporan bug dan masukan yang membangun sangat diterima melalui [GitHub Issues](https://github.com/Bagaas-ind/react-lara-forge/issues).
 

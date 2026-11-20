@@ -10,7 +10,13 @@
     "index.js",
     "lib",
     "templates",
-    "docs"
+    "docs",
+    "README.md",
+    "README.id.md",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "SECURITY.md",
+    "LICENSE"
   ],
   "keywords": [
     "cli",
@@ -30,7 +36,7 @@
   ],
   "license": "MIT",
   "engines": {
-    "node": ">=18"
+    "node": "^22.0.0 || ^24.0.0"
   },
   "dependencies": {
     "chalk": "^5.3.0",
@@ -39,5 +45,16 @@
   },
   "scripts": {
     "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bagaas-ind/React-Lara-forge.git"
+  },
+  "homepage": "https://github.com/Bagaas-ind/React-Lara-forge#readme",
+  "bugs": {
+    "url": "https://github.com/Bagaas-ind/React-Lara-forge/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

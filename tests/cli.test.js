@@ -23,6 +23,7 @@ test('CLI help lists the supported generator options', () => {
   assert.match(result.stdout, /--typescript/)
   assert.match(result.stdout, /--database <driver>/)
   assert.match(result.stdout, /--skip-backend/)
+  assert.match(result.stdout, /--laravel-version <version>/)
 })
 
 test('CLI reports an invalid project name before creating files', () => {
@@ -32,7 +33,7 @@ test('CLI reports an invalid project name before creating files', () => {
 })
 
 test('CLI rejects an existing project path instead of overwriting it', () => {
-  const result = execute(['templates', '--non-interactive'])
+  const result = execute(['templates', '--skip-backend', '--non-interactive'])
   assert.equal(result.status, 1)
   assert.match(result.stdout + result.stderr, /sudah ada/)
 })
@@ -79,4 +80,17 @@ test('JavaScript dashboard template uses valid JSX structure', () => {
   const dashboard = fs.readFileSync(path.join(root, 'templates', 'frontend', 'src', 'pages', 'Dashboard.jsx'), 'utf8')
   assert.match(dashboard, /return \(\s*<div>/)
   assert.match(dashboard, /cards\.map\(\(card\) => \(\s*<div/)
+})
+
+
+test('CLI rejects an invalid Laravel version constraint', () => {
+  const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'react-lara-forge-version-'))
+  try {
+    const result = execute(['sample-app', '--skip-backend', '--skip-install', '--non-interactive', '--laravel-version', '12;invalid'], temp)
+    assert.equal(result.status, 1)
+    assert.match(result.stdout + result.stderr, /Versi Laravel tidak valid/)
+    assert.equal(fs.existsSync(path.join(temp, 'sample-app')), false)
+  } finally {
+    fs.rmSync(temp, { recursive: true, force: true })
+  }
 })

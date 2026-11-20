@@ -9,7 +9,7 @@
 
 A command-line project generator that scaffolds a separate Laravel backend and React frontend, with authentication, role-based admin features, database configuration, and a ready-to-customize interface.
 
-[![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-22%2F24-LTS-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![CI](https://github.com/Bagaas-ind/react-lara-forge/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Bagaas-ind/react-lara-forge/actions/workflows/ci.yml)
 [![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?logo=laravel&logoColor=white)](https://laravel.com/)
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://react.dev/)
@@ -47,6 +47,7 @@ npx github:Bagaas-ind/react-lara-forge my-project
 - [Authentication and security](#authentication-and-security)
 - [Database configuration](#database-configuration)
 - [Development commands](#development-commands)
+- [Automated testing](#automated-testing)
 - [Troubleshooting](#troubleshooting)
 - [Project status and roadmap](#project-status-and-roadmap)
 - [Contributing](#contributing)
@@ -60,7 +61,7 @@ Starting a Laravel API and a separate React single-page application often involv
 
 The generated project keeps the backend and frontend separate:
 
-- `backend/` — Laravel 12 API.
+- `backend/` — Laravel 12.x API.
 - `frontend/` — React single-page application.
 
 React-Lara Forge is a project starter and learning-friendly scaffold. It is not a hosted service or a finished business application.
@@ -71,7 +72,7 @@ React-Lara Forge is a project starter and learning-friendly scaffold. It is not 
 ```mermaid
 flowchart LR
     A["React-Lara Forge CLI"] --> B["Project Generator"]
-    B --> C["Laravel 12 API"]
+    B --> C["Laravel 12.x API"]
     B --> D["React 18 SPA"]
     C --> E["Sanctum Auth + Role Authorization"]
     D --> F["Vite + Tailwind CSS"]
@@ -116,10 +117,10 @@ Install these tools before generating a full-stack project:
 
 | Tool | Version | Purpose |
 |---|---|---|
-| Node.js | 18 or newer | Runs the CLI and frontend tooling |
+| Node.js | 22 or 24 LTS | Runs the CLI and frontend tooling |
 | npm | Included with Node.js | Installs frontend dependencies |
-| PHP | 8.2 or newer | Runs the Laravel 12 backend |
-| Composer | 2.x recommended | Creates and manages the Laravel application |
+| PHP | 8.2 or newer | Runs the Laravel 12.x backend |
+| Composer | 2.x required for backend generation | Creates and manages the Laravel application |
 | Database | SQLite, MySQL, or PostgreSQL | Stores application data |
 
 Check your installations:
@@ -196,6 +197,7 @@ npx github:Bagaas-ind/react-lara-forge <project-name> [options]
 |---|---|
 | `--typescript` | Use the TypeScript frontend template |
 | `--language <language>` | Choose `javascript` or `typescript` |
+| `--laravel-version <version>` | Pin the Laravel version; defaults to `12.*` |
 | `--database <driver>` | Choose `sqlite`, `mysql`, or `pgsql` |
 | `--skip-backend` | Generate only the React frontend |
 | `--skip-install` | Generate files without running frontend `npm install` |
@@ -215,6 +217,13 @@ Generate a JavaScript project with MySQL without interactive prompts:
 
 ```bash
 npx github:Bagaas-ind/react-lara-forge my-app --language javascript --database mysql --non-interactive
+```
+
+
+Pin Laravel to the 12.x series:
+
+```bash
+npx github:Bagaas-ind/react-lara-forge my-app --laravel-version '12.*'
 ```
 
 Generate only the frontend:
@@ -267,6 +276,7 @@ React-Lara Forge provides a starting authentication implementation. Understand t
 - Public registration is rate-limited and assigns the `user` role. Administrator-only operations are authorized by the Laravel backend.
 - Login is rate-limited by Laravel route middleware.
 - The frontend stores the returned token in `localStorage` for a straightforward starter experience. JavaScript-accessible storage increases the impact of cross-site scripting (XSS); review token storage and your threat model before production use.
+- For applications that need stronger browser-session protection, consider Sanctum's stateful cookie-based SPA authentication with HttpOnly cookies and CSRF protection. This mode is an alternative, not included in the current scaffold, and requires coordinated backend/frontend configuration.
 - CORS is configured through `FRONTEND_URL`. Set this to the exact frontend origin used by your deployment. Avoid permissive wildcard origins when credentials are involved.
 - The local seeder uses `admin@example.com` / `password` only in local or testing environments. For other environments, configure `ADMIN_NAME`, `ADMIN_EMAIL`, and a strong `ADMIN_PASSWORD` in `backend/.env` before seeding.
 - Do not commit `.env` files, credentials, access tokens, or production secrets.
@@ -356,16 +366,28 @@ Open a terminal in the generated `frontend/` directory and run `npm install`.
 
 </details>
 
+## Automated testing
+
+Run CLI and template regression tests from the repository root:
+
+```bash
+npm ci
+npm test
+```
+
+GitHub Actions checks the CLI on Node.js 22 and 24 across Ubuntu, Windows, and macOS. The pipeline also lints PHP templates, generates a real Laravel + React project using SQLite, builds the generated frontend, runs Laravel feature tests (admin login, failed login, protected endpoint, and logout), then generates, builds, and type-checks the TypeScript frontend.
+
+The full generation job requires PHP 8.3, Composer 2.x, SQLite extensions, and internet access to download Laravel and frontend dependencies.
+
 ## Project status and roadmap
 
-React-Lara Forge is under active development. The current repository contains the generator, JavaScript and TypeScript templates, documentation, and automated CLI tests.
+The repository now includes the CLI generator, JavaScript and TypeScript templates, baseline authentication hardening, Windows/macOS/Linux launchers, CLI tests, Laravel feature tests, and cross-platform CI.
 
-Planned areas of improvement include:
+Remaining work before a stable release:
 
-- More comprehensive end-to-end tests for generated Laravel and React projects.
-- Additional starter modules and customization options.
-- Clearer release notes and versioned distribution.
-- More examples and screenshots of generated projects.
+- Review the CI results and manually test on Windows and macOS/Linux.
+- Inspect generated output and the login flow with a local PHP/Composer installation.
+- Prepare release notes and the npm package after all checks pass.
 
 Bug reports and constructive feedback are welcome through [GitHub Issues](https://github.com/Bagaas-ind/react-lara-forge/issues).
 
