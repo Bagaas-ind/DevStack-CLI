@@ -14,7 +14,7 @@ const templates = path.join(__dirname, 'templates')
 const VERSION = '0.3.1'
 
 function fail(message) {
-  console.error(chalk.red(`\n✖ ${message}\n`))
+  console.error(chalk.red(`\nâœ– ${message}\n`))
   process.exitCode = 1
 }
 
@@ -91,12 +91,12 @@ async function collectConfig(options) {
   try {
     console.log(chalk.cyan('\nKonfigurasi React-Lara Forge\n'))
     config.language = await ask(rl, 'Bahasa frontend:', [
-      { label: 'JavaScript — lebih sederhana untuk mulai', value: 'javascript' },
-      { label: 'TypeScript — type checking untuk proyek terstruktur', value: 'typescript' },
+      { label: 'JavaScript â€” lebih sederhana untuk mulai', value: 'javascript' },
+      { label: 'TypeScript â€” type checking untuk proyek terstruktur', value: 'typescript' },
     ], config.language)
     if (!options.skipBackend) {
       config.database = await ask(rl, 'Database Laravel:', [
-        { label: 'SQLite — tanpa server database (default)', value: 'sqlite' },
+        { label: 'SQLite â€” tanpa server database (default)', value: 'sqlite' },
         { label: 'MySQL', value: 'mysql' },
         { label: 'PostgreSQL', value: 'pgsql' },
       ], config.database)
@@ -143,6 +143,22 @@ async function createProject(projectName, options) {
     throw new Error('Nama project harus diawali huruf/angka dan hanya boleh berisi huruf, angka, titik, strip, atau garis bawah.')
   }
 
+  const templateName = options.template || 'starter'
+  if (!['starter', 'ecommerce'].includes(templateName)) {
+    throw new Error('Template tidak dikenal. Pilihan: starter, ecommerce.')
+  }
+  const templateDir = templateName === 'starter'
+    ? templates
+    : path.join(templates, templateName)
+
+  if (!fs.existsSync(templateDir)) {
+    throw new Error(`Folder template "${templateName}" tidak ditemukan.`)
+  }
+
+  if (templateName === 'ecommerce' && options.skipBackend) {
+    throw new Error('Template ecommerce membutuhkan backend Laravel.')
+  }
+
   const laravelVersion = options.laravelVersion || '12.*'
   if (!/^\d+\.(?:\d+(?:\.\d+)?|\*)$/.test(laravelVersion)) {
     throw new Error('Versi Laravel tidak valid. Gunakan format seperti 12.* atau 12.8.0.')
@@ -161,16 +177,16 @@ async function createProject(projectName, options) {
   try {
     fs.ensureDirSync(target)
     created = true
-    console.log(chalk.cyan(`\n⚒  Membuat ${projectName}\n`))
+    console.log(chalk.cyan(`\nâš’  Membuat ${projectName}\n`))
 
-    const frontendTemplate = path.join(templates, config.language === 'typescript' ? 'frontend-ts' : 'frontend')
+    const frontendTemplate = path.join(templateDir, config.language === 'typescript' ? 'frontend-ts' : 'frontend')
     const frontendDir = path.join(target, 'frontend')
     currentStep = 'menyiapkan frontend React'
     console.log(chalk.bold('1/3 Menyiapkan frontend React'))
     fs.copySync(frontendTemplate, frontendDir)
     fs.copySync(path.join(frontendDir, '.env.example'), path.join(frontendDir, '.env'))
     fs.writeFileSync(path.join(frontendDir, '.gitignore'), 'node_modules/\ndist/\n.env\n')
-    fs.copyFileSync(path.join(templates, 'root', 'PROJECT_README.md'), path.join(target, 'README.md'))
+    fs.copyFileSync(path.join(templateDir, 'root', 'PROJECT_README.md'), path.join(target, 'README.md'))
 
     if (!options.skipBackend) {
       console.log(chalk.bold('\n2/3 Membuat backend Laravel dan memasang Sanctum'))
@@ -184,7 +200,7 @@ async function createProject(projectName, options) {
       if (!apiResult.ok) throw new Error('Laravel gagal memasang API/Sanctum. Periksa versi Laravel dan output Artisan di atas.')
 
       currentStep = 'menerapkan template backend dan konfigurasi database'
-      fs.copySync(path.join(templates, 'backend'), backendDir, { overwrite: true })
+      fs.copySync(path.join(templateDir, 'backend'), backendDir, { overwrite: true })
       patchUserModel(backendDir)
       configureDatabase(backendDir, config.database)
 
@@ -196,9 +212,9 @@ async function createProject(projectName, options) {
       }
 
       currentStep = 'menyalin script launcher lintas platform'
-      fs.copySync(path.join(templates, 'root', 'start.bat'), path.join(target, 'start.bat'))
+      fs.copySync(path.join(templateDir, 'root', 'start.bat'), path.join(target, 'start.bat'))
       const shellScript = path.join(target, 'start.sh')
-      fs.copySync(path.join(templates, 'root', 'start.sh'), shellScript)
+      fs.copySync(path.join(templateDir, 'root', 'start.sh'), shellScript)
       fs.chmodSync(shellScript, 0o755)
     } else {
       console.log(chalk.gray('\n2/3 Backend dilewati (--skip-backend)'))
@@ -215,7 +231,7 @@ async function createProject(projectName, options) {
       console.log(chalk.gray('\n3/3 Instalasi dependency dilewati (--skip-install)'))
     }
 
-    console.log(chalk.green(`\n✔ ${projectName} berhasil dibuat.\n`))
+    console.log(chalk.green(`\nâœ” ${projectName} berhasil dibuat.\n`))
     console.log(chalk.bold('Konfigurasi project:'))
     console.log(`  Frontend  : React + Vite + ${config.language === 'typescript' ? 'TypeScript' : 'JavaScript'}`)
     if (!options.skipBackend) console.log(`  Backend   : Laravel + Sanctum (${config.database})`)
@@ -242,6 +258,7 @@ program
   .description('Generate a Laravel API + React SPA starter project')
   .version(VERSION)
   .argument('<project-name>', 'nama folder project yang akan dibuat')
+  .option('--template <name>', 'jenis template: starter atau ecommerce', 'starter')
   .option('--skip-backend', 'buat frontend saja tanpa Laravel')
   .option('--typescript', 'gunakan template React + TypeScript')
   .option('--language <language>', 'bahasa frontend: javascript atau typescript')
