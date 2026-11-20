@@ -267,6 +267,7 @@ React-Lara Forge provides a starting authentication implementation. Understand t
 - Public registration is rate-limited and assigns the `user` role. Administrator-only operations are authorized by the Laravel backend.
 - Login is rate-limited by Laravel route middleware.
 - The frontend stores the returned token in `localStorage` for a straightforward starter experience. JavaScript-accessible storage increases the impact of cross-site scripting (XSS); review token storage and your threat model before production use.
+- For applications that need stronger browser-session protection, consider Sanctum's stateful cookie-based SPA authentication with HttpOnly cookies and CSRF protection. This mode is an alternative, not included in the current scaffold, and requires coordinated backend/frontend configuration.
 - CORS is configured through `FRONTEND_URL`. Set this to the exact frontend origin used by your deployment. Avoid permissive wildcard origins when credentials are involved.
 - The local seeder uses `admin@example.com` / `password` only in local or testing environments. For other environments, configure `ADMIN_NAME`, `ADMIN_EMAIL`, and a strong `ADMIN_PASSWORD` in `backend/.env` before seeding.
 - Do not commit `.env` files, credentials, access tokens, or production secrets.

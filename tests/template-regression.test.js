@@ -53,3 +53,17 @@ test('Laravel API exceptions are rendered as JSON without an Accept header', () 
   assert.match(bootstrap, /shouldRenderJsonWhen/)
   assert.match(bootstrap, /\$request->is\('api\/\*'\) \|\| \$request->expectsJson\(\)/)
 })
+
+
+test('Sanctum tokens have a finite lifetime and login revokes older tokens', async () => {
+  const auth = fs.readFileSync(path.join(root, 'templates', 'backend', 'app', 'Http', 'Controllers', 'AuthController.php'), 'utf8')
+  const sanctum = fs.readFileSync(path.join(root, 'templates', 'backend', 'config', 'sanctum.php'), 'utf8')
+  assert.match(sanctum, /'expiration'\s*=>\s*env\('SANCTUM_EXPIRATION',\s*43200\)/)
+  const login = auth.slice(auth.indexOf('public function login'), auth.indexOf('public function logout'))
+  assert.match(login, /\$user->tokens\(\)->delete\(\)/)
+})
+
+test('demo credentials are blocked outside local and testing environments', () => {
+  const seeder = fs.readFileSync(path.join(root, 'templates', 'backend', 'database', 'seeders', 'DatabaseSeeder.php'), 'utf8')
+  assert.match(seeder, /! \$isLocal && \(\$email === 'admin@example.com' \|\| \$password === 'password'\)/)
+})

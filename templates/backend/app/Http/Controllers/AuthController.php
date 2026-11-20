@@ -44,6 +44,9 @@ class AuthController extends Controller
             throw ValidationException::withMessages(['email' => ['Email atau kata sandi tidak sesuai.']]);
         }
 
+        // Login ulang mencabut token lama untuk akun ini sebelum menerbitkan token baru.
+        $user->tokens()->delete();
+
         return response()->json([
             'token' => $user->createToken('react-lara-forge')->plainTextToken,
             'user' => $user->only(['id', 'name', 'email', 'role']),

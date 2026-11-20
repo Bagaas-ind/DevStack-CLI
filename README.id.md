@@ -266,6 +266,7 @@ React-Lara Forge menyediakan implementasi awal autentikasi. Pahami konfigurasi d
 - Registrasi publik dibatasi dengan rate limit dan memberikan peran `user`. Operasi khusus administrator diotorisasi oleh backend Laravel.
 - Login dilindungi rate limit melalui middleware route Laravel.
 - Frontend menyimpan token yang diterima di `localStorage` untuk pengalaman awal yang sederhana. Penyimpanan yang dapat diakses JavaScript meningkatkan dampak risiko cross-site scripting (XSS); tinjau penyimpanan token dan model ancaman sebelum production.
+- Untuk aplikasi yang membutuhkan perlindungan sesi browser lebih kuat, pertimbangkan autentikasi SPA Sanctum berbasis stateful cookie dengan cookie HttpOnly dan perlindungan CSRF. Mode ini merupakan alternatif dan belum disertakan dalam scaffold saat ini; backend dan frontend perlu dikonfigurasi bersama.
 - CORS dikonfigurasi melalui `FRONTEND_URL`. Atur ke origin frontend yang tepat saat deployment. Hindari wildcard origin yang terlalu permisif ketika menggunakan credentials.
 - Seeder lokal menggunakan `admin@example.com` / `password` hanya di lingkungan lokal atau testing. Untuk lingkungan lain, atur `ADMIN_NAME`, `ADMIN_EMAIL`, dan `ADMIN_PASSWORD` yang kuat di `backend/.env` sebelum menjalankan seeder.
 - Jangan commit file `.env`, kredensial, access token, atau secret production.

@@ -23,6 +23,11 @@ class DatabaseSeeder extends Seeder
             );
         }
 
+        // Kredensial demo tidak boleh digunakan di staging/production, meskipun diisi lewat .env.
+        if (! $isLocal && ($email === 'admin@example.com' || $password === 'password')) {
+            throw new RuntimeException('Demo credentials are disabled outside local/testing. Set a unique ADMIN_EMAIL and a strong ADMIN_PASSWORD.');
+        }
+
         if (strlen($password) < 12 && ! $isLocal) {
             throw new RuntimeException('ADMIN_PASSWORD must contain at least 12 characters outside local/testing.');
         }
