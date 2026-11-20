@@ -28,6 +28,8 @@ jobs:
         run: bash -n templates/root/start.sh
       - name: Run tests
         run: npm test
+      - name: Verify npm package contents
+        run: npm pack --dry-run
 
   php-lint:
     name: PHP template syntax
@@ -41,3 +43,40 @@ jobs:
           php-version: '8.2'
       - name: Lint backend templates
         run: find templates/backend -name '*.php' -print0 | xargs -0 -n1 php -l
+
+  generated-project:
+    name: Generate project, build frontend, and test Laravel API
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, bcmath, pdo_sqlite, sqlite3, curl, fileinfo, openssl, tokenizer, xml
+          coverage: none
+      - name: Install CLI dependencies
+        run: npm ci
+      - name: Generate Laravel + React project
+        run: node index.js ci-generated-app --database sqlite --laravel-version '12.*' --non-interactive --skip-install
+      - name: Build generated React frontend
+        working-directory: ci-generated-app/frontend
+        run: |
+          npm install
+          npm run build
+      - name: Run generated Laravel feature tests
+        working-directory: ci-generated-app/backend
+        run: php artisan test
+      - name: Generate TypeScript frontend
+        run: node index.js ci-generated-ts --skip-backend --typescript --non-interactive --skip-install
+      - name: Build and type-check generated TypeScript frontend
+        working-directory: ci-generated-ts/frontend
+        run: |
+          npm install
+          npm run build
+          npm run typecheck

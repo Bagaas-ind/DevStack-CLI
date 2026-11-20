@@ -46,6 +46,7 @@ npx github:Bagaas-ind/react-lara-forge my-project
 - [Autentikasi dan Keamanan](#autentikasi-dan-keamanan)
 - [Konfigurasi Database](#konfigurasi-database)
 - [Perintah Pengembangan](#perintah-pengembangan)
+- [Pengujian Otomatis](#pengujian-otomatis)
 - [Pemecahan Masalah](#pemecahan-masalah)
 - [Status dan Roadmap](#status-dan-roadmap)
 - [Kontribusi](#kontribusi)
@@ -363,16 +364,28 @@ Buka terminal di direktori hasil generate `frontend/` lalu jalankan `npm install
 
 </details>
 
+## Pengujian Otomatis
+
+Jalankan pengujian CLI dan regresi template dari root repository:
+
+```bash
+npm ci
+npm test
+```
+
+GitHub Actions menjalankan pemeriksaan CLI pada Node.js 22 dan 24 di Ubuntu, Windows, dan macOS. Pipeline juga memeriksa sintaks PHP, membuat proyek Laravel + React sungguhan menggunakan SQLite, menjalankan build frontend, menjalankan pengujian fitur Laravel (login admin, login gagal, endpoint terlindungi, dan logout), serta membuat dan melakukan build/type-check template TypeScript.
+
+Pengujian generate penuh membutuhkan PHP 8.3, Composer 2.x, ekstensi SQLite, dan koneksi internet untuk mengunduh Laravel serta dependency frontend.
+
 ## Status dan Roadmap
 
-React-Lara Forge masih dalam pengembangan aktif. Repository saat ini berisi generator, template JavaScript dan TypeScript, dokumentasi, serta automated CLI tests.
+Repository saat ini mencakup generator CLI, template JavaScript dan TypeScript, pengamanan autentikasi dasar, launcher Windows/macOS/Linux, pengujian CLI, pengujian fitur Laravel, dan CI lintas platform.
 
-Area pengembangan berikutnya meliputi:
+Pekerjaan berikutnya sebelum rilis stabil:
 
-- Pengujian end-to-end yang lebih menyeluruh untuk proyek Laravel dan React yang dihasilkan.
-- Modul starter dan opsi kustomisasi tambahan.
-- Catatan rilis dan distribusi berbasis versi yang lebih jelas.
-- Contoh serta screenshot tambahan dari proyek hasil generate.
+- Meninjau hasil CI dan melakukan uji manual di Windows serta macOS/Linux.
+- Memeriksa hasil generate dan alur login pada instalasi PHP/Composer lokal.
+- Menyiapkan catatan rilis dan paket npm setelah seluruh pemeriksaan lulus.
 
 Laporan bug dan masukan yang membangun sangat diterima melalui [GitHub Issues](https://github.com/Bagaas-ind/react-lara-forge/issues).
 

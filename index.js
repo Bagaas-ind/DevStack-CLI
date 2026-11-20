@@ -192,8 +192,7 @@ async function createProject(projectName, options) {
       currentStep = 'menjalankan migrasi database'
       const migration = run('php', ['artisan', 'migrate', '--seed', '--no-interaction'], backendDir)
       if (!migration.ok) {
-        console.log(chalk.yellow('\n! Project berhasil dibuat, tetapi migrasi belum berhasil. Periksa konfigurasi database di backend/.env lalu jalankan:'))
-        console.log(chalk.cyan('  cd backend && php artisan migrate --seed'))
+        throw new Error('Migrasi database gagal. Periksa konfigurasi database di backend/.env dan pastikan server database tersedia.')
       }
 
       currentStep = 'menyalin script launcher lintas platform'

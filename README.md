@@ -47,6 +47,7 @@ npx github:Bagaas-ind/react-lara-forge my-project
 - [Authentication and security](#authentication-and-security)
 - [Database configuration](#database-configuration)
 - [Development commands](#development-commands)
+- [Automated testing](#automated-testing)
 - [Troubleshooting](#troubleshooting)
 - [Project status and roadmap](#project-status-and-roadmap)
 - [Contributing](#contributing)
@@ -225,13 +226,6 @@ Pin Laravel to the 12.x series:
 npx github:Bagaas-ind/react-lara-forge my-app --laravel-version '12.*'
 ```
 
-
-Pin Laravel to the 12.x series:
-
-```bash
-npx github:Bagaas-ind/react-lara-forge my-app --laravel-version '12.*'
-```
-
 Generate only the frontend:
 
 ```bash
@@ -372,16 +366,28 @@ Open a terminal in the generated `frontend/` directory and run `npm install`.
 
 </details>
 
+## Automated testing
+
+Run CLI and template regression tests from the repository root:
+
+```bash
+npm ci
+npm test
+```
+
+GitHub Actions checks the CLI on Node.js 22 and 24 across Ubuntu, Windows, and macOS. The pipeline also lints PHP templates, generates a real Laravel + React project using SQLite, builds the generated frontend, runs Laravel feature tests (admin login, failed login, protected endpoint, and logout), then generates, builds, and type-checks the TypeScript frontend.
+
+The full generation job requires PHP 8.3, Composer 2.x, SQLite extensions, and internet access to download Laravel and frontend dependencies.
+
 ## Project status and roadmap
 
-React-Lara Forge is under active development. The current repository contains the generator, JavaScript and TypeScript templates, documentation, and automated CLI tests.
+The repository now includes the CLI generator, JavaScript and TypeScript templates, baseline authentication hardening, Windows/macOS/Linux launchers, CLI tests, Laravel feature tests, and cross-platform CI.
 
-Planned areas of improvement include:
+Remaining work before a stable release:
 
-- More comprehensive end-to-end tests for generated Laravel and React projects.
-- Additional starter modules and customization options.
-- Clearer release notes and versioned distribution.
-- More examples and screenshots of generated projects.
+- Review the CI results and manually test on Windows and macOS/Linux.
+- Inspect generated output and the login flow with a local PHP/Composer installation.
+- Prepare release notes and the npm package after all checks pass.
 
 Bug reports and constructive feedback are welcome through [GitHub Issues](https://github.com/Bagaas-ind/react-lara-forge/issues).
 

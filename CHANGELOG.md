@@ -1,5 +1,15 @@
 # Changelog
 
+All notable changes to React-Lara Forge are documented here.
+
+## [Unreleased]
+
+- Added Laravel feature tests for demo admin login, invalid credentials, protected endpoints, and logout token revocation.
+- Expanded CI to generate real Laravel + React and TypeScript projects, build both frontends, and run backend tests.
+- Added npm package-content verification and cross-platform CLI checks on Node.js 22/24.
+- Aligned launcher behavior across Windows, macOS, and Linux.
+- Failed database migrations now stop generation and remove the incomplete output directory.
+
 ## [0.3.0] - 2026-11-19
 
 - Added registration flow for JavaScript and TypeScript frontends.
@@ -7,10 +17,6 @@
 - Added server-protected admin dashboard statistics and user management API.
 - Replaced static dashboard metrics and sample user rows with API-backed data.
 - Added admin account role enforcement in the seeder.
-
-# Changelog
-
-All notable changes to React-Lara Forge are documented here.
 
 ## [0.2.0] - 2026-11-19
 
