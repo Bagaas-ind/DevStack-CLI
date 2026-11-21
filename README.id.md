@@ -2,7 +2,7 @@
 
 **Pasang framework. Buat kerangka aplikasi. Mulai coding lebih cepat.**
 
-Toolkit command-line untuk membantu developer menyiapkan framework dan membuat kerangka aplikasi melalui satu alur CLI yang praktis.
+Toolkit command-line interaktif untuk memasang dan menyiapkan framework yang didukung, sekaligus membuat kerangka aplikasi melalui satu pengalaman CLI.
 
 [English](README.md) | **Bahasa Indonesia**
 
@@ -26,12 +26,12 @@ Toolkit command-line untuk membantu developer menyiapkan framework dan membuat k
 
 Menyiapkan lingkungan development baru terkadang membingungkan, terutama saat baru belajar sebuah framework. Kita perlu mengingat perintah instalasi, membuat folder proyek, memasang dependency, dan mengatur berbagai tools sebelum mulai menulis kode aplikasi.
 
-**DevStack CLI bertujuan menyederhanakan langkah awal tersebut.** Dalam jangka panjang, proyek ini akan menggabungkan dua alur kerja:
+**DevStack CLI menyederhanakan langkah awal tersebut melalui dua alur kerja:**
 
 1. **Framework Installer** — membantu pengguna memasang dan menyiapkan framework yang didukung melalui panduan CLI.
 2. **Application Generator** — membuat kerangka aplikasi yang siap dikembangkan dengan fitur-fitur dasar yang sudah terhubung.
 
-Pengembangan dilakukan secara bertahap. Generator React + Laravel yang sudah ada merupakan fondasi yang saat ini telah diimplementasikan. Installer untuk berbagai framework masih menjadi arah pengembangan dan belum boleh dianggap tersedia sebelum didokumentasikan sebagai fitur yang sudah dirilis.
+Framework Installer dan Application Generator kini tersedia di CLI. Installer menyiapkan project awal untuk framework yang didukung, sedangkan generator membuat starter Laravel API + React SPA.
 
 ## ✨ Fitur yang tersedia saat ini
 
