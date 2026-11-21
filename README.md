@@ -1,129 +1,77 @@
 <div align="center">
-<img src="assets/react-lara-forge-wordmark.png" alt="React-Lara Forge Logo" width="650">
+
+# DevStack CLI
+
+**Install development frameworks. Generate application starters. Start building faster.**
+
+A beginner-friendly command-line toolkit for setting up development projects. DevStack CLI is evolving toward two complementary tools: a framework installer and an application generator.
 
 [English](README.md) | [Bahasa Indonesia](README.id.md)
 
-# React-Lara Forge
-
-**Generate a Laravel API + React SPA starter project in minutes.**
-
-A command-line project generator that scaffolds a separate Laravel backend and React frontend, with authentication, role-based admin features, database configuration, and a ready-to-customize interface.
-
-[![Node.js](https://img.shields.io/badge/Node.js-22%2F24-LTS-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
-[![CI](https://github.com/Bagaas-ind/react-lara-forge/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Bagaas-ind/react-lara-forge/actions/workflows/ci.yml)
+[![Node.js](https://img.shields.io/badge/Node.js-22%2F24_LTS-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![CI](https://github.com/Bagaas-ind/React-Lara-forge/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Bagaas-ind/React-Lara-forge/actions/workflows/ci.yml)
 [![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?logo=laravel&logoColor=white)](https://laravel.com/)
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://react.dev/)
-[![Vite](https://img.shields.io/badge/Vite-6-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-
-[![GitHub stars](https://img.shields.io/github/stars/Bagaas-ind/react-lara-forge?style=for-the-badge&logo=github&label=STARS)](https://github.com/Bagaas-ind/react-lara-forge/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/Bagaas-ind/react-lara-forge?style=for-the-badge&logo=github&label=FORKS)](https://github.com/Bagaas-ind/react-lara-forge/network/members)
-[![GitHub issues](https://img.shields.io/github/issues/Bagaas-ind/react-lara-forge?style=for-the-badge&logo=github&label=ISSUES)](https://github.com/Bagaas-ind/react-lara-forge/issues)
-[![GitHub last commit](https://img.shields.io/github/last-commit/Bagaas-ind/react-lara-forge?style=for-the-badge&logo=git&label=UPDATED)](https://github.com/Bagaas-ind/react-lara-forge/commits/main)
-
-> **Build faster. Customize freely. Ship with confidence.**
-
-**Quick start**
-
-```bash
-npx github:Bagaas-ind/react-lara-forge my-project
-```
+[![GitHub stars](https://img.shields.io/github/stars/Bagaas-ind/React-Lara-forge?style=for-the-badge&logo=github)](https://github.com/Bagaas-ind/React-Lara-forge/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/Bagaas-ind/React-Lara-forge?style=for-the-badge&logo=github)](https://github.com/Bagaas-ind/React-Lara-forge/issues)
 
 </div>
 
 ---
 
-## Table of contents
+## What is DevStack CLI?
 
-- [Overview](#overview)
-- [Features](#features)
-- [Preview](#preview)
-- [Requirements](#requirements)
-- [Quick start](#quick-start)
-- [CLI options](#cli-options)
-- [Generated project structure](#generated-project-structure)
-- [Authentication and security](#authentication-and-security)
-- [Database configuration](#database-configuration)
-- [Development commands](#development-commands)
-- [Automated testing](#automated-testing)
-- [Troubleshooting](#troubleshooting)
-- [Project status and roadmap](#project-status-and-roadmap)
-- [Contributing](#contributing)
-- [License](#license)
+Setting up a new development environment can be confusing, especially when you are learning a framework for the first time. You may need to remember installation commands, create project folders, configure dependencies, and connect several tools before writing your first line of application code.
 
-## Overview
+**DevStack CLI aims to make that first step easier.** The long-term direction is to bring two workflows together:
 
-Starting a Laravel API and a separate React single-page application often involves repeating the same setup: creating the backend, installing Sanctum, configuring CORS, preparing Vite and Tailwind CSS, connecting API requests, and building an authentication flow.
+1. **Framework Installer** — guided installation and project setup for supported development frameworks.
+2. **Application Generator** — ready-to-customize application starters with useful features already connected.
 
-**React-Lara Forge automates that initial setup.** It gives you a practical foundation that you can customize for your own application instead of starting from an empty directory.
+The project is being expanded in stages. The existing React + Laravel generator is the current implemented foundation; the broader multi-framework installer is part of the planned direction and should not be considered available until it is documented as released.
 
-The generated project keeps the backend and frontend separate:
+## Current functionality
 
-- `backend/` — Laravel 12.x API.
-- `frontend/` — React single-page application.
+The current generator creates a separate Laravel API backend and React single-page application (SPA).
 
-React-Lara Forge is a project starter and learning-friendly scaffold. It is not a hosted service or a finished business application.
+- **JavaScript or TypeScript** frontend.
+- **Laravel 12.x** backend with Sanctum personal access token authentication.
+- **SQLite, MySQL, or PostgreSQL** database configuration.
+- Registration, login, logout, protected API routes, and role-based authorization.
+- Local development administrator seeder and admin dashboard/user management.
+- React 18, Vite 6, Tailwind CSS 4, React Router, and Axios.
+- Windows and macOS/Linux launch scripts.
+- CLI validation and automated tests.
 
+> The current scaffold is a development starting point, not a finished business application or a production security certification. Review and adapt generated code before deployment.
 
-### Architecture at a glance
+## Project direction
 
-```mermaid
-flowchart LR
-    A["React-Lara Forge CLI"] --> B["Project Generator"]
-    B --> C["Laravel 12.x API"]
-    B --> D["React 18 SPA"]
-    C --> E["Sanctum Auth + Role Authorization"]
-    D --> F["Vite + Tailwind CSS"]
-    E <--> G[("SQLite / MySQL / PostgreSQL")]
-    F <-->|"HTTP + Bearer Token"| C
-```
+The planned architecture keeps the two workflows separate:
 
+| Part | Purpose | Status |
+|---|---|---|
+| Framework Installer | Help users set up supported frameworks through guided CLI steps | Planned / in development |
+| Application Generator | Generate a Laravel API + React SPA starter | Existing functionality |
+| More application templates | Add reusable project types while preserving existing templates | Planned |
 
-## Features
-
-- **Separate backend and frontend** — Laravel API and React SPA are generated in their own directories.
-- **JavaScript or TypeScript** — choose the frontend language during setup or with a CLI option.
-- **Database selection** — configure SQLite, MySQL, or PostgreSQL.
-- **Authentication starter** — registration, login, logout, protected API routes, and Laravel Sanctum personal access tokens.
-- **Role-based access** — registered users receive the `user` role; the local development seeder creates an administrator account.
-- **Admin dashboard** — dashboard statistics and user management backed by the database.
-- **Server-side authorization** — administrator-only API actions are protected on the Laravel backend.
-- **Modern frontend stack** — React 18, Vite 6, Tailwind CSS 4, React Router, and Axios.
-- **Cross-platform launch scripts** — `start.bat` for Windows and `start.sh` for macOS/Linux.
-- **Safer generation** — validates project names and existing paths, checks required tools, and cleans up incomplete output after fatal generation errors.
-
-> Dashboard statistics currently focus on user/account data. Features such as orders, payments, inventory, and revenue are not included and must be developed separately.
-
-## Preview
-
-<div align="center">
-  <table>
-    <tr>
-      <td align="center"><strong>Login</strong></td>
-      <td align="center"><strong>Admin dashboard</strong></td>
-    </tr>
-    <tr>
-      <td><img src="docs/login.png" width="420" alt="React-Lara Forge login page"></td>
-      <td><img src="docs/dashboard.png" width="420" alt="React-Lara Forge admin dashboard"></td>
-    </tr>
-  </table>
-</div>
+The framework list and supported versions will be published here only after each installer has been implemented and tested.
 
 ## Requirements
 
-Install these tools before generating a full-stack project:
+For the current Laravel + React generator:
 
 | Tool | Version | Purpose |
 |---|---|---|
 | Node.js | 22 or 24 LTS | Runs the CLI and frontend tooling |
 | npm | Included with Node.js | Installs frontend dependencies |
-| PHP | 8.2 or newer | Runs the Laravel 12.x backend |
-| Composer | 2.x required for backend generation | Creates and manages the Laravel application |
+| PHP | 8.2 or newer | Runs Laravel 12 |
+| Composer | 2.x | Creates and manages the Laravel backend |
 | Database | SQLite, MySQL, or PostgreSQL | Stores application data |
 
-Check your installations:
+Check your environment:
 
 ```bash
 node --version
@@ -132,25 +80,23 @@ php --version
 composer --version
 ```
 
-For MySQL or PostgreSQL, start the database server and create the database and database user before running migrations. SQLite is the default and does not require a separate database server.
-
 ## Quick start
 
-### 1. Generate a project
+The repository is currently named `React-Lara-forge`; the repository URL and command below will be updated after the GitHub repository rename is completed.
+
+Generate a project from the current repository:
 
 ```bash
-npx github:Bagaas-ind/react-lara-forge my-project
+npx github:Bagaas-ind/React-Lara-forge my-project
 ```
 
-Follow the prompts to choose JavaScript or TypeScript and a database. The default choices are JavaScript and SQLite.
+Follow the prompts to select JavaScript or TypeScript and a database. The default choices are JavaScript and SQLite.
 
-The generator downloads Laravel through Composer and installs frontend dependencies through npm. An internet connection is required during initial generation.
+The generator downloads Laravel through Composer and installs frontend dependencies through npm, so an internet connection is required during generation.
 
-### 2. Start the applications
+### Start the generated project
 
 **Windows**
-
-Open the generated folder and double-click `start.bat`, or run:
 
 ```powershell
 cd my-project
@@ -165,32 +111,30 @@ chmod +x start.sh
 ./start.sh
 ```
 
-The development servers use these default addresses:
+Default development addresses:
 
-| Application | URL |
+| Application | Address |
 |---|---|
 | React frontend | http://localhost:5173 |
 | Laravel backend | http://localhost:8000 |
 
-### 3. Open the application
+Open the frontend at http://localhost:5173.
 
-Visit [http://localhost:5173](http://localhost:5173) in your browser.
-
-For a project generated with the default local development configuration, the seeded administrator credentials are:
+For the default local development setup, the seeded administrator credentials are:
 
 | Field | Local demo value |
 |---|---|
 | Email | `admin@example.com` |
 | Password | `password` |
 
-**Important:** These are local development credentials only. Change or remove the demo account before exposing the application to other users or deploying it. Never use the demo password in production.
+**Security:** These credentials are for local development only. Change or remove the demo account before exposing the application to other users. Never use the demo password in production.
 
 ## CLI options
 
 General syntax:
 
 ```bash
-npx github:Bagaas-ind/react-lara-forge <project-name> [options]
+npx github:Bagaas-ind/React-Lara-forge <project-name> [options]
 ```
 
 | Option | Description |
@@ -201,54 +145,31 @@ npx github:Bagaas-ind/react-lara-forge <project-name> [options]
 | `--database <driver>` | Choose `sqlite`, `mysql`, or `pgsql` |
 | `--skip-backend` | Generate only the React frontend |
 | `--skip-install` | Generate files without running frontend `npm install` |
-| `--non-interactive` | Run with options/defaults without interactive prompts |
+| `--non-interactive` | Use supplied options and defaults without prompts |
 | `-V, --version` | Display the CLI version |
 | `-h, --help` | Display help |
 
-### Examples
-
-Generate a TypeScript project:
+Examples:
 
 ```bash
-npx github:Bagaas-ind/react-lara-forge my-app --typescript
+# TypeScript frontend
+npx github:Bagaas-ind/React-Lara-forge my-app --typescript
+
+# JavaScript + MySQL, without interactive prompts
+npx github:Bagaas-ind/React-Lara-forge my-app --language javascript --database mysql --non-interactive
+
+# Generate only the frontend
+npx github:Bagaas-ind/React-Lara-forge my-frontend --skip-backend
 ```
 
-Generate a JavaScript project with MySQL without interactive prompts:
-
-```bash
-npx github:Bagaas-ind/react-lara-forge my-app --language javascript --database mysql --non-interactive
-```
-
-
-Pin Laravel to the 12.x series:
-
-```bash
-npx github:Bagaas-ind/react-lara-forge my-app --laravel-version '12.*'
-```
-
-Generate only the frontend:
-
-```bash
-npx github:Bagaas-ind/react-lara-forge my-frontend --skip-backend
-```
-
-Generate the project without installing frontend packages:
-
-```bash
-npx github:Bagaas-ind/react-lara-forge my-app --skip-install
-```
-
-When using `--non-interactive`, JavaScript and SQLite are selected by default unless you override them with options.
+When using `--non-interactive`, JavaScript and SQLite are selected by default unless overridden.
 
 ## Generated project structure
 
-The generated directory follows this general structure:
-
 ```text
 my-project/
-├── backend/                     # Laravel 12 API + Sanctum
-│   ├── app/Http/Controllers/    # Authentication, dashboard, users
-│   ├── config/                  # Application and CORS configuration
+├── backend/                     # Laravel API + Sanctum
+│   ├── app/Http/Controllers/
 │   ├── database/
 │   │   ├── migrations/
 │   │   └── seeders/
@@ -256,55 +177,47 @@ my-project/
 │       └── api.php
 ├── frontend/                    # React + Vite + Tailwind CSS
 │   ├── src/
-│   │   ├── components/
-│   │   ├── context/
-│   │   ├── lib/
-│   │   └── pages/
 │   ├── package.json
 │   └── vite.config.js            # .ts for TypeScript projects
 ├── start.bat                     # Windows launcher
 └── start.sh                      # macOS/Linux launcher
 ```
 
-Exact files may vary slightly depending on the selected language and generator options.
+Exact files may vary depending on the selected language and generator options.
 
 ## Authentication and security
 
-React-Lara Forge provides a starting authentication implementation. Understand these defaults before adapting the generated application:
+The current scaffold uses Laravel Sanctum personal access tokens sent through the `Authorization: Bearer` header. It does not configure Sanctum's stateful cookie-based SPA authentication flow.
 
-- Authentication uses **Sanctum personal access tokens** sent with the `Authorization: Bearer` header. The generator does not configure Sanctum's stateful cookie-based SPA authentication flow.
-- Public registration is rate-limited and assigns the `user` role. Administrator-only operations are authorized by the Laravel backend.
-- Login is rate-limited by Laravel route middleware.
+- Public registration is rate-limited and assigns the `user` role.
+- Administrator-only operations are authorized by the Laravel backend.
 - The frontend stores the returned token in `localStorage` for a straightforward starter experience. JavaScript-accessible storage increases the impact of cross-site scripting (XSS); review token storage and your threat model before production use.
-- For applications that need stronger browser-session protection, consider Sanctum's stateful cookie-based SPA authentication with HttpOnly cookies and CSRF protection. This mode is an alternative, not included in the current scaffold, and requires coordinated backend/frontend configuration.
-- CORS is configured through `FRONTEND_URL`. Set this to the exact frontend origin used by your deployment. Avoid permissive wildcard origins when credentials are involved.
-- The local seeder uses `admin@example.com` / `password` only in local or testing environments. For other environments, configure `ADMIN_NAME`, `ADMIN_EMAIL`, and a strong `ADMIN_PASSWORD` in `backend/.env` before seeding.
+- CORS is configured through `FRONTEND_URL`. Set it to the exact frontend origin used by your deployment.
+- The demo administrator is intended for local/testing environments only.
 - Do not commit `.env` files, credentials, access tokens, or production secrets.
 
-**Production note:** generated projects are development foundations, not security-certified applications. Before deployment, review authentication, authorization, validation, token handling, HTTPS, logging, monitoring, backups, dependency updates, and environment configuration.
+Generated projects are development foundations. Before deployment, review authentication, authorization, validation, token handling, HTTPS, logging, monitoring, backups, dependency updates, and environment configuration.
 
 ## Database configuration
 
-The generator writes the selected database driver to `backend/.env`.
+The selected driver is written to `backend/.env`.
 
 | Driver | Notes |
 |---|---|
-| SQLite | Creates `backend/database/database.sqlite`; no separate database server is needed. |
-| MySQL | Uses standard local connection defaults. Create the database and update credentials in `backend/.env`. |
-| PostgreSQL | Uses standard local connection defaults. Create the database and update credentials in `backend/.env`. |
+| SQLite | Uses `backend/database/database.sqlite`; no separate database server is required. |
+| MySQL | Create the database and update credentials in `backend/.env`. |
+| PostgreSQL | Create the database and update credentials in `backend/.env`. |
 
-After changing database settings, run:
+After changing database settings:
 
 ```bash
 cd backend
 php artisan migrate --seed
 ```
 
-If the database server is unavailable or the database does not exist during generation, correct `backend/.env` and run the migration command once the database is ready.
+## Development and tests
 
-## Development commands
-
-### Frontend
+Frontend:
 
 ```bash
 cd frontend
@@ -313,13 +226,13 @@ npm run dev
 npm run build
 ```
 
-For a TypeScript project, run the following command to check frontend types:
+For a TypeScript project:
 
 ```bash
 npm run typecheck
 ```
 
-### Backend
+Backend:
 
 ```bash
 cd backend
@@ -327,94 +240,36 @@ php artisan serve
 php artisan migrate --seed
 ```
 
-The frontend API base URL is configured in `frontend/.env` through `VITE_API_URL`.
-
-## Troubleshooting
-
-<details>
-<summary><strong>PHP or Composer is not recognized</strong></summary>
-
-Install PHP and Composer, add them to your system `PATH`, then open a new terminal. Verify with `php --version` and `composer --version`.
-
-</details>
-
-<details>
-<summary><strong>The frontend cannot connect to the API</strong></summary>
-
-Make sure Laravel is running at `http://localhost:8000`. Check `VITE_API_URL` in `frontend/.env` and confirm that `FRONTEND_URL` in `backend/.env` matches the frontend origin.
-
-</details>
-
-<details>
-<summary><strong>MySQL or PostgreSQL migration fails</strong></summary>
-
-Confirm that the database server is running, the database exists, and the credentials in `backend/.env` are correct. Then retry `php artisan migrate --seed`.
-
-</details>
-
-<details>
-<summary><strong>The project directory already exists</strong></summary>
-
-Choose a different project name. The generator is designed not to overwrite an existing project directory.
-
-</details>
-
-<details>
-<summary><strong>Frontend dependencies are missing</strong></summary>
-
-Open a terminal in the generated `frontend/` directory and run `npm install`.
-
-</details>
-
-## Automated testing
-
-Run CLI and template regression tests from the repository root:
+Run repository tests from the project root:
 
 ```bash
 npm ci
 npm test
 ```
 
-GitHub Actions checks the CLI on Node.js 22 and 24 across Ubuntu, Windows, and macOS. The pipeline also lints PHP templates, generates a real Laravel + React project using SQLite, builds the generated frontend, runs Laravel feature tests (admin login, failed login, protected endpoint, and logout), then generates, builds, and type-checks the TypeScript frontend.
-
-The full generation job requires PHP 8.3, Composer 2.x, SQLite extensions, and internet access to download Laravel and frontend dependencies.
-
-## Project status and roadmap
-
-The repository now includes the CLI generator, JavaScript and TypeScript templates, baseline authentication hardening, Windows/macOS/Linux launchers, CLI tests, Laravel feature tests, and cross-platform CI.
-
-Remaining work before a stable release:
-
-- Review the CI results and manually test on Windows and macOS/Linux.
-- Inspect generated output and the login flow with a local PHP/Composer installation.
-- Prepare release notes and the npm package after all checks pass.
-
-Bug reports and constructive feedback are welcome through [GitHub Issues](https://github.com/Bagaas-ind/react-lara-forge/issues).
+The CI workflow checks the CLI across supported Node.js versions and operating systems, and exercises generated Laravel/React templates.
 
 ## Contributing
 
-Contributions are welcome, including bug fixes, tests, documentation improvements, and feature suggestions.
+Contributions, bug reports, documentation improvements, and feature suggestions are welcome.
 
-Before submitting a pull request:
+1. Create a focused branch from `main`.
+2. Add or update tests for behavior changes.
+3. Run `npm test`.
+4. Explain what changed and how you tested it in your pull request.
 
-1. Read [CONTRIBUTING.md](CONTRIBUTING.md).
-2. Create a focused branch from `main`.
-3. Add or update tests for behavior changes.
-4. Run `npm test`.
-5. Explain what changed and how you tested it.
-
-Please do not commit generated application folders, `node_modules`, `.env` files, local databases, or secrets.
+Do not commit generated application folders, `node_modules`, `.env` files, local databases, or secrets.
 
 ## License
 
-React-Lara Forge is released under the [MIT License](LICENSE). You are free to use, modify, and distribute it under the terms of that license.
+DevStack CLI is released under the [MIT License](LICENSE). You may use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the software, subject to the license conditions.
 
 ---
 
 <div align="center">
 
-Made to make starting Laravel + React projects less repetitive.
+**Install Frameworks. Build Projects. Start Coding.**
 
-**If React-Lara Forge is useful to you, consider giving the repository a ⭐ on GitHub.**
+Built to make getting started with development tools less intimidating.
 
 </div>
