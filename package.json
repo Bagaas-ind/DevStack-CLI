@@ -1,10 +1,10 @@
 {
-  "name": "react-lara-forge",
+  "name": "@bagaas-ind/devstack-cli",
   "version": "0.3.1",
-  "description": "Laravel + React project generator with JavaScript/TypeScript templates and Sanctum authentication",
+  "description": "Beginner-friendly CLI for generating Laravel + React application starters, with a guided multi-framework installer planned.",
   "type": "module",
   "bin": {
-    "react-lara-forge": "./index.js"
+    "devstack-cli": "./index.js"
   },
   "files": [
     "index.js",
@@ -19,20 +19,22 @@
     "LICENSE"
   ],
   "keywords": [
+    "devstack",
+    "devstack-cli",
     "cli",
-    "generator",
-    "javascript",
-    "laravel",
-    "mysql",
-    "postgresql",
-    "react",
-    "sanctum",
-    "scaffold",
-    "sqlite",
+    "framework-installer",
+    "project-generator",
+    "scaffolding",
     "starter-kit",
-    "tailwindcss",
+    "laravel",
+    "react",
     "typescript",
-    "vite"
+    "javascript",
+    "vite",
+    "sanctum",
+    "sqlite",
+    "mysql",
+    "postgresql"
   ],
   "license": "MIT",
   "engines": {
@@ -48,11 +50,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Bagaas-ind/React-Lara-forge.git"
+    "url": "https://github.com/Bagaas-ind/DevStack-CLI.git"
   },
-  "homepage": "https://github.com/Bagaas-ind/React-Lara-forge#readme",
+  "homepage": "https://github.com/Bagaas-ind/DevStack-CLI#readme",
   "bugs": {
-    "url": "https://github.com/Bagaas-ind/React-Lara-forge/issues"
+    "url": "https://github.com/Bagaas-ind/DevStack-CLI/issues"
   },
   "publishConfig": {
     "access": "public"

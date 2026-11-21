@@ -9,13 +9,13 @@ A beginner-friendly command-line toolkit for setting up development projects. De
 [English](README.md) | [Bahasa Indonesia](README.id.md)
 
 [![Node.js](https://img.shields.io/badge/Node.js-22%2F24_LTS-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
-[![CI](https://github.com/Bagaas-ind/React-Lara-forge/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Bagaas-ind/React-Lara-forge/actions/workflows/ci.yml)
+[![CI](https://github.com/Bagaas-ind/DevStack-CLI/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Bagaas-ind/DevStack-CLI/actions/workflows/ci.yml)
 [![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?logo=laravel&logoColor=white)](https://laravel.com/)
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-[![GitHub stars](https://img.shields.io/github/stars/Bagaas-ind/React-Lara-forge?style=for-the-badge&logo=github)](https://github.com/Bagaas-ind/React-Lara-forge/stargazers)
-[![GitHub issues](https://img.shields.io/github/issues/Bagaas-ind/React-Lara-forge?style=for-the-badge&logo=github)](https://github.com/Bagaas-ind/React-Lara-forge/issues)
+[![GitHub stars](https://img.shields.io/github/stars/Bagaas-ind/DevStack-CLI?style=for-the-badge&logo=github)](https://github.com/Bagaas-ind/DevStack-CLI/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/Bagaas-ind/DevStack-CLI?style=for-the-badge&logo=github)](https://github.com/Bagaas-ind/DevStack-CLI/issues)
 
 </div>
 
@@ -82,12 +82,10 @@ composer --version
 
 ## Quick start
 
-The repository is currently named `React-Lara-forge`; the repository URL and command below will be updated after the GitHub repository rename is completed.
-
 Generate a project from the current repository:
 
 ```bash
-npx github:Bagaas-ind/React-Lara-forge my-project
+npx github:Bagaas-ind/DevStack-CLI my-project
 ```
 
 Follow the prompts to select JavaScript or TypeScript and a database. The default choices are JavaScript and SQLite.
@@ -134,7 +132,7 @@ For the default local development setup, the seeded administrator credentials ar
 General syntax:
 
 ```bash
-npx github:Bagaas-ind/React-Lara-forge <project-name> [options]
+npx github:Bagaas-ind/DevStack-CLI <project-name> [options]
 ```
 
 | Option | Description |
@@ -153,13 +151,13 @@ Examples:
 
 ```bash
 # TypeScript frontend
-npx github:Bagaas-ind/React-Lara-forge my-app --typescript
+npx github:Bagaas-ind/DevStack-CLI my-app --typescript
 
 # JavaScript + MySQL, without interactive prompts
-npx github:Bagaas-ind/React-Lara-forge my-app --language javascript --database mysql --non-interactive
+npx github:Bagaas-ind/DevStack-CLI my-app --language javascript --database mysql --non-interactive
 
 # Generate only the frontend
-npx github:Bagaas-ind/React-Lara-forge my-frontend --skip-backend
+npx github:Bagaas-ind/DevStack-CLI my-frontend --skip-backend
 ```
 
 When using `--non-interactive`, JavaScript and SQLite are selected by default unless overridden.

@@ -9,13 +9,13 @@ Toolkit command-line yang dirancang untuk membantu developer menyiapkan proyek d
 [English](README.md) | **Bahasa Indonesia**
 
 [![Node.js](https://img.shields.io/badge/Node.js-22%2F24_LTS-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
-[![CI](https://github.com/Bagaas-ind/React-Lara-forge/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Bagaas-ind/React-Lara-forge/actions/workflows/ci.yml)
+[![CI](https://github.com/Bagaas-ind/DevStack-CLI/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Bagaas-ind/DevStack-CLI/actions/workflows/ci.yml)
 [![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?logo=laravel&logoColor=white)](https://laravel.com/)
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![Lisensi: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-[![GitHub stars](https://img.shields.io/github/stars/Bagaas-ind/React-Lara-forge?style=for-the-badge&logo=github)](https://github.com/Bagaas-ind/React-Lara-forge/stargazers)
-[![GitHub issues](https://img.shields.io/github/issues/Bagaas-ind/React-Lara-forge?style=for-the-badge&logo=github)](https://github.com/Bagaas-ind/React-Lara-forge/issues)
+[![GitHub stars](https://img.shields.io/github/stars/Bagaas-ind/DevStack-CLI?style=for-the-badge&logo=github)](https://github.com/Bagaas-ind/DevStack-CLI/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/Bagaas-ind/DevStack-CLI?style=for-the-badge&logo=github)](https://github.com/Bagaas-ind/DevStack-CLI/issues)
 
 </div>
 
@@ -82,12 +82,10 @@ composer --version
 
 ## Memulai dengan cepat
 
-Repository saat ini masih bernama `React-Lara-forge`. URL repository dan perintah di bawah akan diperbarui setelah nama repository GitHub selesai diubah.
-
 Buat proyek dari repository saat ini:
 
 ```bash
-npx github:Bagaas-ind/React-Lara-forge my-project
+npx github:Bagaas-ind/DevStack-CLI my-project
 ```
 
 Ikuti instruksi untuk memilih JavaScript atau TypeScript serta database. Pilihan default adalah JavaScript dan SQLite.
@@ -134,7 +132,7 @@ Untuk konfigurasi development lokal default, kredensial administrator dari seede
 Sintaks umum:
 
 ```bash
-npx github:Bagaas-ind/React-Lara-forge <nama-proyek> [options]
+npx github:Bagaas-ind/DevStack-CLI <nama-proyek> [options]
 ```
 
 | Opsi | Keterangan |
@@ -153,13 +151,13 @@ Contoh:
 
 ```bash
 # Frontend TypeScript
-npx github:Bagaas-ind/React-Lara-forge my-app --typescript
+npx github:Bagaas-ind/DevStack-CLI my-app --typescript
 
 # JavaScript + MySQL tanpa prompt interaktif
-npx github:Bagaas-ind/React-Lara-forge my-app --language javascript --database mysql --non-interactive
+npx github:Bagaas-ind/DevStack-CLI my-app --language javascript --database mysql --non-interactive
 
 # Hanya membuat frontend
-npx github:Bagaas-ind/React-Lara-forge my-frontend --skip-backend
+npx github:Bagaas-ind/DevStack-CLI my-frontend --skip-backend
 ```
 
 Jika menggunakan `--non-interactive`, pilihan default adalah JavaScript dan SQLite kecuali ditentukan lain.
