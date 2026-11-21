@@ -1,10 +1,12 @@
 <div align="center">
 
+<img src="docs/assets/devstack-mark.svg" alt="DevStack CLI logo" width="72" />
+
 # DevStack CLI
 
-**Install development frameworks. Generate application starters. Start building faster.**
+**Install frameworks. Generate application starters. Start coding.**
 
-A beginner-friendly command-line toolkit for setting up development projects. DevStack CLI is evolving toward two complementary tools: a framework installer and an application generator.
+A beginner-friendly command-line toolkit for setting up development projects and generating a Laravel API + React application starter.
 
 [English](README.md) | [Bahasa Indonesia](README.id.md)
 
@@ -21,7 +23,7 @@ A beginner-friendly command-line toolkit for setting up development projects. De
 
 ---
 
-## What is DevStack CLI?
+## 📖 What is DevStack CLI?
 
 Setting up a new development environment can be confusing, especially when you are learning a framework for the first time. You may need to remember installation commands, create project folders, configure dependencies, and connect several tools before writing your first line of application code.
 
@@ -32,7 +34,7 @@ Setting up a new development environment can be confusing, especially when you a
 
 The project is being expanded in stages. The existing React + Laravel generator is the current implemented foundation; the broader multi-framework installer is part of the planned direction and should not be considered available until it is documented as released.
 
-## Current functionality
+## ✨ Current functionality
 
 The current generator creates a separate Laravel API backend and React single-page application (SPA).
 
@@ -47,7 +49,7 @@ The current generator creates a separate Laravel API backend and React single-pa
 
 > The current scaffold is a development starting point, not a finished business application or a production security certification. Review and adapt generated code before deployment.
 
-## Project direction
+## 🧭 Project direction
 
 The planned architecture keeps the two workflows separate:
 
@@ -59,7 +61,7 @@ The planned architecture keeps the two workflows separate:
 
 The framework list and supported versions will be published here only after each installer has been implemented and tested.
 
-## Requirements
+## 📋 Requirements
 
 For the current Laravel + React generator:
 
@@ -80,7 +82,7 @@ php --version
 composer --version
 ```
 
-## Quick start
+## 🚀 Quick start
 
 Generate a project from the current repository:
 
@@ -92,7 +94,7 @@ Follow the prompts to select JavaScript or TypeScript and a database. The defaul
 
 The generator downloads Laravel through Composer and installs frontend dependencies through npm, so an internet connection is required during generation.
 
-### Start the generated project
+### ▶️ Start the generated project
 
 **Windows**
 
@@ -127,7 +129,7 @@ For the default local development setup, the seeded administrator credentials ar
 
 **Security:** These credentials are for local development only. Change or remove the demo account before exposing the application to other users. Never use the demo password in production.
 
-## CLI options
+## ⚙️ CLI options
 
 General syntax:
 
@@ -162,7 +164,7 @@ npx github:Bagaas-ind/DevStack-CLI my-frontend --skip-backend
 
 When using `--non-interactive`, JavaScript and SQLite are selected by default unless overridden.
 
-## Generated project structure
+## 🗂️ Generated project structure
 
 ```text
 my-project/
@@ -183,7 +185,7 @@ my-project/
 
 Exact files may vary depending on the selected language and generator options.
 
-## Authentication and security
+## 🔐 Authentication and security
 
 The current scaffold uses Laravel Sanctum personal access tokens sent through the `Authorization: Bearer` header. It does not configure Sanctum's stateful cookie-based SPA authentication flow.
 
@@ -196,7 +198,7 @@ The current scaffold uses Laravel Sanctum personal access tokens sent through th
 
 Generated projects are development foundations. Before deployment, review authentication, authorization, validation, token handling, HTTPS, logging, monitoring, backups, dependency updates, and environment configuration.
 
-## Database configuration
+## 🗄️ Database configuration
 
 The selected driver is written to `backend/.env`.
 
@@ -213,7 +215,7 @@ cd backend
 php artisan migrate --seed
 ```
 
-## Development and tests
+## 🧪 Development and tests
 
 Frontend:
 
@@ -247,7 +249,7 @@ npm test
 
 The CI workflow checks the CLI across supported Node.js versions and operating systems, and exercises generated Laravel/React templates.
 
-## Contributing
+## 🤝 Contributing
 
 Contributions, bug reports, documentation improvements, and feature suggestions are welcome.
 
@@ -258,7 +260,7 @@ Contributions, bug reports, documentation improvements, and feature suggestions 
 
 Do not commit generated application folders, `node_modules`, `.env` files, local databases, or secrets.
 
-## License
+## 📄 License
 
 DevStack CLI is released under the [MIT License](LICENSE). You may use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the software, subject to the license conditions.
 
