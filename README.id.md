@@ -82,8 +82,6 @@ composer --version
 
 ## Memulai dengan cepat
 
-Repository saat ini masih bernama `React-Lara-forge`. URL repository dan perintah di bawah akan diperbarui setelah nama repository GitHub selesai diubah.
-
 Buat proyek dari repository saat ini:
 
 ```bash
