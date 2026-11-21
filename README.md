@@ -1,16 +1,16 @@
 <div align="center">
 
-<img src="docs/assets/devstack-mark.svg" alt="DevStack CLI logo" width="72" />
+<img src="docs/assets/devstack-mark.svg" width="64" alt="DevStack CLI logo" />
 
 # DevStack CLI
 
-**Install frameworks. Generate application starters. Start coding.**
+**Install frameworks. Generate application starters. Start building faster.**
 
-A beginner-friendly command-line toolkit for setting up development projects and generating a Laravel API + React application starter.
+A beginner-friendly command-line toolkit for setting up development projects and generating application starters.
 
-[English](README.md) | [Bahasa Indonesia](README.id.md)
+[English](README.md) · [Bahasa Indonesia](README.id.md)
 
-[![Node.js](https://img.shields.io/badge/Node.js-22%2F24_LTS-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-22%20%7C%2024_LTS-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![CI](https://github.com/Bagaas-ind/DevStack-CLI/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Bagaas-ind/DevStack-CLI/actions/workflows/ci.yml)
 [![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?logo=laravel&logoColor=white)](https://laravel.com/)
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://react.dev/)
@@ -23,52 +23,51 @@ A beginner-friendly command-line toolkit for setting up development projects and
 
 ---
 
-## 📖 What is DevStack CLI?
+## 📖 Overview
 
-Setting up a new development environment can be confusing, especially when you are learning a framework for the first time. You may need to remember installation commands, create project folders, configure dependencies, and connect several tools before writing your first line of application code.
+Starting a development project often means repeating the same setup tasks: preparing folders, installing dependencies, configuring tools, and connecting the pieces before writing application code.
 
-**DevStack CLI aims to make that first step easier.** The long-term direction is to bring two workflows together:
+**DevStack CLI is designed to make that starting process simpler.** The project brings together two complementary workflows:
 
-1. **Framework Installer** — guided installation and project setup for supported development frameworks.
-2. **Application Generator** — ready-to-customize application starters with useful features already connected.
+- **Framework Installer** — guided setup for supported development frameworks.
+- **Application Generator** — customizable application starters with common project foundations already connected.
 
-The project is being expanded in stages. The existing React + Laravel generator is the current implemented foundation; the broader multi-framework installer is part of the planned direction and should not be considered available until it is documented as released.
+Development is happening incrementally. The existing Laravel API + React SPA generator is the current published foundation. The broader multi-framework installer is being developed and tested separately; framework support will be listed here as it becomes ready for release.
 
-## ✨ Current functionality
+## ✨ Current features
 
-The current generator creates a separate Laravel API backend and React single-page application (SPA).
+The currently documented generator creates a Laravel API backend and a React single-page application (SPA).
 
-- **JavaScript or TypeScript** frontend.
-- **Laravel 12.x** backend with Sanctum personal access token authentication.
-- **SQLite, MySQL, or PostgreSQL** database configuration.
-- Registration, login, logout, protected API routes, and role-based authorization.
-- Local development administrator seeder and admin dashboard/user management.
-- React 18, Vite 6, Tailwind CSS 4, React Router, and Axios.
-- Windows and macOS/Linux launch scripts.
-- CLI validation and automated tests.
+- **Frontend choices:** JavaScript or TypeScript.
+- **Backend:** Laravel 12.x with Sanctum personal access token authentication.
+- **Database options:** SQLite, MySQL, or PostgreSQL.
+- **Authentication:** registration, login, logout, and protected API routes.
+- **Authorization:** role-based access control for administrator operations.
+- **Admin foundation:** local development seeder, dashboard, and user management.
+- **Frontend stack:** React 18, Vite 6, Tailwind CSS 4, React Router, and Axios.
+- **Launch scripts:** Windows and macOS/Linux.
+- **Developer experience:** CLI input validation and automated tests.
 
-> The current scaffold is a development starting point, not a finished business application or a production security certification. Review and adapt generated code before deployment.
+> **Note:** Generated projects are development starters, not finished business applications or security certifications. Review and adapt the generated code before deploying it.
 
-## 🧭 Project direction
+## 🧭 Project roadmap
 
-The planned architecture keeps the two workflows separate:
-
-| Part | Purpose | Status |
+| Component | Purpose | Status |
 |---|---|---|
-| Framework Installer | Help users set up supported frameworks through guided CLI steps | Planned / in development |
-| Application Generator | Generate a Laravel API + React SPA starter | Existing functionality |
-| More application templates | Add reusable project types while preserving existing templates | Planned |
+| Application Generator | Generate a Laravel API + React SPA starter | Available |
+| Framework Installer | Guided setup for supported frameworks | In development |
+| Additional application templates | Expand reusable project types | Planned |
 
-The framework list and supported versions will be published here only after each installer has been implemented and tested.
+Framework names and supported versions will be documented after their installers have been implemented and tested.
 
 ## 📋 Requirements
 
-For the current Laravel + React generator:
+Requirements for the current Laravel + React generator:
 
 | Tool | Version | Purpose |
 |---|---|---|
 | Node.js | 22 or 24 LTS | Runs the CLI and frontend tooling |
-| npm | Included with Node.js | Installs frontend dependencies |
+| npm | Bundled with Node.js | Installs frontend dependencies |
 | PHP | 8.2 or newer | Runs Laravel 12 |
 | Composer | 2.x | Creates and manages the Laravel backend |
 | Database | SQLite, MySQL, or PostgreSQL | Stores application data |
@@ -84,17 +83,17 @@ composer --version
 
 ## 🚀 Quick start
 
-Generate a project from the current repository:
+Create a project directly from the GitHub repository:
 
 ```bash
 npx github:Bagaas-ind/DevStack-CLI my-project
 ```
 
-Follow the prompts to select JavaScript or TypeScript and a database. The default choices are JavaScript and SQLite.
+Follow the prompts to choose JavaScript or TypeScript and a database. The defaults are **JavaScript** and **SQLite**.
 
-The generator downloads Laravel through Composer and installs frontend dependencies through npm, so an internet connection is required during generation.
+An internet connection is required while generating the project because Composer and npm download the required dependencies.
 
-### ▶️ Start the generated project
+### Run the generated project
 
 **Windows**
 
@@ -111,23 +110,25 @@ chmod +x start.sh
 ./start.sh
 ```
 
-Default development addresses:
+Default local addresses:
 
-| Application | Address |
+| Service | URL |
 |---|---|
 | React frontend | http://localhost:5173 |
 | Laravel backend | http://localhost:8000 |
 
-Open the frontend at http://localhost:5173.
+Open the frontend at **http://localhost:5173**.
 
-For the default local development setup, the seeded administrator credentials are:
+### Local demo administrator
 
-| Field | Local demo value |
+The default local development seeder provides:
+
+| Field | Demo value |
 |---|---|
 | Email | `admin@example.com` |
 | Password | `password` |
 
-**Security:** These credentials are for local development only. Change or remove the demo account before exposing the application to other users. Never use the demo password in production.
+**Security:** This account is for local development and testing only. Change or remove it before making the application accessible to other users. Never use the demo password in production.
 
 ## ⚙️ CLI options
 
@@ -141,7 +142,7 @@ npx github:Bagaas-ind/DevStack-CLI <project-name> [options]
 |---|---|
 | `--typescript` | Use the TypeScript frontend template |
 | `--language <language>` | Choose `javascript` or `typescript` |
-| `--laravel-version <version>` | Pin the Laravel version; defaults to `12.*` |
+| `--laravel-version <version>` | Select a Laravel version; defaults to `12.*` |
 | `--database <driver>` | Choose `sqlite`, `mysql`, or `pgsql` |
 | `--skip-backend` | Generate only the React frontend |
 | `--skip-install` | Generate files without running frontend `npm install` |
@@ -155,16 +156,18 @@ Examples:
 # TypeScript frontend
 npx github:Bagaas-ind/DevStack-CLI my-app --typescript
 
-# JavaScript + MySQL, without interactive prompts
+# JavaScript + MySQL without interactive prompts
 npx github:Bagaas-ind/DevStack-CLI my-app --language javascript --database mysql --non-interactive
 
 # Generate only the frontend
 npx github:Bagaas-ind/DevStack-CLI my-frontend --skip-backend
 ```
 
-When using `--non-interactive`, JavaScript and SQLite are selected by default unless overridden.
+With `--non-interactive`, JavaScript and SQLite are selected unless you override them.
 
 ## 🗂️ Generated project structure
+
+A typical generated project looks like this:
 
 ```text
 my-project/
@@ -178,12 +181,12 @@ my-project/
 ├── frontend/                    # React + Vite + Tailwind CSS
 │   ├── src/
 │   ├── package.json
-│   └── vite.config.js            # .ts for TypeScript projects
-├── start.bat                     # Windows launcher
-└── start.sh                      # macOS/Linux launcher
+│   └── vite.config.js           # .ts for TypeScript projects
+├── start.bat                    # Windows launcher
+└── start.sh                     # macOS/Linux launcher
 ```
 
-Exact files may vary depending on the selected language and generator options.
+The exact files may vary depending on the selected language and generator options.
 
 ## 🔐 Authentication and security
 
@@ -191,24 +194,24 @@ The current scaffold uses Laravel Sanctum personal access tokens sent through th
 
 - Public registration is rate-limited and assigns the `user` role.
 - Administrator-only operations are authorized by the Laravel backend.
-- The frontend stores the returned token in `localStorage` for a straightforward starter experience. JavaScript-accessible storage increases the impact of cross-site scripting (XSS); review token storage and your threat model before production use.
+- The frontend stores the returned token in `localStorage` for a straightforward starter experience. Because JavaScript can access this storage, an XSS vulnerability can expose tokens; review token storage and your threat model before production use.
 - CORS is configured through `FRONTEND_URL`. Set it to the exact frontend origin used by your deployment.
 - The demo administrator is intended for local/testing environments only.
-- Do not commit `.env` files, credentials, access tokens, or production secrets.
+- Never commit `.env` files, credentials, access tokens, or production secrets.
 
-Generated projects are development foundations. Before deployment, review authentication, authorization, validation, token handling, HTTPS, logging, monitoring, backups, dependency updates, and environment configuration.
+Before deployment, review authentication, authorization, validation, token handling, HTTPS, logging, monitoring, backups, dependency updates, and environment configuration.
 
 ## 🗄️ Database configuration
 
-The selected driver is written to `backend/.env`.
+The selected database driver is written to `backend/.env`.
 
 | Driver | Notes |
 |---|---|
 | SQLite | Uses `backend/database/database.sqlite`; no separate database server is required. |
-| MySQL | Create the database and update credentials in `backend/.env`. |
-| PostgreSQL | Create the database and update credentials in `backend/.env`. |
+| MySQL | Create the database and update the credentials in `backend/.env`. |
+| PostgreSQL | Create the database and update the credentials in `backend/.env`. |
 
-After changing database settings:
+After changing database settings, run:
 
 ```bash
 cd backend
@@ -217,7 +220,7 @@ php artisan migrate --seed
 
 ## 🧪 Development and tests
 
-Frontend:
+**Frontend**
 
 ```bash
 cd frontend
@@ -232,7 +235,7 @@ For a TypeScript project:
 npm run typecheck
 ```
 
-Backend:
+**Backend**
 
 ```bash
 cd backend
@@ -240,14 +243,16 @@ php artisan serve
 php artisan migrate --seed
 ```
 
-Run repository tests from the project root:
+**Repository tests**
+
+Run from the repository root:
 
 ```bash
 npm ci
 npm test
 ```
 
-The CI workflow checks the CLI across supported Node.js versions and operating systems, and exercises generated Laravel/React templates.
+The CI workflow checks the CLI on configured Node.js versions and operating systems, and exercises the generated Laravel/React templates.
 
 ## 🤝 Contributing
 
@@ -256,13 +261,13 @@ Contributions, bug reports, documentation improvements, and feature suggestions 
 1. Create a focused branch from `main`.
 2. Add or update tests for behavior changes.
 3. Run `npm test`.
-4. Explain what changed and how you tested it in your pull request.
+4. Describe the changes and testing performed in your pull request.
 
-Do not commit generated application folders, `node_modules`, `.env` files, local databases, or secrets.
+Please do not commit generated application folders, `node_modules`, `.env` files, local databases, or secrets.
 
 ## 📄 License
 
-DevStack CLI is released under the [MIT License](LICENSE). You may use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the software, subject to the license conditions.
+DevStack CLI is released under the [MIT License](LICENSE).
 
 ---
 
@@ -270,6 +275,6 @@ DevStack CLI is released under the [MIT License](LICENSE). You may use, copy, mo
 
 **Install Frameworks. Build Projects. Start Coding.**
 
-Built to make getting started with development tools less intimidating.
+Made to make getting started with development tools less intimidating.
 
 </div>
