@@ -1,0 +1,17 @@
+{
+  "binName": "devstack-cli",
+  "argument": "<project-name>",
+  "flags": [
+    "--database",
+    "--language",
+    "--laravel-version",
+    "--non-interactive",
+    "--skip-backend",
+    "--skip-install",
+    "--template",
+    "--typescript"
+  ],
+  "packageBin": {
+    "devstack-cli": "./index.js"
+  }
+}
