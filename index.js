@@ -89,7 +89,7 @@ async function collectConfig(options) {
 
   const rl = readline.createInterface({ input, output })
   try {
-    console.log(chalk.cyan('\nKonfigurasi React-Lara Forge\n'))
+    console.log(chalk.cyan('\nKonfigurasi DevStack CLI\n'))
     config.language = await ask(rl, 'Bahasa frontend:', [
       { label: 'JavaScript â€” lebih sederhana untuk mulai', value: 'javascript' },
       { label: 'TypeScript â€” type checking untuk proyek terstruktur', value: 'typescript' },
@@ -254,8 +254,8 @@ async function createProject(projectName, options) {
 }
 
 program
-  .name('react-lara-forge')
-  .description('Generate a Laravel API + React SPA starter project')
+  .name('devstack-cli')
+  .description('Generate a Laravel API + React SPA application starter')
   .version(VERSION)
   .argument('<project-name>', 'nama folder project yang akan dibuat')
   .option('--template <name>', 'jenis template: starter atau ecommerce', 'starter')
@@ -266,7 +266,7 @@ program
   .option('--laravel-version <version>', 'versi Laravel, default 12.*')
   .option('--non-interactive', 'gunakan konfigurasi default tanpa prompt')
   .option('--skip-install', 'lewati npm install frontend')
-  .addHelpText('after', `\nContoh:\n  $ npx react-lara-forge my-app\n  $ npx react-lara-forge my-app --typescript\n  $ npx react-lara-forge my-app --database mysql --non-interactive\n  $ npx react-lara-forge my-app --laravel-version '12.*'\n  $ npx react-lara-forge my-frontend --skip-backend`)
+  .addHelpText('after', `\nContoh:\n  $ npx @bagaas-ind/devstack-cli my-app\n  $ npx @bagaas-ind/devstack-cli my-app --typescript\n  $ npx @bagaas-ind/devstack-cli my-app --database mysql --non-interactive\n  $ npx @bagaas-ind/devstack-cli my-app --laravel-version '12.*'\n  $ npx @bagaas-ind/devstack-cli my-frontend --skip-backend`)
   .action(async (projectName, options) => {
     try {
       await createProject(projectName, options)
