@@ -6,7 +6,8 @@ Toolkit command-line untuk membantu developer menyiapkan framework dan membuat k
 
 [English](README.md) | **Bahasa Indonesia**
 
-[English](README.md) | **Bahasa Indonesia**
+
+<div align="center">
 
 [![Node.js](https://img.shields.io/badge/Node.js-22%2F24_LTS-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![CI](https://github.com/Bagaas-ind/DevStack-CLI/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Bagaas-ind/DevStack-CLI/actions/workflows/ci.yml)
