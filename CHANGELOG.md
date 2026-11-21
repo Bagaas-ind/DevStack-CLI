@@ -1,9 +1,13 @@
 # Changelog
 
-All notable changes to React-Lara Forge are documented here.
+All notable changes to DevStack CLI are documented here.
 
 ## [Unreleased]
 
+- Rebranded the project from React-Lara Forge to DevStack CLI.
+- Renamed the executable command to `devstack-cli` and aligned package metadata with the DevStack CLI identity.
+- Updated repository, homepage, and issue-tracker metadata after the GitHub repository rename.
+- Clarified the distinction between the currently implemented Laravel + React application generator and the planned multi-framework installer.
 - Added Laravel feature tests for demo admin login, invalid credentials, protected endpoints, and logout token revocation.
 - Expanded CI to generate real Laravel + React and TypeScript projects, build both frontends, and run backend tests.
 - Updated pinned frontend dependencies, aligned Tailwind packages, and moved React Router to a patched v7 release while retaining the v6-compatible `react-router-dom` import path.
