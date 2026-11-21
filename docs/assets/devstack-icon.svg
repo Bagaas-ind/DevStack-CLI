@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">DevStack</title>
+  <defs>
+    <linearGradient id="stack" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8B5CF6"/>
+      <stop offset="1" stop-color="#2563EB"/>
+    </linearGradient>
+  </defs>
+  <path d="M32 5 57 18.5 32 32 7 18.5 32 5Z" fill="url(#stack)"/>
+  <path d="M7 27.5 32 41l25-13.5v10L32 51 7 37.5v-10Z" fill="url(#stack)" opacity=".82"/>
+  <path d="M7 42.5 32 56l25-13.5v5L32 61 7 47.5v-5Z" fill="url(#stack)" opacity=".62"/>
+</svg>
