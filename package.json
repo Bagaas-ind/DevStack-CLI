@@ -1,7 +1,7 @@
 {
   "name": "@bagaas-ind/devstack-cli",
   "version": "0.3.1",
-  "description": "Beginner-friendly CLI for generating Laravel + React application starters, with a guided multi-framework installer planned.",
+  "description": "A Node.js CLI toolkit for installing development frameworks and generating Laravel API + React SPA application starters.",
   "type": "module",
   "bin": {
     "devstack-cli": "./index.js"
@@ -9,6 +9,7 @@
   "files": [
     "index.js",
     "lib",
+    "locales",
     "templates",
     "docs",
     "README.md",
@@ -21,20 +22,24 @@
   "keywords": [
     "devstack",
     "devstack-cli",
+    "nodejs",
     "cli",
     "framework-installer",
     "project-generator",
     "scaffolding",
-    "starter-kit",
+    "developer-tools",
     "laravel",
     "react",
-    "typescript",
-    "javascript",
     "vite",
-    "sanctum",
-    "sqlite",
-    "mysql",
-    "postgresql"
+    "express",
+    "nextjs",
+    "vuejs",
+    "django",
+    "flask",
+    "fastapi",
+    "codeigniter",
+    "symfony",
+    "spring-boot"
   ],
   "license": "MIT",
   "engines": {
