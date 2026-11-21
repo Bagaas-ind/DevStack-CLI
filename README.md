@@ -6,7 +6,8 @@ A beginner-friendly command-line toolkit for setting up development projects. De
 
 [English](README.md) | [Bahasa Indonesia](README.id.md)
 
-[English](README.md) | [Bahasa Indonesia](README.id.md)
+
+<div align="center">
 
 [![Node.js](https://img.shields.io/badge/Node.js-22%2F24_LTS-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![CI](https://github.com/Bagaas-ind/DevStack-CLI/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Bagaas-ind/DevStack-CLI/actions/workflows/ci.yml)
