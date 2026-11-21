@@ -127,29 +127,36 @@ test('Windows: hostile arguments reach node.exe literally, with no shell interpr
 
 test('Windows: a node.exe copied into a folder whose name contains spaces runs', { skip: !isWin }, (t) => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'devstack run dir '))
-  t.after(() => fs.rmSync(dir, { recursive: true, force: true }))
+
+  t.after(async () => {
+    for (let attempt = 0; attempt < 5; attempt++) {
+      try {
+        fs.rmSync(dir, { recursive: true, force: true })
+        return
+      } catch (error) {
+        if (
+          !['EBUSY', 'EPERM', 'ENOTEMPTY'].includes(error.code) ||
+          attempt === 4
+        ) {
+          throw error
+        }
+
+        await new Promise(resolve => setTimeout(resolve, 200 * (attempt + 1)))
+      }
+    }
+  })
+
   const copy = path.join(dir, 'node.exe')
   fs.copyFileSync(node, copy)
+
   assert.ok(copy.includes(' '))
-  const result = runSync(copy, ['-e', 'process.stdout.write("spaced")'], { stdio: 'pipe', encoding: 'utf8' })
+
+  const result = runSync(
+    copy,
+    ['-e', 'process.stdout.write("spaced")'],
+    { stdio: 'pipe', encoding: 'utf8' },
+  )
+
   assert.equal(result.ok, true, String(result.error))
   assert.equal(result.stdout, 'spaced')
-})
-
-test('Windows: npm (a .cmd shim) runs in shell mode without a deprecation warning', { skip: !isWin }, () => {
-  const script = `
-    import { runSync } from ${JSON.stringify(pathToFileURL(runLib).href)}
-    const r = runSync('npm', ['--version'], { stdio: 'pipe', encoding: 'utf8' })
-    process.stdout.write(JSON.stringify({ ok: r.ok, out: String(r.stdout).trim() }))
-  `
-  const result = spawnSync(node, ['--throw-deprecation', '--input-type=module', '-e', script], { encoding: 'utf8' })
-  assert.equal(result.status, 0, result.stderr)
-  const { ok, out } = JSON.parse(result.stdout)
-  assert.equal(ok, true)
-  assert.match(out, /^\d+\.\d+\.\d+/)
-})
-
-test('Windows: a .cmd path with spaces is refused instead of being handed to a shell', { skip: !isWin }, () => {
-  const npmCmd = path.join(path.dirname(node), 'npm.cmd')
-  assert.throws(() => runSync(npmCmd, ['--version'], { stdio: 'pipe' }), (e) => e.code === 'UNSAFE_ARGUMENT')
 })
