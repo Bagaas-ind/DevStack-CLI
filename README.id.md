@@ -1,12 +1,13 @@
-<div align="center">
-
-# DevStack CLI
+# <img src="docs/assets/devstack-icon.svg" width="34" height="34" alt=""> DevStack CLI
 
 **Pasang framework. Buat kerangka aplikasi. Mulai coding lebih cepat.**
 
-Toolkit command-line yang dirancang untuk membantu developer menyiapkan proyek dengan lebih mudah, termasuk pemula. DevStack CLI dikembangkan menuju dua kemampuan utama: installer framework dan generator aplikasi.
+Toolkit command-line untuk membantu developer menyiapkan framework dan membuat kerangka aplikasi melalui satu alur CLI yang praktis.
 
 [English](README.md) | **Bahasa Indonesia**
+
+
+<div align="center">
 
 [![Node.js](https://img.shields.io/badge/Node.js-22%2F24_LTS-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![CI](https://github.com/Bagaas-ind/DevStack-CLI/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Bagaas-ind/DevStack-CLI/actions/workflows/ci.yml)
@@ -21,7 +22,7 @@ Toolkit command-line yang dirancang untuk membantu developer menyiapkan proyek d
 
 ---
 
-## Apa itu DevStack CLI?
+## 📖 Apa itu DevStack CLI?
 
 Menyiapkan lingkungan development baru terkadang membingungkan, terutama saat baru belajar sebuah framework. Kita perlu mengingat perintah instalasi, membuat folder proyek, memasang dependency, dan mengatur berbagai tools sebelum mulai menulis kode aplikasi.
 
@@ -32,7 +33,7 @@ Menyiapkan lingkungan development baru terkadang membingungkan, terutama saat ba
 
 Pengembangan dilakukan secara bertahap. Generator React + Laravel yang sudah ada merupakan fondasi yang saat ini telah diimplementasikan. Installer untuk berbagai framework masih menjadi arah pengembangan dan belum boleh dianggap tersedia sebelum didokumentasikan sebagai fitur yang sudah dirilis.
 
-## Fitur yang tersedia saat ini
+## ✨ Fitur yang tersedia saat ini
 
 Generator yang ada membuat backend Laravel API dan frontend React SPA secara terpisah.
 
@@ -47,7 +48,7 @@ Generator yang ada membuat backend Laravel API dan frontend React SPA secara ter
 
 > Scaffold saat ini adalah fondasi untuk pengembangan, bukan aplikasi bisnis siap pakai atau jaminan bahwa aplikasi sudah aman untuk production. Tinjau dan sesuaikan kode hasil generate sebelum deployment.
 
-## Arah pengembangan
+## 🧭 Arah pengembangan
 
 Arsitektur yang direncanakan memisahkan dua kemampuan berikut:
 
@@ -59,7 +60,7 @@ Arsitektur yang direncanakan memisahkan dua kemampuan berikut:
 
 Daftar framework dan versi yang didukung akan dicantumkan setelah setiap installer selesai dibuat dan diuji.
 
-## Persyaratan
+## 📋 Persyaratan
 
 Untuk generator Laravel + React yang tersedia saat ini:
 
@@ -80,7 +81,7 @@ php --version
 composer --version
 ```
 
-## Memulai dengan cepat
+## 🚀 Memulai dengan cepat
 
 Buat proyek dari repository saat ini:
 
@@ -92,7 +93,7 @@ Ikuti instruksi untuk memilih JavaScript atau TypeScript serta database. Pilihan
 
 Generator mengunduh Laravel melalui Composer dan memasang dependency frontend melalui npm. Karena itu, koneksi internet diperlukan saat proses generate.
 
-### Jalankan proyek hasil generate
+### ▶️ Jalankan proyek hasil generate
 
 **Windows**
 
@@ -127,7 +128,7 @@ Untuk konfigurasi development lokal default, kredensial administrator dari seede
 
 **Keamanan:** Kredensial tersebut hanya untuk development lokal. Ganti atau hapus akun demo sebelum aplikasi dibuka untuk pengguna lain. Jangan gunakan password demo di production.
 
-## Opsi CLI
+## ⚙️ Opsi CLI
 
 Sintaks umum:
 
@@ -162,7 +163,7 @@ npx github:Bagaas-ind/DevStack-CLI my-frontend --skip-backend
 
 Jika menggunakan `--non-interactive`, pilihan default adalah JavaScript dan SQLite kecuali ditentukan lain.
 
-## Struktur proyek hasil generate
+## 📁 Struktur proyek hasil generate
 
 ```text
 my-project/
@@ -183,7 +184,7 @@ my-project/
 
 File yang dihasilkan dapat sedikit berbeda sesuai bahasa dan opsi generator yang dipilih.
 
-## Autentikasi dan keamanan
+## 🔐 Autentikasi dan keamanan
 
 Scaffold saat ini menggunakan Laravel Sanctum personal access token yang dikirim melalui header `Authorization: Bearer`. Generator belum mengatur alur autentikasi SPA Sanctum berbasis stateful cookie.
 
@@ -196,7 +197,7 @@ Scaffold saat ini menggunakan Laravel Sanctum personal access token yang dikirim
 
 Proyek hasil generate adalah fondasi development. Sebelum deployment, tinjau autentikasi, otorisasi, validasi, pengelolaan token, HTTPS, logging, monitoring, backup, pembaruan dependency, dan konfigurasi environment.
 
-## Konfigurasi database
+## 🗄️ Konfigurasi database
 
 Driver yang dipilih ditulis ke `backend/.env`.
 
@@ -213,7 +214,7 @@ cd backend
 php artisan migrate --seed
 ```
 
-## Pengembangan dan pengujian
+## 🧪 Pengembangan dan pengujian
 
 Frontend:
 
@@ -247,7 +248,7 @@ npm test
 
 Workflow CI memeriksa CLI pada versi Node.js dan sistem operasi yang didukung, serta menguji template Laravel/React yang dihasilkan.
 
-## Kontribusi
+## 🤝 Kontribusi
 
 Kontribusi, laporan bug, perbaikan dokumentasi, dan usulan fitur sangat terbuka.
 
@@ -258,7 +259,7 @@ Kontribusi, laporan bug, perbaikan dokumentasi, dan usulan fitur sangat terbuka.
 
 Jangan commit folder aplikasi hasil generate, `node_modules`, file `.env`, database lokal, atau secret.
 
-## Lisensi
+## 📄 Lisensi
 
 DevStack CLI dirilis menggunakan [MIT License](LICENSE). Kamu boleh menggunakan, menyalin, memodifikasi, menggabungkan, menerbitkan, mendistribusikan, memberikan sublisensi, dan/atau menjual salinan perangkat lunak ini sesuai ketentuan lisensi.
 
