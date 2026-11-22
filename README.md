@@ -19,10 +19,10 @@ Run StackPilot without arguments to open the interactive menu. The terminal disp
 
 ```text
   ____  _             _    ____  _ _
- / ___|| |_ __ _  ___| | _|  _ \\(_) |
- \\___ \\| __/ _` |/ __| |/ / |_) | | |
+ / ___|| |_ __ _  ___| | _|  _ \(_) |
+ \___ \| __/ _` |/ __| |/ / |_) | | |
   ___) | || (_| | (__|   <|  __/| | |
- |____/ \\__\\__,_|\\___|_|\\_\\_|   |_|
+ |____/ \__\__,_|\___|_|\_\_|   |_|
 
   StackPilot
   One CLI. Every Development Environment.
