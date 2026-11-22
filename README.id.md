@@ -30,7 +30,10 @@ Jalankan StackPilot tanpa argumen untuk membuka menu interaktif. Terminal akan m
   1. Runtime Doctor
   2. Framework Installer
   3. Application Generator
-  4. Exit
+  4. Environment Manager
+  5. Database Manager
+  6. Docker Manager
+  7. Exit
 ```
 
 File logo repository tersedia di [docs/assets/stackpilot-icon.svg](docs/assets/stackpilot-icon.svg).
@@ -50,7 +53,19 @@ Memeriksa ketersediaan dan menampilkan versi tools development:
 
 Fitur ini menandai versi Node.js yang tidak didukung (StackPilot mendukung Node.js 22 dan 24), serta membedakan tools wajib dan opsional. Doctor hanya melakukan diagnostik; tidak memasang, memperbarui, atau menghapus software.
 
-### 2. Framework Installer
+### 2. Environment Manager
+
+Menampilkan inventaris runtime lokal: Node.js, npm, PHP, Composer, Python, Java, Git, dan Docker, termasuk entri PATH. Fitur ini bersifat read-only dan tidak mengubah PATH atau memasang/menghapus tools.
+
+### 3. Database Manager
+
+Mendeteksi client MySQL, MariaDB, PostgreSQL, SQLite, MongoDB Shell, dan Redis CLI. Fitur ini juga memeriksa ketersediaan Docker Compose. Versi awal bersifat read-only dan tidak membuat, menghapus, atau mengubah database.
+
+### 4. Docker Manager
+
+Memeriksa Docker CLI, daemon, dan Compose; menampilkan container yang berjalan; serta menyediakan daftar container/image dan perintah Compose up/down untuk project di direktori aktif. Aksi Compose memerlukan file konfigurasi yang terdeteksi dan konfirmasi eksplisit.
+
+### 5. Framework Installer
 
 Installer interaktif untuk 11 starter framework:
 
@@ -63,7 +78,7 @@ Installer interaktif untuk 11 starter framework:
 
 Installer memeriksa runtime yang diperlukan, meminta nama project, lalu menjalankan perintah setup atau workflow starter framework. Beberapa installer membutuhkan koneksi internet untuk mengunduh project dan dependency.
 
-### 3. Application Generator
+### 6. Application Generator
 
 Membuat starter full-stack Laravel API + React SPA dengan kemampuan:
 
@@ -110,6 +125,9 @@ node index.js
 
 # Memeriksa runtime development
 node index.js doctor
+node index.js environment
+node index.js database
+node index.js docker
 
 # Membuat starter Laravel + React
 node index.js my-app
@@ -160,9 +178,9 @@ GitHub Actions menguji CLI pada sistem operasi dan versi Node.js yang didukung, 
 | Runtime Doctor | Tersedia |
 | Framework Installer (11 framework) | Tersedia |
 | Laravel + React Application Generator | Tersedia |
-| Environment Manager | Direncanakan |
-| Database Manager | Direncanakan |
-| Docker Manager | Direncanakan |
+| Environment Manager | Tersedia (inventaris runtime dan PATH) |
+| Database Manager | Tersedia (deteksi client, read-only) |
+| Docker Manager | Tersedia (status daemon/Compose, daftar container/image, Compose up/down dengan konfirmasi) |
 
 ## Keamanan
 
