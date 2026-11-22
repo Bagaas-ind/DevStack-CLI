@@ -59,7 +59,7 @@ test('golden: generator template tree is unchanged', () => {
   assert.deepEqual({ added, removed, changed }, { added: [], removed: [], changed: [] })
 })
 
-test('golden: legacy CLI contract `devstack-cli <project-name> [options]` is preserved', () => {
+test('golden: StackPilot CLI contract `stackpilot <project-name> [options]` is preserved', () => {
   const actual = readCliContract()
   if (process.env.UPDATE_GOLDEN === '1') {
     fs.writeFileSync(contractPath, JSON.stringify(actual, null, 2) + '\n')
