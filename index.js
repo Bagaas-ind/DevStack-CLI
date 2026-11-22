@@ -583,12 +583,24 @@ program
         )
       }
 
-      if (projectName === 'doctor') {\n        const { runDoctor } = await import('./lib/doctor.js')\n        runDoctor()\n        return\n      }\n\n      if (projectName === '__STACKPILOT_MAIN_MENU__') {
+      if (projectName === 'doctor') {
+        const { runDoctor } = await import('./lib/doctor.js')
+        runDoctor()
+        return
+      }
+
+      if (projectName === '__STACKPILOT_MAIN_MENU__') {
         const selected = await runMainMenu({ lang })
 
         if (selected === 'exit') return
 
-        if (selected === 'doctor') {\n          const { runDoctor } = await import('./lib/doctor.js')\n          runDoctor()\n          return\n        }\n\n        if (selected === 'installer') {
+        if (selected === 'doctor') {
+          const { runDoctor } = await import('./lib/doctor.js')
+          runDoctor()
+          return
+        }
+
+        if (selected === 'installer') {
           await runFrameworkInstaller({ lang })
           return
         }
