@@ -15,7 +15,7 @@ import { normalizeLang, t } from './lib/i18n.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const templates = path.join(__dirname, 'templates')
-const VERSION = '0.3.1'
+const VERSION = '0.4.0'
 
 function fail(message) {
   console.error(chalk.red(`\n[ERROR] ${message}\n`))
@@ -143,7 +143,7 @@ async function collectConfig(options) {
   const rl = readline.createInterface({ input, output })
 
   try {
-    console.log(chalk.cyan('\nKonfigurasi DevStack CLI\n'))
+    console.log(chalk.cyan('\nKonfigurasi StackPilot\n'))
 
     config.language = await ask(
       rl,
@@ -548,7 +548,7 @@ async function createProject(projectName, options) {
 }
 
 program
-  .name('devstack-cli')
+  .name('stackpilot')
   .description('Generate a Laravel API + React SPA application starter')
   .version(VERSION)
   .option('--lang <language>', 'bahasa CLI: en atau id', 'en')
@@ -564,11 +564,11 @@ program
   .addHelpText(
     'after',
     `\nContoh:
-  $ npx @bagaas-ind/devstack-cli my-app
-  $ npx @bagaas-ind/devstack-cli my-app --typescript
-  $ npx @bagaas-ind/devstack-cli my-app --database mysql --non-interactive
-  $ npx @bagaas-ind/devstack-cli my-app --laravel-version '12.*'
-  $ npx @bagaas-ind/devstack-cli my-frontend --skip-backend`
+  $ npx stackpilot my-app
+  $ npx stackpilot my-app --typescript
+  $ npx stackpilot my-app --database mysql --non-interactive
+  $ npx stackpilot my-app --laravel-version '12.*'
+  $ npx stackpilot my-frontend --skip-backend`
   )
   .action(async (projectName, options) => {
     try {
@@ -583,12 +583,12 @@ program
         )
       }
 
-      if (projectName === '__DEVSTACK_MAIN_MENU__') {
+      if (projectName === 'doctor') {\n        const { runDoctor } = await import('./lib/doctor.js')\n        runDoctor()\n        return\n      }\n\n      if (projectName === '__STACKPILOT_MAIN_MENU__') {
         const selected = await runMainMenu({ lang })
 
         if (selected === 'exit') return
 
-        if (selected === 'installer') {
+        if (selected === 'doctor') {\n          const { runDoctor } = await import('./lib/doctor.js')\n          runDoctor()\n          return\n        }\n\n        if (selected === 'installer') {
           await runFrameworkInstaller({ lang })
           return
         }
@@ -640,7 +640,7 @@ for (let i = 0; i < cliArgs.length; i++) {
 }
 
 if (!hasProjectName) {
-  process.argv.splice(2, 0, '__DEVSTACK_MAIN_MENU__')
+  process.argv.splice(2, 0, '__STACKPILOT_MAIN_MENU__')
 }
 
 await program.parseAsync()
