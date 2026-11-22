@@ -13,6 +13,10 @@
 
 StackPilot menyatukan workflow pengembangan umum dalam satu CLI. Tujuannya mengurangi setup berulang tanpa menyembunyikan tools yang digunakan atau mengubah sistem secara diam-diam.
 
+## Gambaran workflow
+
+<p align="center"><img src="docs/assets/stackpilot-workflow.svg" width="100%" alt="Gambaran workflow StackPilot"></p>
+
 ## Modul saat ini
 
 | Modul | Kemampuan | Status |
