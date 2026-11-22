@@ -1,10 +1,10 @@
 {
-  "name": "@bagaas-ind/devstack-cli",
-  "version": "0.3.1",
-  "description": "A Node.js CLI toolkit for installing development frameworks and generating Laravel API + React SPA application starters.",
+  "name": "@bagaas-ind/stackpilot",
+  "version": "0.4.0",
+  "description": "A universal developer environment CLI for framework setup, project generation, and runtime diagnostics.",
   "type": "module",
   "bin": {
-    "devstack-cli": "./index.js"
+    "stackpilot": "./index.js"
   },
   "files": [
     "index.js",
@@ -20,26 +20,18 @@
     "LICENSE"
   ],
   "keywords": [
-    "devstack",
-    "devstack-cli",
-    "nodejs",
+    "stackpilot",
+    "developer-tools",
+    "developer-environment",
     "cli",
+    "runtime-doctor",
     "framework-installer",
     "project-generator",
-    "scaffolding",
-    "developer-tools",
-    "laravel",
-    "react",
-    "vite",
-    "express",
-    "nextjs",
-    "vuejs",
-    "django",
-    "flask",
-    "fastapi",
-    "codeigniter",
-    "symfony",
-    "spring-boot"
+    "nodejs",
+    "php",
+    "python",
+    "java",
+    "docker"
   ],
   "license": "MIT",
   "engines": {
@@ -55,11 +47,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Bagaas-ind/DevStack-CLI.git"
+    "url": "https://github.com/Bagaas-ind/StackPilot.git"
   },
-  "homepage": "https://github.com/Bagaas-ind/DevStack-CLI#readme",
+  "homepage": "https://github.com/Bagaas-ind/StackPilot#readme",
   "bugs": {
-    "url": "https://github.com/Bagaas-ind/DevStack-CLI/issues"
+    "url": "https://github.com/Bagaas-ind/StackPilot/issues"
   },
   "publishConfig": {
     "access": "public"

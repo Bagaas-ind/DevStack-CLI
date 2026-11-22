@@ -29,9 +29,10 @@
   "menu.framework_installer": "Framework Installer",
   "menu.application_generator": "Application Generator",
   "menu.exit": "Exit",
-  "menu.choose": "Choose [1-3]:",
-  "menu.invalid": "Invalid choice. Please enter 1, 2, or 3.",
-  "menu.tty_required": "The interactive menu requires a terminal. Run devstack-cli <project-name> for non-interactive use.",
+  "menu.choose": "Choose [1-4]:",
+  "menu.invalid": "Invalid choice. Please enter a number from 1 to 4.",
+  "menu.tty_required": "The interactive menu requires a terminal. Run stackpilot <project-name> or stackpilot doctor for command-line use.",
   "menu.installer_pending": "Framework Installer is not implemented yet. It will be added in the next development stage.",
-  "menu.project_name": "Enter your new project name:"
+  "menu.project_name": "Enter your new project name:",
+  "menu.runtime_doctor": "Runtime Doctor"
 }

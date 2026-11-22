@@ -1,5 +1,5 @@
 {
-  "binName": "devstack-cli",
+  "binName": "stackpilot",
   "argument": "<project-name>",
   "flags": [
     "--database",
@@ -12,6 +12,6 @@
     "--typescript"
   ],
   "packageBin": {
-    "devstack-cli": "./index.js"
+    "stackpilot": "./index.js"
   }
 }

@@ -1,12 +1,17 @@
 # Changelog
 
-All notable changes to DevStack CLI are documented here.
+All notable changes to StackPilot are documented here.
+
+## [0.4.0] - 2026-11-23
+
+- Rebranded the CLI and repository identity as StackPilot.
+- Added Runtime Doctor diagnostics for common developer tools.
+- Added a StackPilot terminal wordmark and refreshed documentation.
+- Preserved the existing framework installer and Laravel + React generator.
 
 ## [Unreleased]
 
-- Rebranded the project from React-Lara Forge to DevStack CLI.
-- Renamed the executable command to `devstack-cli` and aligned package metadata with the DevStack CLI identity.
-- Updated repository, homepage, and issue-tracker metadata after the GitHub repository rename.
+- Added the initial StackPilot identity migration and package metadata updates.
 - Clarified the distinction between the currently implemented Laravel + React application generator and the planned multi-framework installer.
 - Added Laravel feature tests for demo admin login, invalid credentials, protected endpoints, and logout token revocation.
 - Expanded CI to generate real Laravel + React and TypeScript projects, build both frontends, and run backend tests.

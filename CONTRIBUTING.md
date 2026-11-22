@@ -1,6 +1,6 @@
-# Contributing to DevStack CLI
+# Contributing to StackPilot
 
-Thanks for considering a contribution to DevStack CLI. Bug reports, documentation fixes, tests, and focused feature proposals are welcome.
+Thanks for considering a contribution to StackPilot. Bug reports, documentation fixes, tests, and focused feature proposals are welcome.
 
 ## Before opening an issue
 
@@ -13,8 +13,8 @@ Thanks for considering a contribution to DevStack CLI. Bug reports, documentatio
 ## Development setup
 
 ```bash
-git clone https://github.com/Bagaas-ind/DevStack-CLI.git
-cd DevStack-CLI
+git clone https://github.com/Bagaas-ind/StackPilot.git
+cd StackPilot
 npm ci
 npm test
 ```

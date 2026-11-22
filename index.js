@@ -15,7 +15,7 @@ import { normalizeLang, t } from './lib/i18n.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const templates = path.join(__dirname, 'templates')
-const VERSION = '0.3.1'
+const VERSION = '0.4.0'
 
 function fail(message) {
   console.error(chalk.red(`\n[ERROR] ${message}\n`))
@@ -143,7 +143,7 @@ async function collectConfig(options) {
   const rl = readline.createInterface({ input, output })
 
   try {
-    console.log(chalk.cyan('\nKonfigurasi DevStack CLI\n'))
+    console.log(chalk.cyan('\nKonfigurasi StackPilot\n'))
 
     config.language = await ask(
       rl,
@@ -548,11 +548,11 @@ async function createProject(projectName, options) {
 }
 
 program
-  .name('devstack-cli')
-  .description('Generate a Laravel API + React SPA application starter')
+  .name('stackpilot')
+  .description('Universal developer environment manager: diagnostics, framework setup, and project generation')
   .version(VERSION)
   .option('--lang <language>', 'bahasa CLI: en atau id', 'en')
-  .argument('<project-name>', 'nama folder project yang akan dibuat')
+  .argument('<project-name>', 'nama project, atau gunakan "doctor" untuk diagnostik runtime')
   .option('--template <name>', 'jenis template: starter atau ecommerce', 'starter')
   .option('--skip-backend', 'buat frontend saja tanpa Laravel')
   .option('--typescript', 'gunakan template React + TypeScript')
@@ -564,11 +564,13 @@ program
   .addHelpText(
     'after',
     `\nContoh:
-  $ npx @bagaas-ind/devstack-cli my-app
-  $ npx @bagaas-ind/devstack-cli my-app --typescript
-  $ npx @bagaas-ind/devstack-cli my-app --database mysql --non-interactive
-  $ npx @bagaas-ind/devstack-cli my-app --laravel-version '12.*'
-  $ npx @bagaas-ind/devstack-cli my-frontend --skip-backend`
+  $ node index.js
+  $ node index.js doctor
+  $ node index.js my-app
+  $ node index.js my-app --typescript
+  $ node index.js my-app --database mysql --non-interactive
+  $ node index.js my-app --laravel-version '12.*'
+  $ node index.js my-frontend --skip-backend`
   )
   .action(async (projectName, options) => {
     try {
@@ -583,10 +585,22 @@ program
         )
       }
 
-      if (projectName === '__DEVSTACK_MAIN_MENU__') {
+      if (projectName === 'doctor') {
+        const { runDoctor } = await import('./lib/doctor.js')
+        runDoctor()
+        return
+      }
+
+      if (projectName === '__STACKPILOT_MAIN_MENU__') {
         const selected = await runMainMenu({ lang })
 
         if (selected === 'exit') return
+
+        if (selected === 'doctor') {
+          const { runDoctor } = await import('./lib/doctor.js')
+          runDoctor()
+          return
+        }
 
         if (selected === 'installer') {
           await runFrameworkInstaller({ lang })
@@ -640,7 +654,7 @@ for (let i = 0; i < cliArgs.length; i++) {
 }
 
 if (!hasProjectName) {
-  process.argv.splice(2, 0, '__DEVSTACK_MAIN_MENU__')
+  process.argv.splice(2, 0, '__STACKPILOT_MAIN_MENU__')
 }
 
 await program.parseAsync()
