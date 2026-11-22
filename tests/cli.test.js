@@ -39,7 +39,7 @@ test('CLI rejects an existing project path instead of overwriting it', () => {
 })
 
 test('CLI generates the JavaScript frontend template without a backend', (t) => {
-  const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'react-lara-forge-js-'))
+  const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'stackpilot-js-'))
   t.after(() => fs.rmSync(temp, { recursive: true, force: true }))
   const result = execute(['sample-app', '--skip-backend', '--skip-install', '--non-interactive'], temp)
   assert.equal(result.status, 0, result.stdout + result.stderr)
@@ -49,7 +49,7 @@ test('CLI generates the JavaScript frontend template without a backend', (t) => 
 })
 
 test('CLI generates the TypeScript frontend template without a backend', (t) => {
-  const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'react-lara-forge-ts-'))
+  const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'stackpilot-ts-'))
   t.after(() => fs.rmSync(temp, { recursive: true, force: true }))
   const result = execute(['sample-app', '--skip-backend', '--skip-install', '--typescript', '--non-interactive'], temp)
   assert.equal(result.status, 0, result.stdout + result.stderr)
@@ -62,7 +62,7 @@ test('CLI generates the TypeScript frontend template without a backend', (t) => 
 test('CLI version matches the package release version', () => {
   const result = execute(['--version'])
   assert.equal(result.status, 0)
-  assert.match(result.stdout, /^0\.3\.1/)
+  assert.match(result.stdout, /^0\.4\.0/)
 })
 
 test('Laravel admin routes use a registered middleware alias, not a route closure', () => {
@@ -84,7 +84,7 @@ test('JavaScript dashboard template uses valid JSX structure', () => {
 
 
 test('CLI rejects an invalid Laravel version constraint', () => {
-  const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'react-lara-forge-version-'))
+  const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'stackpilot-version-'))
   try {
     const result = execute(['sample-app', '--skip-backend', '--skip-install', '--non-interactive', '--laravel-version', '12;invalid'], temp)
     assert.equal(result.status, 1)
