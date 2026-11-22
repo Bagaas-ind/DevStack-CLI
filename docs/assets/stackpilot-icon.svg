@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+<title id="title">StackPilot</title>
+<defs><linearGradient id="pilot" x1="16" y1="12" x2="112" y2="116" gradientUnits="userSpaceOnUse"><stop stop-color="#38BDF8"/><stop offset="1" stop-color="#6366F1"/></linearGradient></defs>
+<rect x="5" y="5" width="118" height="118" rx="28" fill="#0F172A"/>
+<path d="M64 16 110 41 64 66 18 41 64 16Z" fill="url(#pilot)"/>
+<path d="M18 53 64 78 110 53v17L64 95 18 70V53Z" fill="url(#pilot)" opacity=".82"/>
+<path d="M18 82 64 107 110 82v8L64 115 18 90v-8Z" fill="url(#pilot)" opacity=".62"/>
+</svg>
