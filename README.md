@@ -2,27 +2,29 @@
   <img src="docs/assets/stackpilot-icon.svg" width="104" height="104" alt="StackPilot logo" />
   <h1>StackPilot</h1>
   <p><strong>One CLI. Every Development Environment.</strong></p>
-  <p>A terminal toolkit for runtime diagnostics, framework installation, and full-stack application scaffolding.</p>
+  <p>A terminal toolkit for runtime diagnostics, framework setup, and Laravel + React application scaffolding.</p>
   <p><a href="https://github.com/Bagaas-ind/StackPilot/actions/workflows/ci.yml"><img src="https://github.com/Bagaas-ind/StackPilot/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI"></a> <img src="https://img.shields.io/badge/Node.js-22%20%7C%2024-339933?logo=node.js&logoColor=white" alt="Node.js 22/24"> <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT"></p>
-  <p><a href="README.md">English</a> · <a href="README.id.md">Bahasa Indonesia</a></p>
+  <p><strong>English</strong> · <a href="README.id.md">Bahasa Indonesia</a></p>
 </div>
 
 ---
 
 ## What is StackPilot?
 
-StackPilot brings several everyday development setup tasks into one interactive CLI. It helps developers inspect their local tools, scaffold supported frameworks, and generate a Laravel + React application starter.
+StackPilot brings common development setup tasks into one interactive command-line interface. It helps you inspect local runtimes, launch framework setup workflows, and scaffold a Laravel API + React application starter.
 
-## Terminal experience
+StackPilot is a local developer utility. It does not replace the official tools used by each framework, database, or container platform.
 
-Run StackPilot without arguments to open the interactive menu. The terminal displays the StackPilot ASCII wordmark and tagline before showing the available actions.
+## Terminal workflow
+
+Run StackPilot without arguments to open the interactive menu. Choose a tool, complete its workflow, and return to the main menu. Select **Exit** to close StackPilot.
 
 ```text
   ____  _             _    ____  _ _
- / ___|| |_ __ _  ___| | _|  _ \(_) |
- \___ \| __/ _` |/ __| |/ / |_) | | |
+ / ___|| |_ __ _  ___| | _|  _ \\(_) |
+ \\___ \\| __/ _` |/ __| |/ / |_) | | |
   ___) | || (_| | (__|   <|  __/| | |
- |____/ \__\__,_|\___|_|\_\_|   |_|
+ |____/ \\__\\__,_|\\___|_|\\_\\_|   |_|
 
   StackPilot
   One CLI. Every Development Environment.
@@ -36,73 +38,96 @@ Run StackPilot without arguments to open the interactive menu. The terminal disp
   7. Exit
 ```
 
-The repository logo is available at [docs/assets/stackpilot-icon.svg](docs/assets/stackpilot-icon.svg).
+The main menu is interactive and requires a terminal (TTY). The manager commands below can also be run directly without opening the menu.
 
 ## Features
 
-### 1. Runtime Doctor
+### Runtime Doctor
 
-Checks whether common developer tools are available and prints their detected versions:
+Checks the availability and reports the detected version of:
 
-- Node.js and npm — required by the CLI.
+- Node.js and npm — required to run StackPilot.
 - PHP and Composer.
 - Python.
 - Java.
 - Git.
 - Docker.
 
-It flags unsupported Node.js versions (StackPilot supports Node.js 22 and 24) and reports optional tools separately. Doctor is diagnostic only: it does not install, update, or remove software.
+Node.js 22 and 24 are supported. Other listed tools are optional to the CLI itself and are needed only by workflows that use them. Doctor is diagnostic only; it does not install, update, or remove software.
 
-### 2. Environment Manager
+### Environment Manager
 
-Displays a local runtime inventory for Node.js, npm, PHP, Composer, Python, Java, Git, and Docker, plus PATH entries. It is read-only and does not modify PATH or install/uninstall tools.
+Displays a local inventory of Node.js, npm, PHP, Composer, Python, Python 3, Java, Git, and Docker, along with up to 12 PATH entries. It is read-only: it does not edit PATH or install/uninstall tools. A missing optional executable is reported as not detected; it does not prove that the related service is unavailable.
 
-### 3. Database Manager
+### Database Manager
 
-Detects common database command-line clients: MySQL, MariaDB, PostgreSQL, SQLite, MongoDB Shell, and Redis CLI. It can also report Docker Compose availability. This first version is read-only; it does not create, drop, or modify databases.
+Checks for these database command-line clients:
 
-### 4. Docker Manager
+- MySQL: `mysql`
+- MariaDB: `mariadb`
+- PostgreSQL: `psql`
+- SQLite: `sqlite3`
+- MongoDB Shell: `mongosh`
+- Redis: `redis-cli`
 
-Checks Docker CLI, daemon, and Compose availability; lists running containers; and offers container/image listing plus Compose up/down for a project in the current directory. Compose actions require a detected Compose file and explicit confirmation.
+If Docker CLI is available, it also checks Docker Compose. This manager performs detection only; it does not connect to database servers or create, drop, or modify databases. A client marked **NOT FOUND** is not available through the current PATH.
 
-### 5. Framework Installer
+### Docker Manager
 
-Interactive installer for 11 framework starters:
+Checks Docker CLI, daemon reachability, and Docker Compose. When the daemon is reachable, it shows running containers and offers:
 
-| Ecosystem | Frameworks |
-| --- | --- |
-| PHP | Laravel, CodeIgniter 4, Symfony |
-| JavaScript | React, Vue.js, Next.js, Express.js |
-| Python | Django, Flask, FastAPI |
-| Java | Spring Boot |
+1. List all containers.
+2. List local images.
+3. Start the Compose project in the current directory.
+4. Stop the Compose project in the current directory.
+5. Return to the main menu.
 
-The installer checks the required runtime, asks for a project name, and runs the framework's setup command or starter workflow. Some installers require internet access and may download dependencies.
+Compose start/stop requires the Compose plugin, a supported Compose file in the current directory (`compose.yaml`, `compose.yml`, `docker-compose.yml`, or `docker-compose.yaml`), and explicit confirmation. Start runs `docker compose up -d`; stop runs `docker compose down`. Review the Compose file and its effects before confirming.
 
-### 6. Application Generator
+### Framework Installer
 
-Creates a full-stack Laravel API + React SPA starter with:
+Provides interactive setup workflows for 11 frameworks:
+
+| Ecosystem | Frameworks | Main prerequisites |
+| --- | --- | --- |
+| PHP | Laravel, CodeIgniter 4, Symfony | PHP and Composer |
+| JavaScript | React, Vue.js, Next.js, Express.js | Node.js and npm |
+| Python | Django, Flask, FastAPI | Python and pip |
+| Java | Spring Boot | Java and `tar` |
+
+The installer validates the project name, checks the required tools, and runs the relevant framework setup command or starter workflow. Python projects are created in a local `.venv`; Spring Boot is downloaded from Spring Initializr. Framework setup may download packages and dependencies, so an internet connection is generally required. Spring Boot setup currently requests Java 17 from Spring Initializr.
+
+### Application Generator
+
+Creates a Laravel API + React SPA starter with:
 
 - Laravel 12 backend and Sanctum API authentication.
-- React + Vite frontend.
-- JavaScript or TypeScript frontend.
-- SQLite, MySQL, or PostgreSQL configuration.
-- Starter and ecommerce template selection.
-- Optional frontend-only generation with `--skip-backend`.
-- Optional dependency-install skip with `--skip-install`.
+- React + Vite frontend, in JavaScript or TypeScript.
+- SQLite, MySQL, or PostgreSQL database configuration.
+- Starter or ecommerce template selection.
+- Frontend-only generation with `--skip-backend`.
+- Optional skipping of frontend dependency installation with `--skip-install`.
 - Windows and Unix startup scripts when the backend is generated.
 
-Generated projects are development starting points, not production security certifications. Review configuration, credentials, authorization, CORS, and deployment hardening before production use.
+The default generator creates both backend and frontend. PHP 8.2+ and Composer 2.x are required unless `--skip-backend` is used. Node.js and npm are always required. The generator runs Composer/Laravel setup commands when creating the backend and can run `npm install` for the frontend.
+
+Generated projects are development starting points, not production security certifications. Review authentication, authorization, CORS, environment secrets, database configuration, dependencies, and deployment hardening before production use.
 
 ## Requirements
 
-- Node.js 22 or 24 LTS to run StackPilot.
-- Framework-specific runtimes are required only for the selected installer.
-- PHP 8.2+ and Composer 2.x for Laravel-based application generation.
-- Internet access is generally needed to download framework starters and dependencies.
+- Node.js 22 or 24 LTS and npm to run StackPilot.
+- Framework-specific tools only for the workflow you choose.
+- PHP 8.2+ and Composer 2.x for Application Generator backend creation.
+- Python and pip for Python framework starters.
+- Java and `tar` for the Spring Boot installer.
+- Docker Engine/Desktop and the Compose plugin for Docker Manager actions.
+- Internet access for framework downloads and dependency installation.
 
 ## Install and run
 
-### Run directly from GitHub
+### Run from GitHub
+
+The npm package has not been published. This command runs the repository source through npm's GitHub package support:
 
 ```bash
 npx --yes github:Bagaas-ind/StackPilot
@@ -117,33 +142,49 @@ npm ci
 node index.js
 ```
 
-### Common commands
+### Interactive menu
 
 ```bash
-# Open the interactive menu (shows the StackPilot logo)
 node index.js
+```
 
-# Check developer runtimes
+Use the menu to open Runtime Doctor, Framework Installer, Application Generator, Environment Manager, Database Manager, or Docker Manager. Most menu actions return to the main menu when finished; choose **Exit** to quit.
+
+### Direct manager commands
+
+```bash
 node index.js doctor
 node index.js environment
 node index.js database
 node index.js docker
+```
 
-# Generate the default Laravel + React starter
+### Generate an application
+
+```bash
+# Default Laravel + React starter
 node index.js my-app
 
-# Generate with TypeScript
+# React + TypeScript
 node index.js my-app --typescript
 
-# Select a database without interactive prompts
+# Choose MySQL without interactive configuration prompts
 node index.js my-app --database mysql --non-interactive
 
-# Generate a frontend-only project
+# Frontend only
 node index.js my-frontend --skip-backend
 
-# Show CLI help and version
+# Skip frontend npm install
+node index.js my-app --skip-install
+```
+
+### Help, version, and language
+
+```bash
 node index.js --help
 node index.js --version
+node index.js --lang id
+node index.js doctor --lang id
 ```
 
 ### Application Generator options
@@ -157,38 +198,51 @@ node index.js --version
 | `--laravel-version <version>` | Select the Laravel version (default: `12.*`) |
 | `--skip-backend` | Generate frontend only |
 | `--skip-install` | Skip frontend `npm install` |
-| `--non-interactive` | Use defaults/options without interactive prompts |
-| `--lang <en|id>` | Select CLI interface language |
+| `--non-interactive` | Use the supplied options/defaults without configuration prompts |
+| `--lang <en|id>` | Select the CLI interface language |
 
-When using a local clone, run commands with `node index.js`. The npm package has not yet been published.
+When using a local clone, run commands with `node index.js`. The npm package is not yet published to the npm registry.
 
 ## Tests and CI
+
+Run the test suite locally:
 
 ```bash
 npm ci
 npm test
 ```
 
-GitHub Actions validates the CLI across supported operating systems and Node.js versions, checks PHP templates, and tests generated application workflows.
+The test suite uses Node's built-in test runner. Platform-specific tests may be skipped when the current operating system cannot run them; a skipped test is not a passing execution on that platform.
+
+GitHub Actions checks the CLI on Windows, macOS, and Ubuntu with Node.js 22 and 24. It also lints PHP templates and generates test applications to build the frontend and run Laravel feature tests.
 
 ## Project status
 
-| Component | Status |
+| Component | Scope |
 | --- | --- |
-| Runtime Doctor | Available |
-| Framework Installer (11 frameworks) | Available |
-| Laravel + React Application Generator | Available |
-| Environment Manager | Available (runtime inventory, PATH overview) |
-| Database Manager | Available (client detection, read-only) |
-| Docker Manager | Available (daemon/Compose status, container/image listing, confirmed Compose up/down) |
+| Runtime Doctor | Runtime detection and Node.js compatibility reporting |
+| Environment Manager | Runtime inventory and PATH overview; read-only |
+| Database Manager | Database client detection; read-only |
+| Docker Manager | Docker/Compose diagnostics, container/image listing, confirmed Compose actions |
+| Framework Installer | Interactive setup workflows for 11 frameworks |
+| Application Generator | Laravel 12 API + React/Vite starter generation |
+
+## Troubleshooting
+
+- **Node.js version rejected:** use Node.js 22 or 24 LTS, then reopen the terminal.
+- **A tool shows MISSING / NOT FOUND:** check that the executable is installed and available in the current terminal's PATH. Restart the terminal after changing PATH.
+- **Docker daemon unavailable:** start Docker Desktop/Engine and wait until the daemon is ready.
+- **Compose action unavailable:** install/enable the Docker Compose plugin and place a supported Compose file in the current working directory.
+- **Framework setup fails:** check the framework's runtime prerequisites, internet connection, and the full output printed by the underlying setup command.
+- **Application Generator backend fails:** verify PHP 8.2+, Composer 2.x, and the selected database configuration. Use `--skip-backend` only when you intentionally want a frontend-only project.
 
 ## Security
 
-StackPilot runs framework setup commands and creates project files on your machine. Review commands and generated code before using them in important environments. Never commit secrets or real credentials. Generated applications must be reviewed and hardened before deployment.
+StackPilot executes framework setup commands and creates files in the selected project directory. Docker Compose actions can start or stop services in the current directory after confirmation. Review commands, Compose files, and generated code before using them in important environments. Never commit secrets or real credentials. Generated applications must be reviewed and hardened before deployment.
 
 ## Contributing
 
-Issues, bug reports, documentation improvements, and focused pull requests are welcome. Please include reproduction steps for bugs and tests for behavior changes.
+Bug reports, documentation improvements, tests, and focused pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md). For vulnerability reports, follow [SECURITY.md](SECURITY.md).
 
 ## License
 
