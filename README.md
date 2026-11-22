@@ -2,12 +2,29 @@
   <img src="docs/assets/stackpilot-icon.svg" width="104" height="104" alt="StackPilot logo" />
   <h1>StackPilot</h1>
   <p><strong>One CLI. Every Development Environment.</strong></p>
-  <p>A terminal toolkit for runtime diagnostics, framework setup, and Laravel + React application scaffolding.</p>
-  <p><a href="https://github.com/Bagaas-ind/StackPilot/actions/workflows/ci.yml"><img src="https://github.com/Bagaas-ind/StackPilot/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI"></a> <img src="https://img.shields.io/badge/Node.js-22%20%7C%2024-339933?logo=node.js&logoColor=white" alt="Node.js 22/24"> <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT"></p>
+  <p><strong>An open-source developer toolkit that brings environment checks, framework setup, and full-stack project scaffolding into one interactive CLI.</strong></p>
+  <p><a href="https://github.com/Bagaas-ind/StackPilot/actions/workflows/ci.yml"><img src="https://github.com/Bagaas-ind/StackPilot/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI"></a> <a href="https://github.com/Bagaas-ind/StackPilot/stargazers"><img src="https://img.shields.io/github/stars/Bagaas-ind/StackPilot?style=flat" alt="GitHub stars"></a> <a href="https://github.com/Bagaas-ind/StackPilot/network/members"><img src="https://img.shields.io/github/forks/Bagaas-ind/StackPilot?style=flat" alt="GitHub forks"></a> <img src="https://img.shields.io/badge/Node.js-22%20%7C%2024-339933?logo=node.js&logoColor=white" alt="Node.js 22/24"> <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT"></p>
   <p><strong>English</strong> · <a href="README.id.md">Bahasa Indonesia</a></p>
 </div>
 
 ---
+
+## Quick start
+
+Try StackPilot directly from the public GitHub repository — no manual clone required:
+
+```bash
+npx --yes github:Bagaas-ind/StackPilot
+```
+
+> **Distribution note:** The npm package name is reserved in the project configuration, but the package has not yet been published to the npm registry. Until an npm release is announced, use the GitHub command above.
+
+## Built for everyday development
+
+- **Inspect** your local development runtimes before starting work.
+- **Set up** popular frameworks through guided installation workflows.
+- **Generate** a Laravel 12 API + React/Vite application with database configuration.
+- **Manage** local environment information, database clients, and Docker Compose workflows from one menu.
 
 ## What is StackPilot?
 
@@ -141,6 +158,8 @@ cd StackPilot
 npm ci
 node index.js
 ```
+
+Use `node index.js` for a local checkout. There is currently no `npm start` script.
 
 ### Interactive menu
 
