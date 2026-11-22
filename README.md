@@ -70,7 +70,7 @@ Checks for these database command-line clients:
 - MongoDB Shell: `mongosh`
 - Redis: `redis-cli`
 
-It also performs read-only TCP reachability checks against common local server ports: MySQL/MariaDB (3306 and 3307), PostgreSQL (5432), MongoDB (27017), and Redis (6379). By default it probes `127.0.0.1`; set `STACKPILOT_DB_HOST` to check another host. SQLite is file-based and does not need a server port.
+It also performs read-only TCP reachability checks against common local server ports: MySQL/MariaDB (3306 and 3307), PostgreSQL (5432), MongoDB (27017), and Redis (6379). By default it probes `127.0.0.1`; set `STACKPILOT_DB_HOST` to check another host. Each TCP probe has a bounded 700 ms timeout. SQLite is file-based and does not need a server port.
 
 **TCP OPEN** means only that the port accepted a TCP connection. It does not verify the database protocol, credentials, permissions, or query health. MySQL and MariaDB share a compatible port and cannot be distinguished by this check. Client detection and server reachability are reported separately, so a missing CLI does not mean the database server is unavailable. If Docker CLI is available, Docker Compose is also checked.
 
