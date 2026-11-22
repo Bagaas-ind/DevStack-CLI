@@ -11,9 +11,7 @@ All notable changes to StackPilot are documented here.
 
 ## [Unreleased]
 
-- Rebranded the project from React-Lara Forge to StackPilot.
-- Renamed the executable command to `devstack-cli` and aligned package metadata with the StackPilot identity.
-- Updated repository, homepage, and issue-tracker metadata after the GitHub repository rename.
+- Added the initial StackPilot identity migration and package metadata updates.
 - Clarified the distinction between the currently implemented Laravel + React application generator and the planned multi-framework installer.
 - Added Laravel feature tests for demo admin login, invalid credentials, protected endpoints, and logout token revocation.
 - Expanded CI to generate real Laravel + React and TypeScript projects, build both frontends, and run backend tests.
