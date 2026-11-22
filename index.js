@@ -18,9 +18,7 @@ const templates = path.join(__dirname, 'templates')
 const VERSION = '0.5.0'
 
 function fail(message) {
-  console.error(chalk.red(`
-[ERROR] ${message}
-`))
+  console.error(chalk.red(`\n[ERROR] ${message}\n`))
   process.exitCode = 1
 }
 
@@ -65,8 +63,7 @@ function checkRuntimeRequirements(skipBackend) {
     stdio: 'pipe',
   })
 
-  const phpOutput = `${php.stdout || ''}
-${php.stderr || ''}`
+  const phpOutput = `${php.stdout || ''}\n${php.stderr || ''}`
   const phpVersion = phpOutput.match(/PHP\s+(\d+)\.(\d+)/)
 
   if (
@@ -86,8 +83,7 @@ ${php.stderr || ''}`
     stdio: 'pipe',
   })
 
-  const composerOutput = `${composer.stdout || ''}
-${composer.stderr || ''}`
+  const composerOutput = `${composer.stdout || ''}\n${composer.stderr || ''}`
 
   if (
     composer.error ||
@@ -106,15 +102,12 @@ async function ask(rl, label, choices, defaultValue) {
       (choice, index) =>
         `${index + 1}) ${choice.label}${choice.value === defaultValue ? ' (default)' : ''}`
     )
-    .join('
-')
+    .join('\n')
 
   while (true) {
     const answer = (
       await rl.question(
-        `${label}
-${menu}
-Pilih [${choices.findIndex((choice) => choice.value === defaultValue) + 1}]: `
+        `${label}\n${menu}\nPilih [${choices.findIndex((choice) => choice.value === defaultValue) + 1}]: `
       )
     ).trim()
 
@@ -132,8 +125,7 @@ Pilih [${choices.findIndex((choice) => choice.value === defaultValue) + 1}]: `
 
     if (byValue) return byValue.value
 
-    console.log(chalk.yellow('Pilihan tidak valid. Masukkan nomor pilihan.
-'))
+    console.log(chalk.yellow('Pilihan tidak valid. Masukkan nomor pilihan.\n'))
   }
 }
 
@@ -151,9 +143,7 @@ async function collectConfig(options) {
   const rl = readline.createInterface({ input, output })
 
   try {
-    console.log(chalk.cyan('
-Konfigurasi StackPilot
-'))
+    console.log(chalk.cyan('\nKonfigurasi StackPilot\n'))
 
     config.language = await ask(
       rl,
@@ -232,33 +222,27 @@ function configureDatabase(backendDir, database) {
       if (pattern.test(env)) {
         env = env.replace(pattern, line)
       } else {
-        env += `
-${line}`
+        env += `\n${line}`
       }
     }
 
     if (!/^FRONTEND_URL=/m.test(env)) {
-      env += '
-FRONTEND_URL=http://localhost:5173'
+      env += '\nFRONTEND_URL=http://localhost:5173'
     }
 
     if (!/^ADMIN_NAME=/m.test(env)) {
-      env += '
-ADMIN_NAME='
+      env += '\nADMIN_NAME='
     }
 
     if (!/^ADMIN_EMAIL=/m.test(env)) {
-      env += '
-ADMIN_EMAIL='
+      env += '\nADMIN_EMAIL='
     }
 
     if (!/^ADMIN_PASSWORD=/m.test(env)) {
-      env += '
-ADMIN_PASSWORD='
+      env += '\nADMIN_PASSWORD='
     }
 
-    fs.writeFileSync(file, `${env.trimEnd()}
-`)
+    fs.writeFileSync(file, `${env.trimEnd()}\n`)
   }
 
   if (database === 'sqlite') {
@@ -339,9 +323,7 @@ async function createProject(projectName, options) {
     fs.ensureDirSync(target)
     created = true
 
-    console.log(chalk.cyan(`
-[CREATE] Membuat ${projectName}
-`))
+    console.log(chalk.cyan(`\n[CREATE] Membuat ${projectName}\n`))
 
     const frontendTemplate = path.join(
       templateDir,
@@ -363,10 +345,7 @@ async function createProject(projectName, options) {
 
     fs.writeFileSync(
       path.join(frontendDir, '.gitignore'),
-      'node_modules/
-dist/
-.env
-'
+      'node_modules/\ndist/\n.env\n'
     )
 
     fs.copyFileSync(
@@ -376,8 +355,7 @@ dist/
 
     if (!options.skipBackend) {
       console.log(
-        chalk.bold('
-2/3 Membuat backend Laravel dan memasang Sanctum')
+        chalk.bold('\n2/3 Membuat backend Laravel dan memasang Sanctum')
       )
 
       const backendDir = path.join(target, 'backend')
@@ -453,8 +431,7 @@ dist/
       }
 
       console.log(
-        chalk.gray(`
-Menjalankan migrasi database (${config.database})...`)
+        chalk.gray(`\nMenjalankan migrasi database (${config.database})...`)
       )
 
       currentStep = 'menjalankan migrasi database'
@@ -488,14 +465,12 @@ Menjalankan migrasi database (${config.database})...`)
       fs.chmodSync(shellScript, 0o755)
     } else {
       console.log(
-        chalk.gray('
-2/3 Backend dilewati (--skip-backend)')
+        chalk.gray('\n2/3 Backend dilewati (--skip-backend)')
       )
     }
 
     if (!options.skipInstall) {
-      console.log(chalk.bold('
-3/3 Memasang dependency frontend'))
+      console.log(chalk.bold('\n3/3 Memasang dependency frontend'))
 
       currentStep = 'memasang dependency frontend'
 
@@ -508,14 +483,11 @@ Menjalankan migrasi database (${config.database})...`)
       }
     } else {
       console.log(
-        chalk.gray('
-3/3 Instalasi dependency dilewati (--skip-install)')
+        chalk.gray('\n3/3 Instalasi dependency dilewati (--skip-install)')
       )
     }
 
-    console.log(chalk.green(`
-[SUCCESS] ${projectName} berhasil dibuat.
-`))
+    console.log(chalk.green(`\n[SUCCESS] ${projectName} berhasil dibuat.\n`))
 
     console.log(chalk.bold('Konfigurasi project:'))
 
@@ -531,8 +503,7 @@ Menjalankan migrasi database (${config.database})...`)
       )
     }
 
-    console.log('
-Langkah berikutnya:')
+    console.log('\nLangkah berikutnya:')
 
     if (!options.skipBackend) {
       console.log(chalk.cyan(`  cd ${projectName}`))
@@ -546,14 +517,12 @@ Langkah berikutnya:')
       )
 
       console.log(
-        '
-Atau jalankan backend dan frontend secara terpisah. Baca README.md di project hasil generate.'
+        '\nAtau jalankan backend dan frontend secara terpisah. Baca README.md di project hasil generate.'
       )
 
       console.log(
         chalk.yellow(
-          '
-PENTING: akun demo hanya untuk development lokal. Ganti/hapus kredensial sebelum deployment.'
+          '\nPENTING: akun demo hanya untuk development lokal. Ganti/hapus kredensial sebelum deployment.'
         )
       )
     } else {
@@ -566,8 +535,7 @@ PENTING: akun demo hanya untuk development lokal. Ganti/hapus kredensial sebelum
       fs.removeSync(target)
 
       console.log(
-        chalk.yellow('
-Folder project yang gagal dibuat telah dibersihkan.')
+        chalk.yellow('\nFolder project yang gagal dibuat telah dibersihkan.')
       )
     }
 
@@ -595,8 +563,7 @@ program
   .option('--skip-install', 'lewati npm install frontend')
   .addHelpText(
     'after',
-    `
-Contoh:
+    `\nContoh:
   $ node index.js
   $ node index.js doctor
   $ node index.js environment
@@ -621,10 +588,18 @@ Contoh:
         )
       }
 
+
       if (['environment', 'database', 'docker'].includes(projectName)) {
-        if (projectName === 'environment') { const { runEnvironmentManager } = await import('./lib/environment-manager.js'); await runEnvironmentManager() }
-        if (projectName === 'database') { const { runDatabaseManager } = await import('./lib/database-manager.js'); runDatabaseManager() }
-        if (projectName === 'docker') { const { runDockerManager } = await import('./lib/docker-manager.js'); await runDockerManager() }
+        if (projectName === 'environment') {
+          const { runEnvironmentManager } = await import('./lib/environment-manager.js')
+          await runEnvironmentManager()
+        } else if (projectName === 'database') {
+          const { runDatabaseManager } = await import('./lib/database-manager.js')
+          runDatabaseManager()
+        } else {
+          const { runDockerManager } = await import('./lib/docker-manager.js')
+          await runDockerManager()
+        }
         return
       }
 
@@ -645,9 +620,22 @@ Contoh:
           return
         }
 
-        if (selected === 'environment') { const { runEnvironmentManager } = await import('./lib/environment-manager.js'); await runEnvironmentManager(); return }
-        if (selected === 'database') { const { runDatabaseManager } = await import('./lib/database-manager.js'); runDatabaseManager(); return }
-        if (selected === 'docker') { const { runDockerManager } = await import('./lib/docker-manager.js'); await runDockerManager(); return }
+
+        if (selected === 'environment') {
+          const { runEnvironmentManager } = await import('./lib/environment-manager.js')
+          await runEnvironmentManager()
+          return
+        }
+        if (selected === 'database') {
+          const { runDatabaseManager } = await import('./lib/database-manager.js')
+          runDatabaseManager()
+          return
+        }
+        if (selected === 'docker') {
+          const { runDockerManager } = await import('./lib/docker-manager.js')
+          await runDockerManager()
+          return
+        }
 
         if (selected === 'installer') {
           await runFrameworkInstaller({ lang })
