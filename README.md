@@ -70,7 +70,11 @@ Checks for these database command-line clients:
 - MongoDB Shell: `mongosh`
 - Redis: `redis-cli`
 
-If Docker CLI is available, it also checks Docker Compose. This manager performs detection only; it does not connect to database servers or create, drop, or modify databases. A client marked **NOT FOUND** is not available through the current PATH.
+It also performs read-only TCP reachability checks against common local server ports: MySQL/MariaDB (3306 and 3307), PostgreSQL (5432), MongoDB (27017), and Redis (6379). By default it probes `127.0.0.1`; set `STACKPILOT_DB_HOST` to check another host. SQLite is file-based and does not need a server port.
+
+**TCP OPEN** means only that the port accepted a TCP connection. It does not verify the database protocol, credentials, permissions, or query health. MySQL and MariaDB share a compatible port and cannot be distinguished by this check. Client detection and server reachability are reported separately, so a missing CLI does not mean the database server is unavailable. If Docker CLI is available, Docker Compose is also checked.
+
+This manager is read-only: it sends no credentials or SQL queries and never creates, drops, or modifies databases.
 
 ### Docker Manager
 
@@ -222,7 +226,7 @@ GitHub Actions checks the CLI on Windows, macOS, and Ubuntu with Node.js 22 and 
 | --- | --- |
 | Runtime Doctor | Runtime detection and Node.js compatibility reporting |
 | Environment Manager | Runtime inventory and PATH overview; read-only |
-| Database Manager | Database client detection; read-only |
+| Database Manager | Database client detection and local TCP reachability checks; read-only |
 | Docker Manager | Docker/Compose diagnostics, container/image listing, confirmed Compose actions |
 | Framework Installer | Interactive setup workflows for 11 frameworks |
 | Application Generator | Laravel 12 API + React/Vite starter generation |

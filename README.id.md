@@ -70,7 +70,11 @@ Memeriksa ketersediaan client command-line database berikut:
 - MongoDB Shell: `mongosh`
 - Redis: `redis-cli`
 
-Jika Docker CLI tersedia, StackPilot juga memeriksa Docker Compose. Manager ini hanya melakukan deteksi; tidak terhubung ke server database dan tidak membuat, menghapus, atau mengubah database. Status **NOT FOUND** berarti client tidak tersedia melalui PATH saat ini.
+Manager juga melakukan pemeriksaan keterjangkauan TCP read-only pada port server lokal yang umum: MySQL/MariaDB (3306 dan 3307), PostgreSQL (5432), MongoDB (27017), dan Redis (6379). Secara default StackPilot memeriksa `127.0.0.1`; gunakan `STACKPILOT_DB_HOST` untuk memeriksa host lain. SQLite berbasis file sehingga tidak membutuhkan port server.
+
+Status **TCP OPEN** hanya berarti port menerima koneksi TCP. Status ini tidak memverifikasi protokol database, kredensial, izin, atau kesehatan query. MySQL dan MariaDB menggunakan port/protokol yang kompatibel sehingga tidak dapat dibedakan melalui pemeriksaan ini. Deteksi client dan keterjangkauan server ditampilkan terpisah; client yang tidak ditemukan bukan berarti server database tidak tersedia. Jika Docker CLI tersedia, Docker Compose juga diperiksa.
+
+Manager ini bersifat read-only: tidak mengirim kredensial atau query SQL, serta tidak membuat, menghapus, atau mengubah database.
 
 ### Docker Manager
 
@@ -222,7 +226,7 @@ GitHub Actions menguji CLI pada Windows, macOS, dan Ubuntu dengan Node.js 22 dan
 | --- | --- |
 | Runtime Doctor | Deteksi runtime dan laporan kompatibilitas Node.js |
 | Environment Manager | Inventaris runtime dan ringkasan PATH; read-only |
-| Database Manager | Deteksi client database; read-only |
+| Database Manager | Deteksi client dan keterjangkauan TCP server lokal; read-only |
 | Docker Manager | Diagnostik Docker/Compose, daftar container/image, aksi Compose dengan konfirmasi |
 | Framework Installer | Workflow setup interaktif untuk 11 framework |
 | Application Generator | Pembuatan starter Laravel 12 API + React/Vite |
