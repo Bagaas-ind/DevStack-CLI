@@ -15,7 +15,7 @@ import { normalizeLang, t } from './lib/i18n.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const templates = path.join(__dirname, 'templates')
-const VERSION = '0.4.0'
+const VERSION = '0.5.0'
 
 function fail(message) {
   console.error(chalk.red(`\n[ERROR] ${message}\n`))
@@ -552,7 +552,7 @@ program
   .description('Universal developer environment manager: diagnostics, framework setup, and project generation')
   .version(VERSION)
   .option('--lang <language>', 'bahasa CLI: en atau id', 'en')
-  .argument('<project-name>', 'nama project, atau gunakan "doctor" untuk diagnostik runtime')
+  .argument('[project-name]', 'nama project atau perintah manager')
   .option('--template <name>', 'jenis template: starter atau ecommerce', 'starter')
   .option('--skip-backend', 'buat frontend saja tanpa Laravel')
   .option('--typescript', 'gunakan template React + TypeScript')
@@ -566,6 +566,9 @@ program
     `\nContoh:
   $ node index.js
   $ node index.js doctor
+  $ node index.js environment
+  $ node index.js database
+  $ node index.js docker
   $ node index.js my-app
   $ node index.js my-app --typescript
   $ node index.js my-app --database mysql --non-interactive
@@ -585,6 +588,21 @@ program
         )
       }
 
+
+      if (['environment', 'database', 'docker'].includes(projectName)) {
+        if (projectName === 'environment') {
+          const { runEnvironmentManager } = await import('./lib/environment-manager.js')
+          await runEnvironmentManager()
+        } else if (projectName === 'database') {
+          const { runDatabaseManager } = await import('./lib/database-manager.js')
+          runDatabaseManager()
+        } else {
+          const { runDockerManager } = await import('./lib/docker-manager.js')
+          await runDockerManager()
+        }
+        return
+      }
+
       if (projectName === 'doctor') {
         const { runDoctor } = await import('./lib/doctor.js')
         runDoctor()
@@ -599,6 +617,23 @@ program
         if (selected === 'doctor') {
           const { runDoctor } = await import('./lib/doctor.js')
           runDoctor()
+          return
+        }
+
+
+        if (selected === 'environment') {
+          const { runEnvironmentManager } = await import('./lib/environment-manager.js')
+          await runEnvironmentManager()
+          return
+        }
+        if (selected === 'database') {
+          const { runDatabaseManager } = await import('./lib/database-manager.js')
+          runDatabaseManager()
+          return
+        }
+        if (selected === 'docker') {
+          const { runDockerManager } = await import('./lib/docker-manager.js')
+          await runDockerManager()
           return
         }
 

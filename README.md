@@ -30,7 +30,10 @@ Run StackPilot without arguments to open the interactive menu. The terminal disp
   1. Runtime Doctor
   2. Framework Installer
   3. Application Generator
-  4. Exit
+  4. Environment Manager
+  5. Database Manager
+  6. Docker Manager
+  7. Exit
 ```
 
 The repository logo is available at [docs/assets/stackpilot-icon.svg](docs/assets/stackpilot-icon.svg).
@@ -50,7 +53,19 @@ Checks whether common developer tools are available and prints their detected ve
 
 It flags unsupported Node.js versions (StackPilot supports Node.js 22 and 24) and reports optional tools separately. Doctor is diagnostic only: it does not install, update, or remove software.
 
-### 2. Framework Installer
+### 2. Environment Manager
+
+Displays a local runtime inventory for Node.js, npm, PHP, Composer, Python, Java, Git, and Docker, plus PATH entries. It is read-only and does not modify PATH or install/uninstall tools.
+
+### 3. Database Manager
+
+Detects common database command-line clients: MySQL, MariaDB, PostgreSQL, SQLite, MongoDB Shell, and Redis CLI. It can also report Docker Compose availability. This first version is read-only; it does not create, drop, or modify databases.
+
+### 4. Docker Manager
+
+Checks Docker CLI, daemon, and Compose availability; lists running containers; and offers container/image listing plus Compose up/down for a project in the current directory. Compose actions require a detected Compose file and explicit confirmation.
+
+### 5. Framework Installer
 
 Interactive installer for 11 framework starters:
 
@@ -63,7 +78,7 @@ Interactive installer for 11 framework starters:
 
 The installer checks the required runtime, asks for a project name, and runs the framework's setup command or starter workflow. Some installers require internet access and may download dependencies.
 
-### 3. Application Generator
+### 6. Application Generator
 
 Creates a full-stack Laravel API + React SPA starter with:
 
@@ -110,6 +125,9 @@ node index.js
 
 # Check developer runtimes
 node index.js doctor
+node index.js environment
+node index.js database
+node index.js docker
 
 # Generate the default Laravel + React starter
 node index.js my-app
@@ -160,9 +178,9 @@ GitHub Actions validates the CLI across supported operating systems and Node.js 
 | Runtime Doctor | Available |
 | Framework Installer (11 frameworks) | Available |
 | Laravel + React Application Generator | Available |
-| Environment Manager | Planned |
-| Database Manager | Planned |
-| Docker Manager | Planned |
+| Environment Manager | Available (runtime inventory, PATH overview) |
+| Database Manager | Available (client detection, read-only) |
+| Docker Manager | Available (daemon/Compose status, container/image listing, confirmed Compose up/down) |
 
 ## Security
 
