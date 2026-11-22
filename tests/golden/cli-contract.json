@@ -1,6 +1,6 @@
 {
   "binName": "stackpilot",
-  "argument": "<project-name>",
+  "argument": "[project-name]",
   "flags": [
     "--database",
     "--language",
