@@ -19,10 +19,10 @@ Jalankan StackPilot tanpa argumen untuk membuka menu interaktif. Terminal akan m
 
 ```text
   ____  _             _    ____  _ _
- / ___|| |_ __ _  ___| | _|  _ \\(_) |
- \\___ \\| __/ _` |/ __| |/ / |_) | | |
+ / ___|| |_ __ _  ___| | _|  _ \(_) |
+ \___ \| __/ _` |/ __| |/ / |_) | | |
   ___) | || (_| | (__|   <|  __/| | |
- |____/ \\__\\__,_|\\___|_|\\_\\_|   |_|
+ |____/ \__\__,_|\___|_|\_\_|   |_|
 
   StackPilot
   One CLI. Every Development Environment.
