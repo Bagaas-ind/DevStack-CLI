@@ -1,8 +1,8 @@
 <div align="center">
-  <img src="docs/assets/stackpilot-icon.svg" width="92" height="92" alt="StackPilot logo" />
+  <img src="docs/assets/stackpilot-icon.svg" width="104" height="104" alt="StackPilot logo" />
   <h1>StackPilot</h1>
   <p><strong>One CLI. Every Development Environment.</strong></p>
-  <p>A command-line companion for runtime diagnostics, framework setup, and application scaffolding.</p>
+  <p>A terminal toolkit for runtime diagnostics, framework installation, and full-stack application scaffolding.</p>
   <p><a href="https://github.com/Bagaas-ind/StackPilot/actions/workflows/ci.yml"><img src="https://github.com/Bagaas-ind/StackPilot/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI"></a> <img src="https://img.shields.io/badge/Node.js-22%20%7C%2024-339933?logo=node.js&logoColor=white" alt="Node.js 22/24"> <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT"></p>
   <p><a href="README.md">English</a> · <a href="README.id.md">Bahasa Indonesia</a></p>
 </div>
@@ -11,96 +11,167 @@
 
 ## What is StackPilot?
 
-StackPilot brings common developer-environment workflows into one CLI. It aims to reduce repetitive setup work while keeping the underlying tools transparent and under the developer's control.
+StackPilot brings several everyday development setup tasks into one interactive CLI. It helps developers inspect their local tools, scaffold supported frameworks, and generate a Laravel + React application starter.
 
-## Workflow overview
+## Terminal experience
 
-<p align="center"><img src="docs/assets/stackpilot-workflow.svg" width="100%" alt="StackPilot workflow overview"></p>
+Run StackPilot without arguments to open the interactive menu. The terminal displays the StackPilot ASCII wordmark and tagline before showing the available actions.
 
-## Current modules
+```text
+  ____  _             _    ____  _ _
+ / ___|| |_ __ _  ___| | _|  _ \\(_) |
+ \\___ \\| __/ _` |/ __| |/ / |_) | | |
+  ___) | || (_| | (__|   <|  __/| | |
+ |____/ \\__\\__,_|\\___|_|\\_\\_|   |_|
 
-| Module | Capability | Status |
-| --- | --- | --- |
-| Runtime Doctor | Detects Node.js, npm, PHP, Composer, Python, Java, Git, and Docker versions | Available |
-| Framework Installer | Guided setup for supported framework starters | Available |
-| Application Generator | Laravel API + React SPA starter with JS/TS and SQLite/MySQL/PostgreSQL options | Available |
-| Environment Manager | Environment profiles and configuration workflows | Planned |
-| Database Manager | Database diagnostics and setup helpers | Planned |
-| Docker Manager | Docker workflow helpers | Planned |
+  StackPilot
+  One CLI. Every Development Environment.
 
-StackPilot diagnoses tools; it does not silently install, update, or remove system runtimes.
+  1. Runtime Doctor
+  2. Framework Installer
+  3. Application Generator
+  4. Exit
+```
+
+The repository logo is available at [docs/assets/stackpilot-icon.svg](docs/assets/stackpilot-icon.svg).
+
+## Features
+
+### 1. Runtime Doctor
+
+Checks whether common developer tools are available and prints their detected versions:
+
+- Node.js and npm — required by the CLI.
+- PHP and Composer.
+- Python.
+- Java.
+- Git.
+- Docker.
+
+It flags unsupported Node.js versions (StackPilot supports Node.js 22 and 24) and reports optional tools separately. Doctor is diagnostic only: it does not install, update, or remove software.
+
+### 2. Framework Installer
+
+Interactive installer for 11 framework starters:
+
+| Ecosystem | Frameworks |
+| --- | --- |
+| PHP | Laravel, CodeIgniter 4, Symfony |
+| JavaScript | React, Vue.js, Next.js, Express.js |
+| Python | Django, Flask, FastAPI |
+| Java | Spring Boot |
+
+The installer checks the required runtime, asks for a project name, and runs the framework's setup command or starter workflow. Some installers require internet access and may download dependencies.
+
+### 3. Application Generator
+
+Creates a full-stack Laravel API + React SPA starter with:
+
+- Laravel 12 backend and Sanctum API authentication.
+- React + Vite frontend.
+- JavaScript or TypeScript frontend.
+- SQLite, MySQL, or PostgreSQL configuration.
+- Starter and ecommerce template selection.
+- Optional frontend-only generation with `--skip-backend`.
+- Optional dependency-install skip with `--skip-install`.
+- Windows and Unix startup scripts when the backend is generated.
+
+Generated projects are development starting points, not production security certifications. Review configuration, credentials, authorization, CORS, and deployment hardening before production use.
 
 ## Requirements
 
 - Node.js 22 or 24 LTS to run StackPilot.
-- PHP 8.2+ and Composer 2.x for Laravel generation.
-- Other tools depend on the selected framework. Git and Docker are optional diagnostics.
+- Framework-specific runtimes are required only for the selected installer.
+- PHP 8.2+ and Composer 2.x for Laravel-based application generation.
+- Internet access is generally needed to download framework starters and dependencies.
 
 ## Install and run
 
-Run from GitHub:
+### Run directly from GitHub
 
-~~~bash
+```bash
 npx --yes github:Bagaas-ind/StackPilot
-~~~
+```
 
-Or clone the repository:
+### Clone the repository
 
-~~~bash
+```bash
 git clone https://github.com/Bagaas-ind/StackPilot.git
 cd StackPilot
 npm ci
 node index.js
-~~~
+```
 
-### Runtime diagnostics
+### Common commands
 
-~~~bash
+```bash
+# Open the interactive menu (shows the StackPilot logo)
+node index.js
+
+# Check developer runtimes
 node index.js doctor
-~~~
 
-Runtime Doctor reports detected versions and distinguishes required tools from optional tools. It does not modify the system.
-
-### Generate an application
-
-~~~bash
+# Generate the default Laravel + React starter
 node index.js my-app
+
+# Generate with TypeScript
 node index.js my-app --typescript
+
+# Select a database without interactive prompts
 node index.js my-app --database mysql --non-interactive
+
+# Generate a frontend-only project
 node index.js my-frontend --skip-backend
-~~~
 
-The generator creates a Laravel API + React SPA starter. Laravel generation requires PHP 8.2+, Composer 2.x, and internet access.
+# Show CLI help and version
+node index.js --help
+node index.js --version
+```
 
-## CLI commands
+### Application Generator options
 
-| Command | Description |
+| Option | Purpose |
 | --- | --- |
-| stackpilot | Open the interactive menu |
-| stackpilot doctor | Diagnose developer tools |
-| stackpilot <project-name> | Generate a Laravel + React starter |
-| stackpilot --help | Show CLI options |
-| stackpilot --version | Show version |
+| `--template <starter|ecommerce>` | Select the application template |
+| `--typescript` | Use the React + TypeScript frontend |
+| `--language <javascript|typescript>` | Explicitly select the frontend language |
+| `--database <sqlite|mysql|pgsql>` | Select the Laravel database driver |
+| `--laravel-version <version>` | Select the Laravel version (default: `12.*`) |
+| `--skip-backend` | Generate frontend only |
+| `--skip-install` | Skip frontend `npm install` |
+| `--non-interactive` | Use defaults/options without interactive prompts |
+| `--lang <en|id>` | Select CLI interface language |
 
-When running from a clone, use node index.js instead of stackpilot. The npm package is not published yet; GitHub-based invocation is the supported quick-start path.
+When using a local clone, run commands with `node index.js`. The npm package has not yet been published.
 
-## Tests
+## Tests and CI
 
-~~~bash
+```bash
 npm ci
 npm test
-~~~
+```
 
-CI runs automated tests across supported Node.js and operating systems, validates launcher syntax and PHP templates, and exercises generated projects.
+GitHub Actions validates the CLI across supported operating systems and Node.js versions, checks PHP templates, and tests generated application workflows.
+
+## Project status
+
+| Component | Status |
+| --- | --- |
+| Runtime Doctor | Available |
+| Framework Installer (11 frameworks) | Available |
+| Laravel + React Application Generator | Available |
+| Environment Manager | Planned |
+| Database Manager | Planned |
+| Docker Manager | Planned |
 
 ## Security
 
-Generated projects are development foundations, not production security certifications. Review authentication, authorization, token storage, CORS, secrets, HTTPS, dependencies, logging, monitoring, backups, and deployment configuration before production use. Never commit .env files or secrets.
+StackPilot runs framework setup commands and creates project files on your machine. Review commands and generated code before using them in important environments. Never commit secrets or real credentials. Generated applications must be reviewed and hardened before deployment.
 
 ## Contributing
 
-Bug reports, documentation improvements, and focused pull requests are welcome. Add tests for behavior changes and run npm test before submitting.
+Issues, bug reports, documentation improvements, and focused pull requests are welcome. Please include reproduction steps for bugs and tests for behavior changes.
 
 ## License
 
-MIT — see LICENSE.
+MIT — see [LICENSE](LICENSE).
