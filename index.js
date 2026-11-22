@@ -549,10 +549,10 @@ async function createProject(projectName, options) {
 
 program
   .name('stackpilot')
-  .description('Generate a Laravel API + React SPA application starter')
+  .description('Universal developer environment manager: diagnostics, framework setup, and project generation')
   .version(VERSION)
   .option('--lang <language>', 'bahasa CLI: en atau id', 'en')
-  .argument('<project-name>', 'nama folder project yang akan dibuat')
+  .argument('<project-name>', 'nama project, atau gunakan "doctor" untuk diagnostik runtime')
   .option('--template <name>', 'jenis template: starter atau ecommerce', 'starter')
   .option('--skip-backend', 'buat frontend saja tanpa Laravel')
   .option('--typescript', 'gunakan template React + TypeScript')
