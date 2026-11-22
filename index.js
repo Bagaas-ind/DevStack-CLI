@@ -436,6 +436,34 @@ async function createProject(projectName, options) {
         )
       }
 
+      // Installing Sanctum through Composer registers its service provider,
+      // but does not publish the personal_access_tokens migration. Publish it
+      // explicitly before the first migration so both fresh projects and
+      // SQLite in-memory feature tests have the required table.
+      currentStep = 'menyiapkan migrasi Laravel Sanctum'
+
+      const sanctumMigration = run(
+        'php',
+        ['artisan', 'vendor:publish', '--tag=sanctum-migrations', '--force', '--no-interaction'],
+        backendDir
+      )
+
+      if (!sanctumMigration.ok) {
+        throw new Error(
+          'Gagal menyiapkan migrasi Laravel Sanctum. Periksa instalasi package dan output Artisan di atas.'
+        )
+      }
+
+      const hasSanctumMigration = fs
+        .readdirSync(path.join(backendDir, 'database', 'migrations'))
+        .some((file) => /create_personal_access_tokens_table/.test(file))
+
+      if (!hasSanctumMigration) {
+        throw new Error(
+          'Migrasi personal_access_tokens Laravel Sanctum tidak ditemukan setelah publikasi.'
+        )
+      }
+
       console.log(
         chalk.gray(`\nMenjalankan migrasi database (${config.database})...`)
       )
