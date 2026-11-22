@@ -610,36 +610,41 @@ program
       }
 
       if (projectName === '__STACKPILOT_MAIN_MENU__') {
-        const selected = await runMainMenu({ lang })
+        while (true) {
+          const selected = await runMainMenu({ lang })
 
-        if (selected === 'exit') return
+          if (selected === 'exit') return
 
-        if (selected === 'doctor') {
-          const { runDoctor } = await import('./lib/doctor.js')
-          runDoctor()
-          return
-        }
+          if (selected === 'doctor') {
+            const { runDoctor } = await import('./lib/doctor.js')
+            runDoctor()
+            continue
+          }
 
+          if (selected === 'environment') {
+            const { runEnvironmentManager } = await import('./lib/environment-manager.js')
+            await runEnvironmentManager()
+            continue
+          }
 
-        if (selected === 'environment') {
-          const { runEnvironmentManager } = await import('./lib/environment-manager.js')
-          await runEnvironmentManager()
-          return
-        }
-        if (selected === 'database') {
-          const { runDatabaseManager } = await import('./lib/database-manager.js')
-          runDatabaseManager()
-          return
-        }
-        if (selected === 'docker') {
-          const { runDockerManager } = await import('./lib/docker-manager.js')
-          await runDockerManager()
-          return
-        }
+          if (selected === 'database') {
+            const { runDatabaseManager } = await import('./lib/database-manager.js')
+            runDatabaseManager()
+            continue
+          }
 
-        if (selected === 'installer') {
-          await runFrameworkInstaller({ lang })
-          return
+          if (selected === 'docker') {
+            const { runDockerManager } = await import('./lib/docker-manager.js')
+            await runDockerManager()
+            continue
+          }
+
+          if (selected === 'installer') {
+            await runFrameworkInstaller({ lang })
+            continue
+          }
+
+          if (selected === 'generator') break
         }
 
         projectName = await askProjectName({ lang })
