@@ -564,6 +564,8 @@ program
   .addHelpText(
     'after',
     `\nContoh:
+  $ npx stackpilot
+  $ npx stackpilot doctor
   $ npx stackpilot my-app
   $ npx stackpilot my-app --typescript
   $ npx stackpilot my-app --database mysql --non-interactive
