@@ -12,6 +12,7 @@ import { patchUserModel } from './lib/patch-user-model.js'
 import { runMainMenu, askProjectName } from './lib/menu.js'
 import { runFrameworkInstaller } from './lib/installer.js'
 import { normalizeLang, t } from './lib/i18n.js'
+import { ensureDatabaseExists, getProjectDatabaseName } from './lib/project-database.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const templates = path.join(__dirname, 'templates')
@@ -189,7 +190,8 @@ async function collectConfig(options) {
   return config
 }
 
-function configureDatabase(backendDir, database) {
+function configureDatabase(backendDir, database, projectName) {
+  const projectDatabase = getProjectDatabaseName(projectName)
   const values = {
     DB_CONNECTION: database,
     DB_HOST: database === 'sqlite' ? '' : '127.0.0.1',
@@ -200,7 +202,7 @@ function configureDatabase(backendDir, database) {
           ? '5432'
           : '',
     DB_DATABASE:
-      database === 'sqlite' ? 'database/database.sqlite' : 'laravel',
+      database === 'sqlite' ? 'database/database.sqlite' : projectDatabase,
     DB_USERNAME:
       database === 'mysql'
         ? 'root'
@@ -402,7 +404,8 @@ async function createProject(projectName, options) {
       )
 
       patchUserModel(backendDir)
-      configureDatabase(backendDir, config.database)
+      configureDatabase(backendDir, config.database, projectName)
+      ensureDatabaseExists(backendDir, config.database)
 
       currentStep = 'membuat application key Laravel'
 
@@ -418,15 +421,18 @@ async function createProject(projectName, options) {
 
       currentStep = 'memasang API dan Sanctum Laravel'
 
-      const apiResult = run(
-        'php',
-        ['artisan', 'install:api', '--no-interaction'],
+      // StackPilot already ships routes/api.php and registers it in
+      // bootstrap/app.php. install:api would try to create those files again
+      // and can run migrations before the project database is prepared.
+      const sanctumResult = run(
+        'composer',
+        ['require', 'laravel/sanctum', '--no-interaction'],
         backendDir
       )
 
-      if (!apiResult.ok) {
+      if (!sanctumResult.ok) {
         throw new Error(
-          'Laravel gagal memasang API/Sanctum. Periksa versi Laravel dan output Artisan di atas.'
+          'Composer gagal memasang Laravel Sanctum. Periksa koneksi internet dan output Composer di atas.'
         )
       }
 
