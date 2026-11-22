@@ -552,7 +552,7 @@ program
   .description('Universal developer environment manager: diagnostics, framework setup, and project generation')
   .version(VERSION)
   .option('--lang <language>', 'bahasa CLI: en atau id', 'en')
-  .argument('<project-name>', 'nama project, atau gunakan "doctor" untuk diagnostik runtime')
+  .argument('[project-name]', 'nama project atau perintah manager')
   .option('--template <name>', 'jenis template: starter atau ecommerce', 'starter')
   .option('--skip-backend', 'buat frontend saja tanpa Laravel')
   .option('--typescript', 'gunakan template React + TypeScript')
@@ -566,6 +566,9 @@ program
     `\nContoh:
   $ node index.js
   $ node index.js doctor
+  $ node index.js environment
+  $ node index.js database
+  $ node index.js docker
   $ node index.js my-app
   $ node index.js my-app --typescript
   $ node index.js my-app --database mysql --non-interactive
@@ -585,7 +588,7 @@ program
         )
       }
 
-      if (projectName === 'doctor') {
+      if (['environment', 'database', 'docker'].includes(projectName)) {\n        if (projectName === 'environment') { const { runEnvironmentManager } = await import('./lib/environment-manager.js'); await runEnvironmentManager() }\n        if (projectName === 'database') { const { runDatabaseManager } = await import('./lib/database-manager.js'); runDatabaseManager() }\n        if (projectName === 'docker') { const { runDockerManager } = await import('./lib/docker-manager.js'); await runDockerManager() }\n        return\n      }\n\n      if (projectName === 'doctor') {
         const { runDoctor } = await import('./lib/doctor.js')
         runDoctor()
         return
@@ -602,7 +605,7 @@ program
           return
         }
 
-        if (selected === 'installer') {
+        if (selected === 'environment') { const { runEnvironmentManager } = await import('./lib/environment-manager.js'); await runEnvironmentManager(); return }\n        if (selected === 'database') { const { runDatabaseManager } = await import('./lib/database-manager.js'); runDatabaseManager(); return }\n        if (selected === 'docker') { const { runDockerManager } = await import('./lib/docker-manager.js'); await runDockerManager(); return }\n\n        if (selected === 'installer') {
           await runFrameworkInstaller({ lang })
           return
         }
