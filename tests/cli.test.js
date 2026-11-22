@@ -62,7 +62,8 @@ test('CLI generates the TypeScript frontend template without a backend', (t) => 
 test('CLI version matches the package release version', () => {
   const result = execute(['--version'])
   assert.equal(result.status, 0)
-  assert.match(result.stdout, /^0\.4\.0/)
+  const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'))
+  assert.match(result.stdout, new RegExp(`^${pkg.version.replaceAll('.', '\\.')}\\b`))
 })
 
 test('Laravel admin routes use a registered middleware alias, not a route closure', () => {
