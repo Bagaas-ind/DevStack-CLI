@@ -564,13 +564,13 @@ program
   .addHelpText(
     'after',
     `\nContoh:
-  $ npx stackpilot
-  $ npx stackpilot doctor
-  $ npx stackpilot my-app
-  $ npx stackpilot my-app --typescript
-  $ npx stackpilot my-app --database mysql --non-interactive
-  $ npx stackpilot my-app --laravel-version '12.*'
-  $ npx stackpilot my-frontend --skip-backend`
+  $ node index.js
+  $ node index.js doctor
+  $ node index.js my-app
+  $ node index.js my-app --typescript
+  $ node index.js my-app --database mysql --non-interactive
+  $ node index.js my-app --laravel-version '12.*'
+  $ node index.js my-frontend --skip-backend`
   )
   .action(async (projectName, options) => {
     try {
