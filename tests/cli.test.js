@@ -95,3 +95,11 @@ test('CLI rejects an invalid Laravel version constraint', () => {
     fs.rmSync(temp, { recursive: true, force: true })
   }
 })
+
+for (const manager of ['environment', 'database', 'docker']) {
+  test(`CLI starts the ${manager} manager without crashing`, () => {
+    const result = execute([manager])
+    assert.equal(result.status, 0, result.stdout + result.stderr)
+    assert.match(result.stdout + result.stderr, new RegExp(`STACKPILOT / ${manager.toUpperCase()} MANAGER`))
+  })
+}

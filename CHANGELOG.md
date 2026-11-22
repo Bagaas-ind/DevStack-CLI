@@ -2,13 +2,6 @@
 
 All notable changes to StackPilot are documented here.
 
-## [0.4.0] - 2026-11-23
-
-- Rebranded the CLI and repository identity as StackPilot.
-- Added Runtime Doctor diagnostics for common developer tools.
-- Added a StackPilot terminal wordmark and refreshed documentation.
-- Preserved the existing framework installer and Laravel + React generator.
-
 ## [0.5.0] - 2026-11-23
 
 - Added Environment Manager for local runtime inventory and PATH inspection.
@@ -16,16 +9,12 @@ All notable changes to StackPilot are documented here.
 - Added Docker Manager for daemon/Compose diagnostics, container/image listing, and confirmed Compose lifecycle actions.
 - Expanded the interactive menu and added direct CLI commands for all three managers.
 
-## [Unreleased]
+## [0.4.0] - 2026-11-23
 
-- Added the initial StackPilot identity migration and package metadata updates.
-- Clarified the distinction between the currently implemented Laravel + React application generator and the planned multi-framework installer.
-- Added Laravel feature tests for demo admin login, invalid credentials, protected endpoints, and logout token revocation.
-- Expanded CI to generate real Laravel + React and TypeScript projects, build both frontends, and run backend tests.
-- Updated pinned frontend dependencies, aligned Tailwind packages, and moved React Router to a patched v7 release while retaining the v6-compatible `react-router-dom` import path.
-- Added npm package-content verification and cross-platform CLI checks on Node.js 22/24.
-- Aligned launcher behavior across Windows, macOS, and Linux.
-- Failed database migrations now stop generation and remove the incomplete output directory.
+- Rebranded the CLI and repository identity as StackPilot.
+- Added Runtime Doctor diagnostics for common developer tools.
+- Added a StackPilot terminal wordmark and refreshed documentation.
+- Preserved the existing framework installer and Laravel + React generator.
 
 ## [0.3.0] - 2026-11-19
 
@@ -54,4 +43,4 @@ All notable changes to StackPilot are documented here.
 
 ### Notes
 - The generator currently scaffolds Laravel 12 with React 18 and Vite 6.
-- This release does not claim production readiness for applications generated from the starter; review and harden each application for its deployment context.
+- Generated applications are development starters; review and harden each application for its deployment context before production use.
