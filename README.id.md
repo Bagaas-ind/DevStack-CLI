@@ -70,7 +70,7 @@ Memeriksa ketersediaan client command-line database berikut:
 - MongoDB Shell: `mongosh`
 - Redis: `redis-cli`
 
-Manager juga melakukan pemeriksaan keterjangkauan TCP read-only pada port server lokal yang umum: MySQL/MariaDB (3306 dan 3307), PostgreSQL (5432), MongoDB (27017), dan Redis (6379). Secara default StackPilot memeriksa `127.0.0.1`; gunakan `STACKPILOT_DB_HOST` untuk memeriksa host lain. SQLite berbasis file sehingga tidak membutuhkan port server.
+Manager juga melakukan pemeriksaan keterjangkauan TCP read-only pada port server lokal yang umum: MySQL/MariaDB (3306 dan 3307), PostgreSQL (5432), MongoDB (27017), dan Redis (6379). Secara default StackPilot memeriksa `127.0.0.1`; gunakan `STACKPILOT_DB_HOST` untuk memeriksa host lain. Setiap probe TCP memiliki batas waktu 700 ms. SQLite berbasis file sehingga tidak membutuhkan port server.
 
 Status **TCP OPEN** hanya berarti port menerima koneksi TCP. Status ini tidak memverifikasi protokol database, kredensial, izin, atau kesehatan query. MySQL dan MariaDB menggunakan port/protokol yang kompatibel sehingga tidak dapat dibedakan melalui pemeriksaan ini. Deteksi client dan keterjangkauan server ditampilkan terpisah; client yang tidak ditemukan bukan berarti server database tidak tersedia. Jika Docker CLI tersedia, Docker Compose juga diperiksa.
 
