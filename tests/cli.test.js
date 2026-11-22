@@ -103,3 +103,16 @@ for (const manager of ['environment', 'database', 'docker']) {
     assert.match(result.stdout + result.stderr, new RegExp(`STACKPILOT / ${manager.toUpperCase()} MANAGER`))
   })
 }
+
+
+test('main menu returns to the menu after closing the framework installer', () => {
+  const source = fs.readFileSync(cli, 'utf8')
+  const menuLoop = source.match(/if \(projectName === '__STACKPILOT_MAIN_MENU__'\) \{([\s\S]*?)\n      \}/)
+
+  assert.ok(menuLoop, 'main menu handler should exist')
+  assert.match(menuLoop[1], /while \(true\)/)
+  assert.match(
+    menuLoop[1],
+    /if \(selected === 'installer'\) \{\s*await runFrameworkInstaller\(\{ lang \}\)\s*continue/
+  )
+})
