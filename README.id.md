@@ -2,12 +2,29 @@
   <img src="docs/assets/stackpilot-icon.svg" width="104" height="104" alt="Logo StackPilot" />
   <h1>StackPilot</h1>
   <p><strong>One CLI. Every Development Environment.</strong></p>
-  <p>Toolkit terminal untuk diagnostik runtime, setup framework, dan pembuatan starter aplikasi Laravel + React.</p>
-  <p><a href="https://github.com/Bagaas-ind/StackPilot/actions/workflows/ci.yml"><img src="https://github.com/Bagaas-ind/StackPilot/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI"></a> <img src="https://img.shields.io/badge/Node.js-22%20%7C%2024-339933?logo=node.js&logoColor=white" alt="Node.js 22/24"> <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT"></p>
+  <p><strong>Toolkit developer open-source untuk memeriksa environment, menyiapkan framework, dan membuat starter aplikasi full-stack melalui satu CLI interaktif.</strong></p>
+  <p><a href="https://github.com/Bagaas-ind/StackPilot/actions/workflows/ci.yml"><img src="https://github.com/Bagaas-ind/StackPilot/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI"></a> <a href="https://github.com/Bagaas-ind/StackPilot/stargazers"><img src="https://img.shields.io/github/stars/Bagaas-ind/StackPilot?style=flat" alt="GitHub stars"></a> <a href="https://github.com/Bagaas-ind/StackPilot/network/members"><img src="https://img.shields.io/github/forks/Bagaas-ind/StackPilot?style=flat" alt="GitHub forks"></a> <img src="https://img.shields.io/badge/Node.js-22%20%7C%2024-339933?logo=node.js&logoColor=white" alt="Node.js 22/24"> <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT"></p>
   <p><a href="README.md">English</a> · <strong>Bahasa Indonesia</strong></p>
 </div>
 
 ---
+
+## Mulai cepat
+
+Coba StackPilot langsung dari repository GitHub publik — tanpa perlu clone secara manual:
+
+```bash
+npx --yes github:Bagaas-ind/StackPilot
+```
+
+> **Informasi distribusi:** Nama package npm sudah disiapkan di konfigurasi project, tetapi package belum dipublikasikan ke npm registry. Sampai rilis npm diumumkan, gunakan perintah GitHub di atas.
+
+## Dibuat untuk workflow development sehari-hari
+
+- **Periksa** runtime dan tools development yang tersedia di komputer.
+- **Siapkan** framework populer melalui workflow instalasi terpandu.
+- **Buat** aplikasi Laravel 12 API + React/Vite beserta konfigurasi database.
+- **Kelola** informasi environment, client database, dan workflow Docker Compose dari satu menu.
 
 ## Apa itu StackPilot?
 
@@ -141,6 +158,8 @@ cd StackPilot
 npm ci
 node index.js
 ```
+
+Untuk checkout lokal, gunakan `node index.js`. Saat ini belum tersedia script `npm start`.
 
 ### Menu interaktif
 
