@@ -1,6 +1,6 @@
 @echo off
 setlocal EnableExtensions EnableDelayedExpansion
-title React-Lara Forge - Launcher
+title StackPilot Generated Project - Launcher
 cd /d "%~dp0"
 
 if not exist "backend\artisan" (
