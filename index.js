@@ -15,7 +15,7 @@ import { normalizeLang, t } from './lib/i18n.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const templates = path.join(__dirname, 'templates')
-const VERSION = '0.4.0'
+const VERSION = '0.5.0'
 
 function fail(message) {
   console.error(chalk.red(`
