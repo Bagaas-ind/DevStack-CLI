@@ -1,5 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
+import net from 'node:net'
 import {
   databaseServers,
   getDatabaseServerStatuses,
@@ -50,4 +51,21 @@ test('TCP probe rejects invalid ports safely', async () => {
   assert.equal(await probeTcpPort('127.0.0.1', 0), false)
   assert.equal(await probeTcpPort('127.0.0.1', 65536), false)
   assert.equal(await probeTcpPort('', 3306), false)
+})
+
+test('TCP probe detects a real listening socket and a closed port', async () => {
+  const server = net.createServer()
+  await new Promise((resolve, reject) => {
+    server.once('error', reject)
+    server.listen(0, '127.0.0.1', resolve)
+  })
+
+  const port = server.address().port
+  assert.equal(await probeTcpPort('127.0.0.1', port), true)
+
+  await new Promise((resolve, reject) => {
+    server.close((error) => error ? reject(error) : resolve())
+  })
+
+  assert.equal(await probeTcpPort('127.0.0.1', port, 300), false)
 })
