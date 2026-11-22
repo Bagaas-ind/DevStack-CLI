@@ -13,6 +13,10 @@
 
 StackPilot brings common developer-environment workflows into one CLI. It aims to reduce repetitive setup work while keeping the underlying tools transparent and under the developer's control.
 
+## Workflow overview
+
+<p align="center"><img src="docs/assets/stackpilot-workflow.svg" width="100%" alt="StackPilot workflow overview"></p>
+
 ## Current modules
 
 | Module | Capability | Status |
