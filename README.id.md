@@ -2,7 +2,7 @@
   <img src="docs/assets/stackpilot-icon.svg" width="104" height="104" alt="Logo StackPilot" />
   <h1>StackPilot</h1>
   <p><strong>One CLI. Every Development Environment.</strong></p>
-  <p>Toolkit terminal untuk diagnostik runtime, instalasi framework, dan pembuatan starter aplikasi full-stack.</p>
+  <p>Toolkit terminal untuk diagnostik runtime, setup framework, dan pembuatan starter aplikasi Laravel + React.</p>
   <p><a href="https://github.com/Bagaas-ind/StackPilot/actions/workflows/ci.yml"><img src="https://github.com/Bagaas-ind/StackPilot/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI"></a> <img src="https://img.shields.io/badge/Node.js-22%20%7C%2024-339933?logo=node.js&logoColor=white" alt="Node.js 22/24"> <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT"></p>
   <p><a href="README.md">English</a> · <strong>Bahasa Indonesia</strong></p>
 </div>
@@ -11,18 +11,20 @@
 
 ## Apa itu StackPilot?
 
-StackPilot menyatukan beberapa kebutuhan setup development ke dalam satu CLI interaktif. StackPilot membantu developer memeriksa tools lokal, membuat starter framework, dan menghasilkan fondasi aplikasi Laravel + React.
+StackPilot menyatukan kebutuhan setup development yang umum ke dalam satu command-line interface interaktif. Kamu bisa memeriksa runtime lokal, menjalankan workflow setup framework, dan membuat starter aplikasi Laravel API + React.
 
-## Tampilan terminal
+StackPilot adalah utilitas development lokal. StackPilot bukan pengganti tools resmi dari masing-masing framework, database, atau platform container.
 
-Jalankan StackPilot tanpa argumen untuk membuka menu interaktif. Terminal akan menampilkan logo ASCII StackPilot dan tagline sebelum daftar fitur.
+## Alur penggunaan terminal
+
+Jalankan StackPilot tanpa argumen untuk membuka menu interaktif. Pilih fitur, selesaikan workflow, lalu kembali ke menu utama. Pilih **Exit** untuk menutup StackPilot.
 
 ```text
   ____  _             _    ____  _ _
- / ___|| |_ __ _  ___| | _|  _ \(_) |
- \___ \| __/ _` |/ __| |/ / |_) | | |
+ / ___|| |_ __ _  ___| | _|  _ \\(_) |
+ \\___ \\| __/ _` |/ __| |/ / |_) | | |
   ___) | || (_| | (__|   <|  __/| | |
- |____/ \__\__,_|\___|_|\_\_|   |_|
+ |____/ \\__\\__,_|\\___|_|\\_\\_|   |_|
 
   StackPilot
   One CLI. Every Development Environment.
@@ -36,73 +38,96 @@ Jalankan StackPilot tanpa argumen untuk membuka menu interaktif. Terminal akan m
   7. Exit
 ```
 
-File logo repository tersedia di [docs/assets/stackpilot-icon.svg](docs/assets/stackpilot-icon.svg).
+Menu utama membutuhkan terminal interaktif (TTY). Perintah manager di bawah ini juga dapat dijalankan langsung tanpa membuka menu.
 
 ## Fitur StackPilot
 
-### 1. Runtime Doctor
+### Runtime Doctor
 
-Memeriksa ketersediaan dan menampilkan versi tools development:
+Memeriksa ketersediaan dan menampilkan versi tools berikut:
 
-- Node.js dan npm — wajib untuk menjalankan CLI.
+- Node.js dan npm — wajib untuk menjalankan StackPilot.
 - PHP dan Composer.
 - Python.
 - Java.
 - Git.
 - Docker.
 
-Fitur ini menandai versi Node.js yang tidak didukung (StackPilot mendukung Node.js 22 dan 24), serta membedakan tools wajib dan opsional. Doctor hanya melakukan diagnostik; tidak memasang, memperbarui, atau menghapus software.
+StackPilot mendukung Node.js 22 dan 24. Tools lainnya bersifat opsional untuk CLI dan hanya dibutuhkan oleh workflow yang menggunakannya. Doctor hanya melakukan diagnostik; tidak memasang, memperbarui, atau menghapus software.
 
-### 2. Environment Manager
+### Environment Manager
 
-Menampilkan inventaris runtime lokal: Node.js, npm, PHP, Composer, Python, Java, Git, dan Docker, termasuk entri PATH. Fitur ini bersifat read-only dan tidak mengubah PATH atau memasang/menghapus tools.
+Menampilkan inventaris runtime Node.js, npm, PHP, Composer, Python, Python 3, Java, Git, dan Docker, serta maksimal 12 entri PATH. Fitur ini read-only: tidak mengubah PATH dan tidak memasang/menghapus tools. Executable opsional yang tidak terdeteksi belum tentu berarti service terkait tidak tersedia.
 
-### 3. Database Manager
+### Database Manager
 
-Mendeteksi client MySQL, MariaDB, PostgreSQL, SQLite, MongoDB Shell, dan Redis CLI. Fitur ini juga memeriksa ketersediaan Docker Compose. Versi awal bersifat read-only dan tidak membuat, menghapus, atau mengubah database.
+Memeriksa ketersediaan client command-line database berikut:
 
-### 4. Docker Manager
+- MySQL: `mysql`
+- MariaDB: `mariadb`
+- PostgreSQL: `psql`
+- SQLite: `sqlite3`
+- MongoDB Shell: `mongosh`
+- Redis: `redis-cli`
 
-Memeriksa Docker CLI, daemon, dan Compose; menampilkan container yang berjalan; serta menyediakan daftar container/image dan perintah Compose up/down untuk project di direktori aktif. Aksi Compose memerlukan file konfigurasi yang terdeteksi dan konfirmasi eksplisit.
+Jika Docker CLI tersedia, StackPilot juga memeriksa Docker Compose. Manager ini hanya melakukan deteksi; tidak terhubung ke server database dan tidak membuat, menghapus, atau mengubah database. Status **NOT FOUND** berarti client tidak tersedia melalui PATH saat ini.
 
-### 5. Framework Installer
+### Docker Manager
 
-Installer interaktif untuk 11 starter framework:
+Memeriksa Docker CLI, koneksi daemon, dan Docker Compose. Jika daemon dapat diakses, StackPilot menampilkan container yang sedang berjalan dan menyediakan pilihan:
 
-| Ekosistem | Framework |
-| --- | --- |
-| PHP | Laravel, CodeIgniter 4, Symfony |
-| JavaScript | React, Vue.js, Next.js, Express.js |
-| Python | Django, Flask, FastAPI |
-| Java | Spring Boot |
+1. Menampilkan semua container.
+2. Menampilkan image lokal.
+3. Menjalankan project Compose di direktori aktif.
+4. Menghentikan project Compose di direktori aktif.
+5. Kembali ke menu utama.
 
-Installer memeriksa runtime yang diperlukan, meminta nama project, lalu menjalankan perintah setup atau workflow starter framework. Beberapa installer membutuhkan koneksi internet untuk mengunduh project dan dependency.
+Aksi Compose up/down memerlukan plugin Compose, file konfigurasi yang didukung di direktori aktif (`compose.yaml`, `compose.yml`, `docker-compose.yml`, atau `docker-compose.yaml`), serta konfirmasi eksplisit. Perintah yang dijalankan adalah `docker compose up -d` dan `docker compose down`. Periksa file Compose dan dampaknya sebelum memberi konfirmasi.
 
-### 6. Application Generator
+### Framework Installer
 
-Membuat starter full-stack Laravel API + React SPA dengan kemampuan:
+Menyediakan workflow setup interaktif untuk 11 framework:
+
+| Ekosistem | Framework | Kebutuhan utama |
+| --- | --- | --- |
+| PHP | Laravel, CodeIgniter 4, Symfony | PHP dan Composer |
+| JavaScript | React, Vue.js, Next.js, Express.js | Node.js dan npm |
+| Python | Django, Flask, FastAPI | Python dan pip |
+| Java | Spring Boot | Java dan `tar` |
+
+Installer memvalidasi nama project, memeriksa tools yang diperlukan, lalu menjalankan perintah setup atau workflow starter yang sesuai. Project Python dibuat di virtual environment lokal `.venv`; Spring Boot diunduh dari Spring Initializr. Proses setup framework dapat mengunduh package dan dependency sehingga umumnya membutuhkan koneksi internet. Setup Spring Boot saat ini meminta Java 17 dari Spring Initializr.
+
+### Application Generator
+
+Membuat starter Laravel API + React SPA dengan fitur:
 
 - Backend Laravel 12 dan autentikasi API Sanctum.
-- Frontend React + Vite.
-- Pilihan JavaScript atau TypeScript.
+- Frontend React + Vite dengan pilihan JavaScript atau TypeScript.
 - Konfigurasi database SQLite, MySQL, atau PostgreSQL.
-- Pilihan template starter dan ecommerce.
-- Opsi frontend saja menggunakan `--skip-backend`.
-- Opsi melewati instalasi dependency dengan `--skip-install`.
+- Pilihan template starter atau ecommerce.
+- Pembuatan frontend saja melalui `--skip-backend`.
+- Opsi melewati instalasi dependency frontend melalui `--skip-install`.
 - Script startup Windows dan Unix jika backend dibuat.
 
-Project hasil generate adalah fondasi development, bukan sertifikasi keamanan production. Periksa konfigurasi, kredensial, otorisasi, CORS, dan keamanan deployment sebelum digunakan di production.
+Secara default, generator membuat backend dan frontend. PHP 8.2+ dan Composer 2.x diperlukan kecuali menggunakan `--skip-backend`. Node.js dan npm tetap diperlukan. Saat backend dibuat, generator menjalankan workflow Composer/Laravel dan dapat menjalankan `npm install` untuk frontend.
+
+Project hasil generate adalah fondasi development, bukan sertifikasi keamanan production. Tinjau autentikasi, otorisasi, CORS, secret environment, konfigurasi database, dependency, dan keamanan deployment sebelum digunakan di production.
 
 ## Persyaratan
 
-- Node.js 22 atau 24 LTS untuk menjalankan StackPilot.
-- Runtime framework hanya diperlukan ketika framework terkait dipilih.
-- PHP 8.2+ dan Composer 2.x untuk membuat aplikasi berbasis Laravel.
-- Koneksi internet umumnya diperlukan untuk mengunduh starter framework dan dependency.
+- Node.js 22 atau 24 LTS dan npm untuk menjalankan StackPilot.
+- Tools framework hanya diperlukan sesuai fitur yang dipilih.
+- PHP 8.2+ dan Composer 2.x untuk membuat backend Application Generator.
+- Python dan pip untuk starter framework Python.
+- Java dan `tar` untuk Framework Installer Spring Boot.
+- Docker Engine/Desktop dan plugin Compose untuk aksi Docker Manager.
+- Koneksi internet untuk mengunduh framework dan memasang dependency.
 
 ## Instalasi dan penggunaan
 
-### Jalankan langsung dari GitHub
+### Jalankan dari GitHub
+
+Package npm StackPilot belum dipublikasikan. Perintah berikut menjalankan source repository melalui dukungan GitHub package pada npm:
 
 ```bash
 npx --yes github:Bagaas-ind/StackPilot
@@ -117,33 +142,49 @@ npm ci
 node index.js
 ```
 
-### Perintah umum
+### Menu interaktif
 
 ```bash
-# Membuka menu interaktif (menampilkan logo StackPilot)
 node index.js
+```
 
-# Memeriksa runtime development
+Gunakan menu untuk membuka Runtime Doctor, Framework Installer, Application Generator, Environment Manager, Database Manager, atau Docker Manager. Sebagian besar fitur akan kembali ke menu utama setelah selesai. Pilih **Exit** untuk keluar.
+
+### Perintah manager langsung
+
+```bash
 node index.js doctor
 node index.js environment
 node index.js database
 node index.js docker
+```
 
-# Membuat starter Laravel + React
+### Membuat aplikasi
+
+```bash
+# Starter Laravel + React default
 node index.js my-app
 
-# Menggunakan TypeScript
+# React + TypeScript
 node index.js my-app --typescript
 
-# Memilih database tanpa prompt interaktif
+# Memilih MySQL tanpa prompt konfigurasi interaktif
 node index.js my-app --database mysql --non-interactive
 
-# Membuat frontend saja
+# Frontend saja
 node index.js my-frontend --skip-backend
 
-# Melihat bantuan dan versi CLI
+# Melewati npm install frontend
+node index.js my-app --skip-install
+```
+
+### Bantuan, versi, dan bahasa
+
+```bash
 node index.js --help
 node index.js --version
+node index.js --lang id
+node index.js doctor --lang id
 ```
 
 ### Opsi Application Generator
@@ -157,38 +198,51 @@ node index.js --version
 | `--laravel-version <version>` | Memilih versi Laravel (default: `12.*`) |
 | `--skip-backend` | Membuat frontend saja |
 | `--skip-install` | Melewati `npm install` frontend |
-| `--non-interactive` | Menggunakan opsi/default tanpa prompt interaktif |
+| `--non-interactive` | Menggunakan opsi/default tanpa prompt konfigurasi |
 | `--lang <en|id>` | Memilih bahasa antarmuka CLI |
 
-Jika menggunakan hasil clone, jalankan perintah dengan `node index.js`. Package npm StackPilot belum dipublikasikan.
+Jika menggunakan hasil clone, jalankan perintah dengan `node index.js`. Package npm StackPilot belum dipublikasikan ke npm registry.
 
 ## Pengujian dan CI
+
+Jalankan test suite secara lokal:
 
 ```bash
 npm ci
 npm test
 ```
 
-GitHub Actions menguji CLI pada sistem operasi dan versi Node.js yang didukung, memeriksa template PHP, serta menguji workflow pembuatan aplikasi.
+Test suite menggunakan test runner bawaan Node.js. Test khusus platform tertentu dapat dilewati jika sistem operasi saat ini tidak dapat menjalankannya; test yang dilewati bukan berarti sudah dieksekusi dan lulus pada platform tersebut.
 
-## Status pengembangan
+GitHub Actions menguji CLI pada Windows, macOS, dan Ubuntu dengan Node.js 22 dan 24. Workflow juga melakukan lint template PHP serta membuat project uji untuk build frontend dan menjalankan feature test Laravel.
 
-| Komponen | Status |
+## Status project
+
+| Komponen | Cakupan |
 | --- | --- |
-| Runtime Doctor | Tersedia |
-| Framework Installer (11 framework) | Tersedia |
-| Laravel + React Application Generator | Tersedia |
-| Environment Manager | Tersedia (inventaris runtime dan PATH) |
-| Database Manager | Tersedia (deteksi client, read-only) |
-| Docker Manager | Tersedia (status daemon/Compose, daftar container/image, Compose up/down dengan konfirmasi) |
+| Runtime Doctor | Deteksi runtime dan laporan kompatibilitas Node.js |
+| Environment Manager | Inventaris runtime dan ringkasan PATH; read-only |
+| Database Manager | Deteksi client database; read-only |
+| Docker Manager | Diagnostik Docker/Compose, daftar container/image, aksi Compose dengan konfirmasi |
+| Framework Installer | Workflow setup interaktif untuk 11 framework |
+| Application Generator | Pembuatan starter Laravel 12 API + React/Vite |
+
+## Troubleshooting
+
+- **Versi Node.js ditolak:** gunakan Node.js 22 atau 24 LTS, lalu buka ulang terminal.
+- **Tool berstatus MISSING / NOT FOUND:** periksa apakah executable sudah terpasang dan tersedia di PATH terminal saat ini. Buka ulang terminal setelah mengubah PATH.
+- **Docker daemon tidak tersedia:** jalankan Docker Desktop/Engine dan tunggu sampai daemon siap.
+- **Aksi Compose tidak tersedia:** pasang/aktifkan plugin Docker Compose dan letakkan file Compose yang didukung di direktori kerja saat ini.
+- **Setup framework gagal:** periksa prasyarat runtime framework, koneksi internet, dan seluruh output dari perintah setup.
+- **Backend Application Generator gagal:** pastikan PHP 8.2+, Composer 2.x, dan konfigurasi database sudah sesuai. Gunakan `--skip-backend` hanya jika memang ingin membuat frontend saja.
 
 ## Keamanan
 
-StackPilot menjalankan perintah setup framework dan membuat file project di komputer pengguna. Periksa perintah dan kode hasil generate sebelum digunakan pada lingkungan penting. Jangan commit secret atau kredensial asli. Aplikasi hasil generate harus ditinjau dan diperkuat keamanannya sebelum deployment.
+StackPilot menjalankan perintah setup framework dan membuat file di direktori project yang dipilih. Aksi Docker Compose dapat menjalankan atau menghentikan service di direktori aktif setelah konfirmasi. Periksa perintah, file Compose, dan kode hasil generate sebelum digunakan di lingkungan penting. Jangan commit secret atau kredensial asli. Aplikasi hasil generate harus ditinjau dan diperkuat keamanannya sebelum deployment.
 
 ## Kontribusi
 
-Issue, laporan bug, perbaikan dokumentasi, dan pull request yang terarah sangat diterima. Sertakan langkah reproduksi untuk bug dan test untuk perubahan perilaku.
+Laporan bug, perbaikan dokumentasi, test, dan pull request yang terarah sangat diterima. Baca [CONTRIBUTING.md](CONTRIBUTING.md). Untuk laporan kerentanan, ikuti panduan [SECURITY.md](SECURITY.md).
 
 ## Lisensi
 
