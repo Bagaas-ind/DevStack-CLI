@@ -131,6 +131,10 @@ Generated projects are development starting points, not production security cert
 - Docker Engine/Desktop and the Compose plugin for Docker Manager actions.
 - Internet access for framework downloads and dependency installation.
 
+## Usage guide
+
+See the [Usage Guide](docs/USAGE.id.md) for step-by-step instructions to launch StackPilot from Windows CMD, PowerShell, or an existing Node.js installation.
+
 ## Install and run
 
 ### Windows 10/11 — one command from CMD (no preinstalled Node.js)
