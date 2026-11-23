@@ -147,6 +147,17 @@ Launcher mendukung Windows 10/11 x64 (Intel/AMD 64-bit), membutuhkan koneksi int
 
 **Catatan keamanan dan kompatibilitas:** perintah ini mengambil lalu menjalankan launcher dari repository StackPilot. Jalankan hanya jika mempercayai repository dan telah meninjau script `scripts/install.ps1`; kamu juga bisa mengunduh dan memeriksa script tersebut sebelum menjalankannya. Tidak ada perintah yang dapat menjamin keamanan mutlak. Launcher saat ini hanya mendukung Windows x64, bukan ARM64/32-bit. Ini menghilangkan instalasi Node.js manual, bukan seluruh prasyarat setiap framework: Laravel tetap memerlukan PHP + Composer, Python framework memerlukan Python, Spring Boot memerlukan Java, dan seterusnya. Launcher belum memasang runtime framework tersebut secara otomatis.
 
+
+### Windows PowerShell — satu perintah (tanpa Node.js terpasang)
+
+Jika kamu lebih nyaman memakai PowerShell, buka PowerShell biasa (tidak perlu Administrator), lalu jalankan:
+
+```powershell
+irm https://raw.githubusercontent.com/Bagaas-ind/StackPilot/main/scripts/install.ps1 | iex
+```
+
+Tunggu proses download dan persiapan selesai sampai menu StackPilot muncul. Perintah ini menggunakan launcher yang sama dengan metode CMD; Node.js 22 LTS portable disiapkan otomatis untuk akun Windows saat ini. Launcher mendukung Windows 10/11 x64 dan membutuhkan internet. Runtime framework seperti PHP/Composer, Python, Java, atau Docker tetap harus disiapkan sesuai fitur yang dipilih.
+
 ### Jalankan dari GitHub (Node.js sudah tersedia)
 
 Package npm StackPilot belum dipublikasikan. Jika Node.js 22 atau 24 LTS sudah tersedia, jalankan source repository melalui npm:
