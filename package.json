@@ -1,7 +1,7 @@
 {
   "name": "@bagaas-ind/stackpilot",
   "version": "0.5.0",
-  "description": "A universal developer environment CLI for framework setup, project generation, and runtime diagnostics.",
+  "description": "A beginner-friendly developer CLI for runtime diagnostics, 11 framework setup workflows, Laravel + React scaffolding, environment inspection, database checks, and Docker management.",
   "type": "module",
   "bin": {
     "stackpilot": "./index.js"
