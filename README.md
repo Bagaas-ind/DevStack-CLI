@@ -151,6 +151,17 @@ The launcher supports Windows 10/11 x64 (Intel/AMD 64-bit), requires internet ac
 
 **Security and compatibility note:** this command downloads and executes the launcher from the StackPilot repository. Run it only if you trust the repository and have reviewed `scripts/install.ps1`; alternatively, download and inspect the script before running it. No command can guarantee absolute security. The launcher currently supports Windows x64 only, not ARM64 or 32-bit Windows. This removes the manual Node.js prerequisite, not every framework prerequisite: Laravel still needs PHP + Composer, Python frameworks need Python, Spring Boot needs Java, and so on. The launcher does not automatically install those framework runtimes.
 
+
+### Windows PowerShell — one command (no preinstalled Node.js)
+
+If you prefer PowerShell, open a regular PowerShell window (no Administrator rights needed) and run:
+
+```powershell
+irm https://raw.githubusercontent.com/Bagaas-ind/StackPilot/main/scripts/install.ps1 | iex
+```
+
+Wait until setup finishes and the StackPilot menu appears. This uses the same launcher as the CMD method; portable Node.js 22 LTS is prepared for the current Windows user. The launcher supports Windows 10/11 x64 and requires internet access. Framework runtimes such as PHP/Composer, Python, Java, or Docker are still needed for the workflows that use them.
+
 ### Run from GitHub (Node.js already available)
 
 The npm package has not been published. If Node.js 22 or 24 LTS is already available, run the repository source through npm:
