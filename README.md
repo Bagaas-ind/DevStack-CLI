@@ -123,7 +123,7 @@ Generated projects are development starting points, not production security cert
 
 ## Requirements
 
-- Node.js 22 or 24 LTS and npm to run StackPilot.
+- The Windows launcher provides a portable Node.js 22 LTS runtime automatically. Running StackPilot directly through `npx` or a local clone requires Node.js 22 or 24 LTS and npm.
 - Framework-specific tools only for the workflow you choose.
 - PHP 8.2+ and Composer 2.x for Application Generator backend creation.
 - Python and pip for Python framework starters.
