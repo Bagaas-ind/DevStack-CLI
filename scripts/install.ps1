@@ -9,7 +9,7 @@ function Write-StackPilotBanner {
     Write-Host ''
     Write-Host '  ____  _             _    ____  _ _' -ForegroundColor Cyan
     Write-Host ' / ___|| |_ __ _  ___| | _|  _ \(_) |' -ForegroundColor Cyan
-    Write-Host ' \___ \| __/ _\` |/ __| |/ / |_) | | |' -ForegroundColor Cyan
+    Write-Host ' \___ \| __/ _` |/ __| |/ / |_) | | |' -ForegroundColor Cyan
     Write-Host '  ___) | || (_| | (__|   <|  __/| | |' -ForegroundColor Cyan
     Write-Host ' |____/ \__\__,_|\___|_|\_\_|   |_|_|' -ForegroundColor Cyan
     Write-Host ''
