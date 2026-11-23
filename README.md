@@ -133,9 +133,21 @@ Generated projects are development starting points, not production security cert
 
 ## Install and run
 
-### Run from GitHub
+### Windows 10/11 — one command (no preinstalled Node.js)
 
-The npm package has not been published. This command runs the repository source through npm's GitHub package support:
+On 64-bit Windows, open a regular PowerShell window (Administrator is not required) and run:
+
+```powershell
+irm https://raw.githubusercontent.com/Bagaas-ind/StackPilot/main/scripts/install.ps1 | iex
+```
+
+The launcher downloads a portable Node.js 22 LTS runtime into `%LOCALAPPDATA%\\StackPilot\\runtime`, verifies the archive against the SHA-256 checksum published by the official Node.js server, then starts StackPilot from GitHub. The runtime is kept in the current user's profile; the launcher does not modify the machine PATH or install Node.js globally. The existing StackPilot ASCII logo and interactive feature menu are retained.
+
+**Note:** this one-liner downloads and executes the launcher script from the repository. Users who prefer to inspect it first can download `scripts/install.ps1`, review it, and run it locally. Internet access is required. This removes the manual Node.js prerequisite, not every framework prerequisite: Laravel still needs PHP + Composer, Python frameworks need Python, Spring Boot needs Java, and so on. StackPilot reports missing framework runtimes; this launcher does not silently install all of them.
+
+### Run from GitHub (Node.js already available)
+
+The npm package has not been published. If Node.js 22 or 24 LTS is already available, run the repository source through npm:
 
 ```bash
 npx --yes github:Bagaas-ind/StackPilot
