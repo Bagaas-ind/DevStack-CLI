@@ -129,17 +129,19 @@ Project hasil generate adalah fondasi development, bukan sertifikasi keamanan pr
 
 ## Instalasi dan penggunaan
 
-### Windows 10/11 — satu perintah (tanpa Node.js terpasang)
+### Windows 10/11 — satu perintah dari CMD (tanpa Node.js terpasang)
 
-Untuk pengguna Windows 64-bit yang belum memasang Node.js, buka PowerShell biasa (tidak perlu Administrator), lalu jalankan:
+**CMD (Command Prompt) adalah cara yang direkomendasikan untuk pengguna Windows pemula.** Buka CMD biasa (tidak perlu Administrator), lalu salin satu baris ini:
 
-```powershell
-irm https://raw.githubusercontent.com/Bagaas-ind/StackPilot/main/scripts/install.ps1 | iex
+```cmd
+powershell.exe -NoLogo -NoProfile -Command "irm 'https://raw.githubusercontent.com/Bagaas-ind/StackPilot/main/scripts/install.ps1' | iex"
 ```
 
-Launcher mengunduh runtime Node.js 22 LTS portable ke `%LOCALAPPDATA%\\StackPilot\\runtime` dan memverifikasi arsipnya menggunakan SHA-256 dari server resmi Node.js. Setelah itu launcher mengunduh source ZIP StackPilot langsung dari GitHub (tidak membutuhkan Git), memasang dependency yang tercatat di `package-lock.json`, lalu menjalankan CLI. Runtime hanya disimpan untuk akun Windows saat ini; launcher tidak mengubah PATH sistem dan tidak memasang Node.js secara global. Logo ASCII dan seluruh menu/fitur StackPilot tetap digunakan. File sementara dibersihkan setelah aplikasi ditutup.
+Perintah ini diketik di CMD. PowerShell hanya dijalankan di belakang layar untuk menjalankan launcher; pengguna tidak perlu membuka PowerShell atau memasang Node.js/npm/Git terlebih dahulu. Perintah yang sama juga dapat dijalankan dari terminal VS Code, baik profil CMD maupun PowerShell.
 
-**Catatan:** perintah satu-baris ini mengunduh lalu menjalankan script launcher dari repository. Pengguna yang ingin memeriksa script terlebih dahulu dapat mengunduh `scripts/install.ps1`, membacanya, lalu menjalankannya secara lokal. Launcher membutuhkan internet. Ini menghilangkan instalasi Node.js manual, bukan seluruh prasyarat setiap framework: Laravel tetap memerlukan PHP + Composer, Python framework memerlukan Python, Spring Boot memerlukan Java, dan seterusnya. StackPilot akan memberi tahu jika runtime framework yang dipilih belum tersedia; launcher belum memasang runtime framework tersebut secara otomatis.
+Launcher mendukung Windows 10/11 x64 (Intel/AMD 64-bit), membutuhkan koneksi internet, dan tidak memerlukan hak Administrator. Launcher mengunduh runtime Node.js 22 LTS portable ke `%LOCALAPPDATA%\\StackPilot\\runtime` dan memverifikasi arsipnya menggunakan SHA-256 dari server resmi Node.js. Setelah itu launcher mengunduh source ZIP StackPilot langsung dari GitHub (tidak membutuhkan Git), memasang dependency yang tercatat di `package-lock.json`, lalu menjalankan CLI. Runtime hanya disimpan untuk akun Windows saat ini; launcher tidak mengubah PATH sistem dan tidak memasang Node.js secara global. Logo ASCII dan seluruh menu/fitur StackPilot tetap digunakan. File sementara dibersihkan setelah aplikasi ditutup.
+
+**Catatan keamanan dan kompatibilitas:** perintah ini mengambil lalu menjalankan launcher dari repository StackPilot. Jalankan hanya jika mempercayai repository dan telah meninjau script `scripts/install.ps1`; kamu juga bisa mengunduh dan memeriksa script tersebut sebelum menjalankannya. Tidak ada perintah yang dapat menjamin keamanan mutlak. Launcher saat ini hanya mendukung Windows x64, bukan ARM64/32-bit. Ini menghilangkan instalasi Node.js manual, bukan seluruh prasyarat setiap framework: Laravel tetap memerlukan PHP + Composer, Python framework memerlukan Python, Spring Boot memerlukan Java, dan seterusnya. Launcher belum memasang runtime framework tersebut secara otomatis.
 
 ### Jalankan dari GitHub (Node.js sudah tersedia)
 
