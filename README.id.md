@@ -127,6 +127,10 @@ Project hasil generate adalah fondasi development, bukan sertifikasi keamanan pr
 - Docker Engine/Desktop dan plugin Compose untuk aksi Docker Manager.
 - Koneksi internet untuk mengunduh framework dan memasang dependency.
 
+## Panduan penggunaan
+
+Panduan lengkap menjalankan StackPilot melalui CMD, PowerShell, dan Node.js tersedia di [Panduan Penggunaan (Bahasa Indonesia)](docs/USAGE.id.md).
+
 ## Instalasi dan penggunaan
 
 ### Windows 10/11 — satu perintah dari CMD (tanpa Node.js terpasang)
