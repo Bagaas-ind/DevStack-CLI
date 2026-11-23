@@ -104,6 +104,69 @@ Application Generator backend membutuhkan PHP 8.2+ dan Composer 2.x. Koneksi int
 - **Runtime framework tidak ditemukan:** instal prasyarat framework yang ingin digunakan, lalu jalankan kembali workflow.
 - **Docker tidak terhubung:** jalankan Docker Desktop/Engine dan tunggu daemon siap.
 
+
+## 8. Tips perintah terminal
+
+Perintah berikut berguna saat memakai StackPilot. Jalankan sesuai shell yang sedang digunakan.
+
+### Cek instalasi dan lokasi kerja
+
+**CMD:**
+
+```cmd
+node --version
+npm --version
+where node
+cd
+```
+
+**PowerShell:**
+
+```powershell
+node --version
+npm --version
+Get-Command node
+Get-Location
+```
+
+Catatan: pada metode launcher CMD/PowerShell, Node.js portable dipakai oleh launcher. Setelah StackPilot ditutup, perintah `node` belum tentu tersedia secara global di terminal baru. Itu memang disengaja agar PATH sistem tidak diubah.
+
+### Perintah praktis saat memakai repository hasil clone
+
+Masuk ke folder project:
+
+```powershell
+Set-Location .\StackPilot
+```
+
+atau di CMD:
+
+```cmd
+cd StackPilot
+```
+
+Jalankan menu, lihat bantuan, dan jalankan diagnostik:
+
+```bash
+node index.js
+node index.js --help
+node index.js --version
+node index.js doctor
+node index.js environment
+node index.js database
+node index.js docker
+```
+
+Tips tambahan:
+
+- Jalankan `node index.js --help` untuk melihat opsi yang tersedia sebelum mencoba perintah.
+- Gunakan `npm ci` saat pertama kali memasang dependency dari repository hasil clone.
+- Jalankan `npm test` dari folder repository untuk menjalankan test suite.
+- Tekan `Ctrl + C` untuk menghentikan proses terminal yang sedang berjalan; jika StackPilot sedang meminta konfirmasi, baca prompt terlebih dahulu.
+- Pastikan terminal berada di folder project yang benar sebelum menjalankan generator atau perintah Docker Compose.
+- Jangan menempelkan perintah PowerShell ke CMD tanpa awalan `powershell.exe -Command`, dan jangan menempelkan sintaks CMD seperti `where node` ke PowerShell (gunakan `Get-Command node`).
+- Tidak perlu menjalankan terminal sebagai Administrator untuk launcher StackPilot.
+
 ## 7. Catatan keamanan
 
 Perintah instalasi satu-baris mengunduh dan menjalankan script launcher dari repository. Jalankan hanya jika kamu mempercayai repository dan sudah meninjau `scripts/install.ps1`. Kamu dapat membuka file tersebut di GitHub dan memeriksanya sebelum menjalankan perintah. Jangan menjalankan perintah atau file Compose yang tidak kamu pahami. Tinjau kode dan konfigurasi hasil generate sebelum digunakan pada lingkungan penting atau production.
