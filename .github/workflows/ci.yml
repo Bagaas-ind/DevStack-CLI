@@ -26,6 +26,21 @@ jobs:
       - name: Validate POSIX launcher syntax
         if: runner.os != 'Windows'
         run: bash -n templates/root/start.sh
+      - name: Validate PowerShell launcher syntax
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $tokens = $null
+          $errors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile(
+            (Join-Path $PWD 'scripts/install.ps1'),
+            [ref] $tokens,
+            [ref] $errors
+          ) | Out-Null
+          if ($errors.Count -gt 0) {
+            $errors | ForEach-Object { Write-Error $_ }
+            exit 1
+          }
       - name: Run tests
         run: npm test
       - name: Verify npm package contents
