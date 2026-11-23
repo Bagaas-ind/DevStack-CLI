@@ -7,6 +7,10 @@
   <p><a href="README.md">English</a> · <strong>Bahasa Indonesia</strong></p>
 </div>
 
+<p align="center">
+  <img src="docs/36734.png" alt="StackPilot berjalan di terminal Windows dan menampilkan menu utama interaktif" width="100%" />
+</p>
+
 ---
 
 ## Apa itu StackPilot?
