@@ -105,7 +105,7 @@ Application Generator backend membutuhkan PHP 8.2+ dan Composer 2.x. Koneksi int
 - **Docker tidak terhubung:** jalankan Docker Desktop/Engine dan tunggu daemon siap.
 
 
-## 8. Tips perintah terminal
+## 7. Tips perintah terminal
 
 Perintah berikut berguna saat memakai StackPilot. Jalankan sesuai shell yang sedang digunakan.
 
@@ -167,6 +167,6 @@ Tips tambahan:
 - Jangan menempelkan perintah PowerShell ke CMD tanpa awalan `powershell.exe -Command`, dan jangan menempelkan sintaks CMD seperti `where node` ke PowerShell (gunakan `Get-Command node`).
 - Tidak perlu menjalankan terminal sebagai Administrator untuk launcher StackPilot.
 
-## 7. Catatan keamanan
+## 8. Catatan keamanan
 
 Perintah instalasi satu-baris mengunduh dan menjalankan script launcher dari repository. Jalankan hanya jika kamu mempercayai repository dan sudah meninjau `scripts/install.ps1`. Kamu dapat membuka file tersebut di GitHub dan memeriksanya sebelum menjalankan perintah. Jangan menjalankan perintah atau file Compose yang tidak kamu pahami. Tinjau kode dan konfigurasi hasil generate sebelum digunakan pada lingkungan penting atau production.
