@@ -28,7 +28,7 @@ jobs:
         run: bash -n templates/root/start.sh
       - name: Validate PowerShell launcher syntax
         if: runner.os == 'Windows'
-        shell: pwsh
+        shell: powershell
         run: |
           $tokens = $null
           $errors = $null
