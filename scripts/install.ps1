@@ -134,16 +134,18 @@ try {
         if ($LASTEXITCODE -ne 0) {
             throw "Instalasi dependency gagal dengan kode keluar $LASTEXITCODE."
         }
-
-        Write-Host '[3/3] Menjalankan StackPilot...' -ForegroundColor Cyan
-        & $nodeExe (Join-Path $projectDir 'index.js')
-        $stackPilotExitCode = $LASTEXITCODE
-        if ($stackPilotExitCode -ne 0) {
-            throw "StackPilot berhenti dengan kode keluar $stackPilotExitCode."
-        }
     }
     finally {
         Pop-Location
+    }
+
+    # Run from the user's original directory so newly generated projects are created there,
+    # not inside the temporary StackPilot source folder.
+    Write-Host '[3/3] Menjalankan StackPilot...' -ForegroundColor Cyan
+    & $nodeExe (Join-Path $projectDir 'index.js')
+    $stackPilotExitCode = $LASTEXITCODE
+    if ($stackPilotExitCode -ne 0) {
+        throw "StackPilot berhenti dengan kode keluar $stackPilotExitCode."
     }
 }
 catch {
