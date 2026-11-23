@@ -119,7 +119,7 @@ Project hasil generate adalah fondasi development, bukan sertifikasi keamanan pr
 
 ## Persyaratan
 
-- Node.js 22 atau 24 LTS dan npm untuk menjalankan StackPilot.
+- Launcher Windows menyediakan Node.js 22 LTS portable secara otomatis. Jika menjalankan StackPilot langsung melalui `npx` atau hasil clone, gunakan Node.js 22 atau 24 LTS dan npm.
 - Tools framework hanya diperlukan sesuai fitur yang dipilih.
 - PHP 8.2+ dan Composer 2.x untuk membuat backend Application Generator.
 - Python dan pip untuk starter framework Python.
