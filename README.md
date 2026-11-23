@@ -133,17 +133,19 @@ Generated projects are development starting points, not production security cert
 
 ## Install and run
 
-### Windows 10/11 — one command (no preinstalled Node.js)
+### Windows 10/11 — one command from CMD (no preinstalled Node.js)
 
-On 64-bit Windows, open a regular PowerShell window (Administrator is not required) and run:
+**CMD (Command Prompt) is the recommended entry point for Windows beginners.** Open a regular CMD window (no Administrator rights needed), then paste this single line:
 
-```powershell
-irm https://raw.githubusercontent.com/Bagaas-ind/StackPilot/main/scripts/install.ps1 | iex
+```cmd
+powershell.exe -NoLogo -NoProfile -Command "irm 'https://raw.githubusercontent.com/Bagaas-ind/StackPilot/main/scripts/install.ps1' | iex"
 ```
 
-The launcher downloads a portable Node.js 22 LTS runtime into `%LOCALAPPDATA%\\StackPilot\\runtime` and verifies the archive against the SHA-256 checksum published by the official Node.js server. It then downloads the StackPilot source ZIP directly from GitHub (Git is not required), installs the dependencies pinned in `package-lock.json`, and starts the CLI. The runtime stays in the current user's profile; the launcher does not modify the machine PATH or install Node.js globally. The existing StackPilot ASCII logo and interactive feature menu are retained. Temporary source files are cleaned up when the app exits.
+Type this command in CMD. PowerShell runs behind the scenes to execute the launcher; users do not need to open PowerShell or install Node.js, npm, or Git first. The same command also works in the VS Code terminal with either the CMD or PowerShell profile.
 
-**Note:** this one-liner downloads and executes the launcher script from the repository. Users who prefer to inspect it first can download `scripts/install.ps1`, review it, and run it locally. Internet access is required. This removes the manual Node.js prerequisite, not every framework prerequisite: Laravel still needs PHP + Composer, Python frameworks need Python, Spring Boot needs Java, and so on. StackPilot reports missing framework runtimes; this launcher does not silently install all of them.
+The launcher supports Windows 10/11 x64 (Intel/AMD 64-bit), requires internet access, and does not require Administrator rights. It downloads a portable Node.js 22 LTS runtime into `%LOCALAPPDATA%\\StackPilot\\runtime` and verifies the archive against the SHA-256 checksum published by the official Node.js server. It then downloads the StackPilot source ZIP directly from GitHub (Git is not required), installs the dependencies pinned in `package-lock.json`, and starts the CLI. The runtime stays in the current user's profile; the launcher does not modify the machine PATH or install Node.js globally. The existing StackPilot ASCII logo and interactive feature menu are retained. Temporary source files are cleaned up when the app exits.
+
+**Security and compatibility note:** this command downloads and executes the launcher from the StackPilot repository. Run it only if you trust the repository and have reviewed `scripts/install.ps1`; alternatively, download and inspect the script before running it. No command can guarantee absolute security. The launcher currently supports Windows x64 only, not ARM64 or 32-bit Windows. This removes the manual Node.js prerequisite, not every framework prerequisite: Laravel still needs PHP + Composer, Python frameworks need Python, Spring Boot needs Java, and so on. The launcher does not automatically install those framework runtimes.
 
 ### Run from GitHub (Node.js already available)
 
