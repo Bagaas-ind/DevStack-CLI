@@ -1,5 +1,7 @@
 # Panduan Pemula: Dari GitHub sampai Menjalankan StackPilot
 
+**Bahasa:** [English](BEGINNER_GUIDE.md) · Bahasa Indonesia
+
 Panduan ini ditujukan untuk pengguna yang baru mengenal GitHub dan terminal. Kamu tidak perlu memahami Git terlebih dahulu untuk mencoba StackPilot di Windows.
 
 ## 1. Kenali istilah dasarnya
@@ -12,6 +14,11 @@ Panduan ini ditujukan untuk pengguna yang baru mengenal GitHub dan terminal. Kam
 - **Dependency:** library tambahan yang dibutuhkan aplikasi.
 - **Framework:** fondasi untuk membangun aplikasi, misalnya Laravel, React, atau Django.
 - **CLI:** aplikasi yang digunakan melalui perintah dan menu di terminal.
+- **Fork:** salinan repository milik akunmu sendiri di GitHub, biasanya untuk mengusulkan perubahan dengan aman.
+- **Branch:** jalur kerja terpisah agar kamu bisa mengubah kode tanpa langsung mengubah branch utama.
+- **Commit:** rekaman/snapshot perubahan yang disimpan dengan pesan singkat.
+- **Issue:** ruang diskusi GitHub untuk melaporkan bug, bertanya, atau mengusulkan peningkatan.
+- **Pull request (PR):** usulan agar perubahan dari sebuah branch ditinjau dan digabungkan ke branch lain.
 
 Kamu boleh menggunakan StackPilot tanpa melakukan clone. Pilih cara instalasi satu perintah di bagian berikut.
 
