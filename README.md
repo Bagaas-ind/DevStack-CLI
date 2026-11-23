@@ -8,7 +8,7 @@
 </div>
 
 <p align="center">
-  <img src="docs/assets/stackpilot-terminal.webp" alt="StackPilot running in a Windows terminal, showing the interactive main menu" width="100%" />
+  <img src="docs/36734.png" alt="StackPilot running in a Windows terminal, showing the interactive main menu" width="100%" />
 </p>
 
 ---
