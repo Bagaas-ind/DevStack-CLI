@@ -1,5 +1,7 @@
 # Beginner Guide: From GitHub to Running StackPilot
 
+**Language:** English · [Bahasa Indonesia](BEGINNER_GUIDE.id.md)
+
 This guide is for people who are new to GitHub and command-line terminals. You do not need to understand Git to try the one-command Windows launcher.
 
 ## 1. Basic terms
@@ -12,6 +14,11 @@ This guide is for people who are new to GitHub and command-line terminals. You d
 - **Dependency:** an additional library required by an application.
 - **Framework:** a foundation for building applications, such as Laravel, React, or Django.
 - **CLI:** an application controlled through terminal commands and menus.
+- **Fork:** your own GitHub copy of someone else's repository, usually used to propose changes safely.
+- **Branch:** a separate line of work where you can make changes without directly changing the main branch.
+- **Commit:** a saved snapshot of your changes with a short description.
+- **Issue:** a GitHub discussion used to report a bug, ask a question, or suggest an improvement.
+- **Pull request (PR):** a proposal to review and merge changes from one branch into another.
 
 You can use StackPilot without cloning the repository. Start with the one-command method below.
 
