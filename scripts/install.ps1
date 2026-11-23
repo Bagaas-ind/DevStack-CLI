@@ -97,6 +97,8 @@ try {
             Remove-Item -LiteralPath $runtimeDir -Recurse -Force
         }
         Move-Item -LiteralPath $extractedDir -Destination $runtimeDir
+        Remove-Item -LiteralPath $tempRoot -Recurse -Force
+        $tempRoot = $null
     }
     else {
         Write-Host "      Runtime portable $version sudah tersedia." -ForegroundColor Green
