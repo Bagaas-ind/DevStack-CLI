@@ -141,7 +141,7 @@ On 64-bit Windows, open a regular PowerShell window (Administrator is not requir
 irm https://raw.githubusercontent.com/Bagaas-ind/StackPilot/main/scripts/install.ps1 | iex
 ```
 
-The launcher downloads a portable Node.js 22 LTS runtime into `%LOCALAPPDATA%\\StackPilot\\runtime`, verifies the archive against the SHA-256 checksum published by the official Node.js server, then starts StackPilot from GitHub. The runtime is kept in the current user's profile; the launcher does not modify the machine PATH or install Node.js globally. The existing StackPilot ASCII logo and interactive feature menu are retained.
+The launcher downloads a portable Node.js 22 LTS runtime into `%LOCALAPPDATA%\\StackPilot\\runtime` and verifies the archive against the SHA-256 checksum published by the official Node.js server. It then downloads the StackPilot source ZIP directly from GitHub (Git is not required), installs the dependencies pinned in `package-lock.json`, and starts the CLI. The runtime stays in the current user's profile; the launcher does not modify the machine PATH or install Node.js globally. The existing StackPilot ASCII logo and interactive feature menu are retained. Temporary source files are cleaned up when the app exits.
 
 **Note:** this one-liner downloads and executes the launcher script from the repository. Users who prefer to inspect it first can download `scripts/install.ps1`, review it, and run it locally. Internet access is required. This removes the manual Node.js prerequisite, not every framework prerequisite: Laravel still needs PHP + Composer, Python frameworks need Python, Spring Boot needs Java, and so on. StackPilot reports missing framework runtimes; this launcher does not silently install all of them.
 
