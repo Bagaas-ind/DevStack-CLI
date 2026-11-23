@@ -7,6 +7,10 @@
   <p><strong>English</strong> · <a href="README.id.md">Bahasa Indonesia</a></p>
 </div>
 
+<p align="center">
+  <img src="docs/assets/stackpilot-terminal.webp" alt="StackPilot running in a Windows terminal, showing the interactive main menu" width="760" />
+</p>
+
 ---
 
 ## What is StackPilot?
