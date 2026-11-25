@@ -196,6 +196,8 @@ npm ci
 node index.js
 ```
 
+There is currently no `npm start` script; run a local checkout with `node index.js`.
+
 ### Interactive menu
 
 ```bash
