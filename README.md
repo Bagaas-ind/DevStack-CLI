@@ -13,14 +13,6 @@
 
 ---
 
-## Quick start
-
-Try StackPilot directly from the public GitHub repository — no manual clone required:
-
-```bash
-npx --yes github:Bagaas-ind/StackPilot
-```
-
 > **Distribution note:** The npm package name is configured in the project, but the package has not been published to the npm registry. Until an npm release is announced, use the GitHub command above.
 
 ## Built for everyday development
