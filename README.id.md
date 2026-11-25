@@ -13,14 +13,6 @@
 
 ---
 
-## Mulai cepat
-
-Coba StackPilot langsung dari repository GitHub publik — tanpa perlu clone secara manual:
-
-```bash
-npx --yes github:Bagaas-ind/StackPilot
-```
-
 > **Informasi distribusi:** Nama package npm sudah dikonfigurasi di project, tetapi package belum dipublikasikan ke npm registry. Sampai rilis npm diumumkan, gunakan perintah GitHub di atas.
 
 ## Dibuat untuk workflow development sehari-hari
