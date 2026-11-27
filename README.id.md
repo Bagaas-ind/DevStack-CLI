@@ -262,6 +262,22 @@ Test suite menggunakan test runner bawaan Node.js. Test khusus platform tertentu
 
 GitHub Actions menguji CLI pada Windows, macOS, dan Ubuntu dengan Node.js 22 dan 24. Workflow juga melakukan lint template PHP serta membuat project uji untuk build frontend dan menjalankan feature test Laravel.
 
+
+### Verifikasi manual — Windows CMD
+
+Maintainer telah mencoba workflow fitur StackPilot secara manual melalui command line Windows. Berdasarkan hasil pengujian yang dilaporkan, fitur-fitur yang tersedia berhasil dijalankan, sementara **Docker Manager masih menunggu pengujian runtime penuh** karena Docker Engine/Desktop belum terpasang di komputer pengujian.
+
+| Fitur | Status pengujian manual | Catatan |
+| --- | --- | --- |
+| Runtime Doctor | Berhasil (dilaporkan maintainer) | Workflow fitur dilaporkan berjalan. |
+| Framework Installer | Berhasil | Video memperlihatkan proses pembuatan project Laravel, instalasi dependency Composer, eksekusi database migration, dan pesan instalasi berhasil. Project Laravel yang dibuat kemudian dijalankan menggunakan `php artisan serve`. |
+| Application Generator | Berhasil (dilaporkan maintainer) | Workflow fitur dilaporkan berjalan. |
+| Environment Manager | Berhasil (dilaporkan maintainer) | Workflow fitur dilaporkan berjalan. |
+| Database Manager | Berhasil (dilaporkan maintainer) | Workflow fitur dilaporkan berjalan. |
+| Docker Manager | Belum diverifikasi | Docker belum terpasang di komputer pengujian, sehingga pemeriksaan yang membutuhkan daemon dan aksi Compose belum dapat dicoba. Ini merupakan keterbatasan environment pengujian, bukan bukti bahwa fitur mengalami kegagalan. |
+
+Hasil ini merupakan pengujian manual dari environment maintainer, bukan klaim bahwa semua sistem operasi dan seluruh kombinasi framework telah diverifikasi secara terpisah. Docker Manager perlu diuji kembali setelah Docker Engine/Desktop dan plugin Compose dipasang serta dijalankan.
+
 ## Status project
 
 | Komponen | Cakupan |
