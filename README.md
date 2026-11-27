@@ -269,7 +269,7 @@ GitHub Actions checks the CLI on Windows, macOS, and Ubuntu with Node.js 22 and 
 
 Watch StackPilot running in Windows CMD, including the Laravel Framework Installer workflow:
 
-https://github.com/user-attachments/assets/84e527b3-4f0c-4d7b-a4bd-d4e1ce0717ae
+https://github.com/user-attachments/assets/c3b4d458-0bd4-47d1-b55f-021262309832
 
 ### Manual verification — Windows CMD
 
