@@ -265,6 +265,12 @@ The test suite uses Node's built-in test runner. Platform-specific tests may be 
 GitHub Actions checks the CLI on Windows, macOS, and Ubuntu with Node.js 22 and 24. It also lints PHP templates and generates test applications to build the frontend and run Laravel feature tests.
 
 
+## 🎬 Live Demo
+
+Watch StackPilot running in Windows CMD, including the Laravel Framework Installer workflow:
+
+https://github.com/user-attachments/assets/84e527b3-4f0c-4d7b-a4bd-d4e1ce0717ae
+
 ### Manual verification — Windows CMD
 
 The maintainer has manually exercised the StackPilot feature workflows on a Windows command-line environment. The reported result is that the available features completed successfully, with **Docker Manager still pending a full runtime check** because Docker Engine/Desktop is not installed on the test machine.
