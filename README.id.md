@@ -263,6 +263,12 @@ Test suite menggunakan test runner bawaan Node.js. Test khusus platform tertentu
 GitHub Actions menguji CLI pada Windows, macOS, dan Ubuntu dengan Node.js 22 dan 24. Workflow juga melakukan lint template PHP serta membuat project uji untuk build frontend dan menjalankan feature test Laravel.
 
 
+## 🎬 Demo Langsung
+
+Lihat StackPilot berjalan di Windows CMD, termasuk workflow Framework Installer untuk Laravel:
+
+https://github.com/user-attachments/assets/84e527b3-4f0c-4d7b-a4bd-d4e1ce0717ae
+
 ### Verifikasi manual — Windows CMD
 
 Maintainer telah mencoba workflow fitur StackPilot secara manual melalui command line Windows. Berdasarkan hasil pengujian yang dilaporkan, fitur-fitur yang tersedia berhasil dijalankan, sementara **Docker Manager masih menunggu pengujian runtime penuh** karena Docker Engine/Desktop belum terpasang di komputer pengujian.
