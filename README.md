@@ -264,6 +264,22 @@ The test suite uses Node's built-in test runner. Platform-specific tests may be 
 
 GitHub Actions checks the CLI on Windows, macOS, and Ubuntu with Node.js 22 and 24. It also lints PHP templates and generates test applications to build the frontend and run Laravel feature tests.
 
+
+### Manual verification — Windows CMD
+
+The maintainer has manually exercised the StackPilot feature workflows on a Windows command-line environment. The reported result is that the available features completed successfully, with **Docker Manager still pending a full runtime check** because Docker Engine/Desktop is not installed on the test machine.
+
+| Feature | Manual test status | Notes |
+| --- | --- | --- |
+| Runtime Doctor | Passed (maintainer-reported) | Feature workflow reported working. |
+| Framework Installer | Passed | The recording shows Laravel project creation, Composer dependency installation, database migrations, and the successful installation message. The generated Laravel project was then started with `php artisan serve`. |
+| Application Generator | Passed (maintainer-reported) | Feature workflow reported working. |
+| Environment Manager | Passed (maintainer-reported) | Feature workflow reported working. |
+| Database Manager | Passed (maintainer-reported) | Feature workflow reported working. |
+| Docker Manager | Not yet verified | Docker is not installed on the test machine, so daemon-dependent checks and Compose actions could not be exercised. This is an environment limitation, not a confirmed feature failure. |
+
+These are manual results from the maintainer's test environment, not a claim that every supported operating system and every framework combination has been independently verified. Docker Manager should be tested again after installing and starting Docker Engine/Desktop with the Compose plugin.
+
 ## Project status
 
 | Component | Scope |
