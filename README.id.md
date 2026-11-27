@@ -267,7 +267,7 @@ GitHub Actions menguji CLI pada Windows, macOS, dan Ubuntu dengan Node.js 22 dan
 
 Lihat StackPilot berjalan di Windows CMD, termasuk workflow Framework Installer untuk Laravel:
 
-https://github.com/user-attachments/assets/84e527b3-4f0c-4d7b-a4bd-d4e1ce0717ae
+https://github.com/user-attachments/assets/c3b4d458-0bd4-47d1-b55f-021262309832
 
 ### Verifikasi manual — Windows CMD
 
